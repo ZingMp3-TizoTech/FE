@@ -1,0 +1,54 @@
+.wrapper-detail-song{
+    width: 34%;
+}
+.wrapper-detail-song h2{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-left: 25px;
+}
+.wrapper-detail-song h3{
+    font-size: 24px;
+    line-height: 32px;
+    margin-left: 25px;
+}
+
+
+.img{
+    width: 240px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.img img{
+    max-width: 240px;
+}
+.img-author{
+    display: flex;
+    align-items: center;
+    margin-left: 90px;
+    margin-top: 35px;
+}
+.img-author img{
+    max-width: 70px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+.img-author span{
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-left: 25px;
+}
+.img-author img{
+    animation: rotation 8s infinite linear;
+}
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+

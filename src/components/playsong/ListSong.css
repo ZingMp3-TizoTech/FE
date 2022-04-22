@@ -1,0 +1,40 @@
+.wrapper-list-song{
+    overflow-y: scroll;
+    width: 100%;
+    background-color: #D7E9ED;
+    max-height: 655px;
+}
+.wrapper-list-song table{
+    width: 100%;
+}
+.wrapper-list-song tr:hover{
+    background-color: #85A5A5;
+    border: 0px solid #85A5A5;
+}
+.wrapper-list-song table, tr, td{
+    border:none;
+   }
+.wrapper-list-song th{
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 20px;
+    text-transform: uppercase;
+    border: none;
+}
+.wrapper-list-song td{
+    padding: 15px;
+    text-align: left;
+    vertical-align:middle;
+    font-weight: 300;
+    font-size: 20px;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+    border: none;
+}
+
+
+
+/* col-span-2 overflow-y-scroll
+
+
+*/
