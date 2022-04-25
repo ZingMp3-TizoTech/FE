@@ -7,7 +7,9 @@ export default function Albums() {
   let navigate = useNavigate();
   return (
     <div>
+        <p className='title-album'>Electronic Dance Music</p>
         <div className='wrapper-album' >
+            <div>
             <div className='album-item'>
                 <span className='icon-play'
                 onClick={(e)=>{
@@ -19,8 +21,11 @@ export default function Albums() {
                     />
                 </span>
                 <img src='https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp…over/a/4/c/e/a4cee97987fe7e4fe4fd2f72c89d284f.jpg' alt='image_album' />
-                <div class="after"></div>
+                <div class="after"></div>   
             </div>
+            <a href='#' className='artist-name'> Alan Walker </a>
+            </div>
+            <div>
             <div className='album-item'>
                 <span className='icon-play'
                 onClick={(e)=>{
@@ -31,6 +36,9 @@ export default function Albums() {
                 <img src='https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp…over/a/4/c/e/a4cee97987fe7e4fe4fd2f72c89d284f.jpg' alt='image_album' />
                 <div class="after"></div>
             </div>
+            <a href='#' className='artist-name'> Alan Walker </a>
+            </div>
+            <div>
             <div className='album-item'>
                 <span className='icon-play'
                 onClick={(e)=>{
@@ -41,6 +49,9 @@ export default function Albums() {
                 <img src='https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp…over/a/4/c/e/a4cee97987fe7e4fe4fd2f72c89d284f.jpg' alt='image_album' />
                 <div class="after"></div>
             </div>
+            <a href='#' className='artist-name'> Alan Walker </a>
+            </div>
+            <div>
             <div className='album-item'>
                 <span className='icon-play'
                 onClick={(e)=>{
@@ -51,6 +62,10 @@ export default function Albums() {
                 <img src='https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp…over/a/4/c/e/a4cee97987fe7e4fe4fd2f72c89d284f.jpg' alt='image_album' />
                 <div class="after"></div>
             </div>
+            <a href='#' className='artist-name'> Alan Walker </a>
+            </div>
+            
+            <div>
             <div className='album-item'>
                 <span className='icon-play'
                 onClick={(e)=>{
@@ -61,6 +76,9 @@ export default function Albums() {
                 <img src='https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp…over/a/4/c/e/a4cee97987fe7e4fe4fd2f72c89d284f.jpg' alt='image_album' />
                 <div class="after"></div>
             </div>
+            <a href='#' className='artist-name'> Alan Walker </a>
+            </div>
+
         </div>
     </div>
   )
