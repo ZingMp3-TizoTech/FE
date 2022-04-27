@@ -11,7 +11,14 @@ export default function PlaySong() {
         <DetailSong />
         <ListSongs />
     </div>
+    <div style={{
+      position:'absolute',
+      bottom:"0px",
+      minWidth:"100%",
+    }}>
     <Playing/>
+    </div>
+   
     </>
   )
 }
