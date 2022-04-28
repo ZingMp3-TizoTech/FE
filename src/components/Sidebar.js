@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -8,11 +7,13 @@ import ListItemText from '@mui/material/ListItemText';
 import AlbumIcon from '@mui/icons-material/Album';
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded';
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded';
-// import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
+import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const drawerWidth = 240;
 
@@ -29,7 +30,24 @@ export default function Sidebar(props: Props) {
   };
   const drawer = (
     <div>
-      <Toolbar />
+      <Toolbar>
+        <div
+        style={{
+          fontSize:'20px',
+          display:'flex',
+          alignItems:'center',
+        }}
+        >
+          <GraphicEqRoundedIcon/>
+          <p
+          style={{
+            fontSize:'30px',
+            marginLeft:'15px',
+            textShadow:'2px 2px #d7d7d7'
+          }}
+          >Suntify</p>
+        </div>
+      </Toolbar>
       <List>
         {['Personal', 'Disconver', 'Library'].map((text, index) => (
           <ListItem button key={text}>
@@ -52,7 +70,9 @@ export default function Sidebar(props: Props) {
   return (
     <Box sx={{ 
       display: 'flex',
-      boxShadow:'-6px 1px 12px 6px #888888' }}
+      boxShadow:'-6px 1px 12px 6px #888888',
+      backgroundColor:'#fcf9f9',
+    }}
     >
       <Box
         component="nav"
@@ -69,6 +89,7 @@ export default function Sidebar(props: Props) {
             Responsive drawer
           </Typography>
         </Toolbar>
+      <CssBaseline />
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}

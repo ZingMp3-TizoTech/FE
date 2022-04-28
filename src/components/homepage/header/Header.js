@@ -2,10 +2,15 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { BiSearchAlt } from 'react-icons/bi';
+import { useNavigate } from "react-router-dom";
+import './Header.css'
+import MainMenu from "./Mainmenu"
 
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 
 export default function Header() {
+  let navigate = useNavigate();
+  const loggedInUser = localStorage.getItem('token');
   return (
     <div className='wrapper-navbar'>
       <div class="search-container">
@@ -19,13 +24,26 @@ export default function Header() {
           marginRight: '10px'
         }}
       >
-        <Button style={{ marginRight: '10px' }}
+        {!loggedInUser?
+          <>
+            <Button style={{ marginRight: '10px' }}
+          onClick={(e)=>{
+            navigate('register');
+          }}
           variant="outlined" startIcon={<DriveFileRenameOutlineIcon />}>
           Register
         </Button>
-        <Button variant="contained" endIcon={<ExitToAppIcon />}>
+        <Button variant="contained" endIcon={<ExitToAppIcon />}
+        onClick={(e)=>{
+          navigate('login');
+        }}>
           Login
-        </Button>
+        </Button> 
+          </>
+        :
+        <MainMenu/>
+        }
+        
       </div>
     </div>
   )
