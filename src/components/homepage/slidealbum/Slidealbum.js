@@ -9,9 +9,11 @@ export default class Slidealbum extends Component {
         let settings = {
             dots: false,
             infinite: true,
-            speed: 500,
+            speed: 1000,
             slidesToShow: 3,
             slidesToScroll: 1,
+            lazyLoad: true,
+           
         };
         return (
             <div className="slide-album">

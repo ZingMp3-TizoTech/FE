@@ -1,17 +1,51 @@
-import React from 'react'
-import AudioPlayer from 'react-h5-audio-player'
+import React, { useEffect, useState } from 'react'
 import 'react-h5-audio-player/lib/styles.css'
+import AudioPlayer from "react-h5-audio-player";
 
-export default function Playing() {
+function Playing({ ...props }) {
+  console.log(props.songs, props.idSong);
+  const [songs, setSongs] = useState([])
+  setSongs(props.songs)
+  const idS= props.idSong - 1;
+  const [id, setId] = useState(idS)
+//  console.log(songs[id]);
+  // const [url, setUrl] = useState("songs[props.idSong].url")
+
+  
+// console.log(songs[0]);
+
+
+  const handleClickNext = () => {
+    if(id<songs.length){
+      setId(id+1)
+      // setUrl(songs[id].url)
+    } else {
+      setId(1)
+    }
+    console.log(id);
+  }
+  const handleClickPrev = () => {
+    if(id>0){
+      setId(id-1)
+    } else {
+      setId(songs.lengt)
+    }
+    console.log(id);
+  }
+  // console.log(url);
   return (
-    <div>
-         <AudioPlayer
-        className="player-music"
-        src={'https://cdn.discordapp.com/attachments/775740994595323954/775741533789224960/Alan_Walker_-_Sing_Me_To_SleepMP3_160K.mp3'}
-        layout="stacked-reverse"
-        showSkipControls={true}
-        showJumpControls={false}
-      />
-    </div>
+  
+    <AudioPlayer
+
+      src={props.songs[1]?.url}
+      layout="stacked-reverse"
+      showSkipControls={true}
+      showJumpControls={false}
+      onClickNext={handleClickNext}
+      onClickPrevious={handleClickPrev}
+    />
+
+
   )
-}
+};
+export default Playing

@@ -1,0 +1,24 @@
+.form-signup {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+       margin-top: 200px;       
+        width: 520px;
+        height: 400px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+                rgba(121, 121, 121, 0.322) 0px 4px 6px -2px;
+        background-color: rgba(199, 234, 250, 0.587);
+}       
+
+.bg {
+        position: absolute;
+    height: 100%;
+    width: 100%;
+    background: url("https://images.unsplash.com/photo-1575285113814-f770cb8c796e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8&w=1000&q=80") no-repeat center center scroll;
+    background-size: cover;
+    opacity: 0.9;
+    background-repeat: no-repeat;
+   
+}
