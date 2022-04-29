@@ -4,6 +4,7 @@ import PlaySong from "./components/playsong/PlaySong";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
+import Demo from "./components/account/Register";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
        <Route path="/" element={<Homepage />} />
        <Route path="/playsong" element={<PlaySong />} />
        <Route path="/login" element={<Login />} />
-       <Route path="/register" element={<Register />} />
+       <Route path="/signup" element={<Register />} />
     </Routes>
   );
 }

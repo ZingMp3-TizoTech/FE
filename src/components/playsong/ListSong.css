@@ -2,7 +2,7 @@
     overflow-y: scroll;
     width: 100%;
     background-color: #D7E9ED;
-    max-height: 655px;
+    max-height: 700px;
 }
 .wrapper-list-song table{
     width: 100%;
@@ -32,7 +32,14 @@
     border: none;
 }
 
-
+.play-parent{    
+  
+    display: flex;
+}
+.play-child{  
+    width: 100%;  
+    align-self: flex-end;
+}
 
 /* col-span-2 overflow-y-scroll
 

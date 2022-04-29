@@ -11,13 +11,13 @@ export default function Homepage() {
   return (
     <div className='container'>
       <Sidebar/>
+     
       <div>
         <Header/>
         <Slidealbum/>
         <Albums/>
         <Albums/>
         <Albums/>
-
       </div>
     </div>
   )

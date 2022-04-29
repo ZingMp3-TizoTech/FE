@@ -20,10 +20,10 @@ export default function Header() {
         }}
       >
         <Button style={{ marginRight: '10px' }}
-          variant="outlined" startIcon={<DriveFileRenameOutlineIcon />}>
+          variant="outlined" href='/signup' startIcon={<DriveFileRenameOutlineIcon />}>
           Register
         </Button>
-        <Button variant="contained" endIcon={<ExitToAppIcon />}>
+        <Button variant="contained" href='/login' endIcon={<ExitToAppIcon />}>
           Login
         </Button>
       </div>

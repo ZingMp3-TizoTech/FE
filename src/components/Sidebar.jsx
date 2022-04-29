@@ -16,11 +16,8 @@ import IconButton from '@mui/material/IconButton';
 
 const drawerWidth = 240;
 
-interface Props {
-  window?: () => Window;
-}
 
-export default function Sidebar(props: Props) {
+export default function Sidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -50,16 +47,20 @@ export default function Sidebar(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ 
-      display: 'flex',
-      boxShadow:'-6px 1px 12px 6px #888888' }}
-    >
+    // <Box sx={{ 
+    //   display: 'flex',
+    //   boxShadow:'-6px 1px 12px 6px #888888' }}
+    // >
       <Box
+      style={{
+    
+        marginLeft:"-110px"
+      }}
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        <Toolbar>
+        {/* <Toolbar>
           <IconButton
             
           >  
@@ -68,9 +69,9 @@ export default function Sidebar(props: Props) {
           <Typography variant="h6" noWrap component="div">
             Responsive drawer
           </Typography>
-        </Toolbar>
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
+        </Toolbar> */}
+        
+        {/* <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
@@ -84,7 +85,7 @@ export default function Sidebar(props: Props) {
           }}
         >
           {drawer}
-        </Drawer>
+        </Drawer> */}
         
         <Drawer
           variant="permanent"
@@ -97,6 +98,6 @@ export default function Sidebar(props: Props) {
           {drawer}
         </Drawer>
       </Box>
-    </Box>
+    // </Box>
   );
 }
