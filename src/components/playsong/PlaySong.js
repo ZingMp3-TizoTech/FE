@@ -11,7 +11,9 @@ export default function PlaySong() {
         <DetailSong />
         <ListSongs />
     </div>
-    <Playing/>
+   <div className='playing'>
+      <Playing/>
+   </div>
     </>
   )
 }

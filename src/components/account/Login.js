@@ -66,6 +66,9 @@ export default function Login() {
                     <div className="login-form">
                         <div className='form'>
                             <input type="email" placeholder="E-mail Address" autofocus onChange={handleEmailInput} />
+                            <div style={{marginLeft:'25px', color:'red'}}>
+                                {email==""?<p> *Please enter email </p>:<></>}
+                            </div>
                             <input type={hidden ? 'password' : 'text'} placeholder="Password" onChange={handlePasswordInput} className="password"/>
                             
                             <span 

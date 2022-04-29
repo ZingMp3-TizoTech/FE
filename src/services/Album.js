@@ -1,8 +1,6 @@
 import axios from 'axios'
 const handleGetAllAlbumAPI = async ()=>{
     try {
-        // let token = await localStorage.getItem('token')
- 
         return axios.get('https://suntify.herokuapp.com/albums',{
             headers: {
                 'Authorization': `Bearer ${token}` 
