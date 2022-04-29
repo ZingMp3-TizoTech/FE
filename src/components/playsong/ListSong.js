@@ -3,7 +3,6 @@ import { FaDownload } from 'react-icons/fa'
 import './ListSong.css'
 import ApiCaller from '../../utils/callAPI'
 import Playing from './Playing'
-import PlaySong from './PlaySong'
 import DetailSong from './DetailSong'
 export default function ListSongs() {
     const [songs, setSongs] = useState([])
@@ -18,7 +17,6 @@ export default function ListSongs() {
                 setSongs(res.data.data)
             })
     }, [])
-    // let i = 1;
     return (
         <>
             <DetailSong
@@ -97,7 +95,7 @@ export default function ListSongs() {
 
             <div >
                 <div className='play-child'>
-                    { <Playing idSong={idNumber} songs={songs} />}
+                    { <Playing setIdNumber={setIdNumber} idSong={idNumber} songs={songs} />}
                 </div>
             </div>
         </>)
