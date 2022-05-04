@@ -11,6 +11,9 @@
     background-color: #85A5A5;
     border: 0px solid #85A5A5;
 }
+.wrapper-list-song .active-row{
+    background-color: #85A5A5;
+}
 .wrapper-list-song table, tr, td{
     border:none;
    }

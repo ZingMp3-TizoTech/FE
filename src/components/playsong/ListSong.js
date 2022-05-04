@@ -8,6 +8,7 @@ import { style } from '@mui/system'
 export default function ListSongs() {
     const [songs, setSongs] = useState([])
     const [idNumber, setIdNumber] = useState(0);
+    const [circular, setCircular] = useState(true);
     useEffect(() => {
         ApiCaller('songs', 'GET')
             .then(res => {
@@ -18,7 +19,7 @@ export default function ListSongs() {
         <div>
             <div className='wrapper-song'>
                 <DetailSong
-                    idSong={idNumber} songs={songs} 
+                    idSong={idNumber} songs={songs} circular={circular}
                 />
                 <div className='wrapper-list-song'>
                     <table>
@@ -52,12 +53,14 @@ export default function ListSongs() {
                         <tbody>
 
                             {songs.map((song, index) => (
-                                <>
+                                
                                     <tr
+                                    key={index}
                                     onClick={(e) => {
                                         setIdNumber(index);
                                     }
                                     }
+                                    className={index===idNumber?"active-row":""} 
                                     >
                                         <td scope="row">{(song._id != null) ? index + 1 : <></>
                                             }</td>
@@ -66,7 +69,7 @@ export default function ListSongs() {
                                         <td
                                         >{song.artist.name}</td>
                                         <td style={{
-                                            textAlign: 'center'
+                                            textAlign:'center',
                                         }}>{
                                                 song.album ? <>{song.album.name}</> : <></>}</td>
                                         <td style={{
@@ -75,7 +78,7 @@ export default function ListSongs() {
                                             <a href={song.url}><FaDownload /></a>
                                         </td>
                                     </tr>
-                                </>
+                                
                             ))
                             }
 
@@ -96,7 +99,7 @@ export default function ListSongs() {
 
             <div >
                 <div className='play-child'>
-                    {<Playing setIdNumber={setIdNumber} idSong={idNumber} songs={songs} />}
+                    {<Playing setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={songs} />}
                 </div>
             </div>
         </div>

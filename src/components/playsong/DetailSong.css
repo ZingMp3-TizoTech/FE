@@ -40,7 +40,7 @@
     line-height: 1.5;
     margin-left: 25px;
 }
-.img-author img{
+.img-author .animation-img{
     animation: rotation 8s infinite linear;
 }
 @keyframes rotation {

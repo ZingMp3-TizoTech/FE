@@ -2,7 +2,7 @@ import React from 'react'
 import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from "react-h5-audio-player";
 
-function Playing({ idSong, setIdNumber, ...props }) {
+function Playing({ idSong, setIdNumber, setCircular, ...props }) {
   // const [songs, setSongs] = useState(props?.songs)
   // const idS= props.idSong - 1;
   // const [id, setId] = useState(idS)
@@ -23,20 +23,25 @@ function Playing({ idSong, setIdNumber, ...props }) {
     console.log("Nam ca", _id)
     setIdNumber && setIdNumber(_id);
   }
+  const handleClickPlay = () =>{
+    setCircular(true)
+  }
+  const handleClickPause = () =>{
+    setCircular(false)
+  }
 
   return (
   
     <AudioPlayer
-
       src={props.songs[idSong]?.url}
       layout="stacked-reverse"
       showSkipControls={true}
       showJumpControls={false}
       onClickNext={handleClickNext}
       onClickPrevious={handleClickPrev}
+      onPause={handleClickPause}
+      onPlay={handleClickPlay}
     />
-
-
   )
 };
 export default Playing
