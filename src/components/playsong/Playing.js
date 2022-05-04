@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-//mport AudioPlayer from 'react-h5-audio-player'
 import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from "react-h5-audio-player";
 import Login from '../account/Login';
@@ -10,27 +9,47 @@ function preSong(i, e) {
 
 
 function Playing({ ...props }) {
-  const [url, setUrl] = useState(props.linkSong)
-  const [songs, setSongs] = useState([])
-  useEffect(() => {
-    ApiCaller('songs', 'GET')
-      .then(res => {
+//   console.log(props.songs, props.idSong);
+//   const [songs, setSongs] = useState([])
+//   setSongs(props.songs)
+//   const idS= props.idSong - 1;
+//   const [id, setId] = useState(idS)
+// //  console.log(songs[id]);
+//   // const [url, setUrl] = useState("songs[props.idSong].url")
 
-        setSongs(res.data.data)
-      })
-  }, [])
-  if(props.linkSong==songs.map(song=>song._id)){
-    console.log("bằng nhau");
-  }
-  const preSong = () => {
   
-  }
-  return (
-    <AudioPlayer
-      src={url}
-      
-    />
+// // console.log(songs[0]);
 
+
+//   const handleClickNext = () => {
+//     if(id<songs.length){
+//       setId(id+1)
+//       // setUrl(songs[id].url)
+//     } else {
+//       setId(1)
+//     }
+//     console.log(id);
+//   }
+//   const handleClickPrev = () => {
+//     if(id>0){
+//       setId(id-1)
+//     } else {
+//       setId(songs.lengt)
+//     }
+//     console.log(id);
+//   }
+  // console.log(url);
+  return (
+  
+    <AudioPlayer
+
+      src={props.linkSong}
+      layout="stacked-reverse"
+      showSkipControls={true}
+      showJumpControls={false}
+      // onClickNext={handleClickNext}
+      // onClickPrevious={handleClickPrev}
+    />
 
   )
 };

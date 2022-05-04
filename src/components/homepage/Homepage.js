@@ -1,10 +1,10 @@
 import React from 'react'
 import Sidebar from '../Sidebar'
-import Albums from './Albums'
-import Slidealbum from './Slidealbum'
+import Albums from './album/Albums'
+import Slidealbum from './slidealbum/Slidealbum'
 import "./Homepage.css"
-import Header from "./Header.js"
-import "./Header.css"
+import Header from "./header/Header"
+import "./Homepage.css"
 
 
 export default function Homepage() {

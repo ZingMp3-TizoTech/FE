@@ -6,7 +6,6 @@ function   ApiCaller(endpoint, method) {
   return axios({
         method:method,
         url:`${Config.API_URL}/${endpoint}`,
-         
       })
      
       .catch(err => {

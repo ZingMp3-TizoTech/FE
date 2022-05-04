@@ -3,6 +3,7 @@ import ApiCaller from '../../utils/callAPI'
 import './DetailSong.css'
 
 export default function DetailSong({...props}) {
+ console.log(props.img);
   return (
     <div className='wrapper-detail-song'>
         <h1> Now playing </h1>

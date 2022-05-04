@@ -8,12 +8,9 @@ export default function PlaySong({...props}) {
   return (
     <>
         <div className='container-page'>
-       
         <ListSongs />
        
     </div>
-   
-   
     </>
   )
 }
