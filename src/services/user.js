@@ -1,7 +1,9 @@
-import axios from "axios"
+import axios from "axios";
+import * as Config from '../constant/config'
 const handleLoginAPI = (email, password)=>{
     try {
-        return axios.post('https://suntify.herokuapp.com/login',{email, password})
+       
+        return axios.post(`${Config.API_URL}/login`,{email, password})
     } catch (error) {
         console.log(error);
     }
@@ -10,7 +12,7 @@ const handleLoginAPI = (email, password)=>{
 const handleSignUpAPI = (email, password)=>{
     try {
         const role="User";
-        return axios.post('http://localhost:5000/signup',{email, password, role})
+        return axios.post(`${Config.API_URL}/signup`,{email, password, role})
     } catch (error) {
         console.log(error);
     }
@@ -18,7 +20,7 @@ const handleSignUpAPI = (email, password)=>{
 const handleGetUserIdAPI = async ()=>{
     try {
         let token = await localStorage.getItem('token')
-        return axios.get('https://suntify.herokuapp.com/user/profile',{
+        return axios.get(`${Config.API_URL}/user/profile`,{
             headers: {
                 'Authorization': `Bearer ${token}` 
               }
