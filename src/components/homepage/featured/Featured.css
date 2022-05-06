@@ -1,3 +1,13 @@
+.more{
+    text-decoration: underline;
+    position: absolute;
+    right: 52px;
+    bottom: 335px;
+    color: black;
+}
+.more:hover{
+    color: rgb(119, 118, 118);
+}
 .title-album{
     margin-left: 45px;
     margin-bottom: -20px;
