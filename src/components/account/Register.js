@@ -1,22 +1,23 @@
 import React, { useState } from 'react'
 import './Login.css'
 import './signup.css'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input } from 'antd';
 import 'antd/dist/antd.css'
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import 'animate.css';
 import { Button as Btn } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { handleSignUpAPI } from '../../services/User';
-import {useNavigate} from "react-router-dom";
-import {toast}   from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
- function Register() {  
+function Register() {
     const navigate = useNavigate();
     const [validate, setValidate] = useState(false)
     const [email, setEmail] = useState('');
     const [pw, setPw] = useState('');
     const [pw1, setPw1] = useState('');
+    const [error, setError] = useState('');
     const getEmail = (e) => {
         setEmail(e.target.value);
     }
@@ -26,24 +27,29 @@ import 'react-toastify/dist/ReactToastify.css';
     const getPW1 = (e) => {
         setPw1(e.target.value);
     }
-   
-   async function signup() {
-    if(pw==pw1){
-        setValidate(true)
-    }
-    else{
-        setValidate(false)
-    }
-        console.log(validate);
-        
-        if (validate && pw.length >= 6) {
-            const acc = await handleSignUpAPI(email, pw);  
-            if(acc.data.data[0]._id){
-                console.log("thành conng");
-                navigate("/")
-            }    
+
+    async function signup() {
+        if (pw == pw1) {
+            setValidate(true)
         }
         else {
+            setValidate(false)
+        }
+
+        if (validate && pw.length >= 6) {
+            console.log(email);
+            const acc = await handleSignUpAPI(email, pw);        
+            console.log(acc.status);
+            if (acc.status == 200) {
+              
+                navigate("/");
+            }
+              if (acc.status == 205){
+                 setError('Email already exists, please try again!');               
+             }
+        }
+        else {
+           
             console.log("log lỗi");
         }
 
@@ -98,6 +104,10 @@ import 'react-toastify/dist/ReactToastify.css';
                             ]}
                         >
                             <Input id='email' onChange={(e) => getEmail(e)} type={'email'} />
+                            <a style={{
+                                color:"red",
+                                fontSize:"15px"
+                            }}>{error}</a>
                         </Form.Item>
 
                         <Form.Item
@@ -119,7 +129,7 @@ import 'react-toastify/dist/ReactToastify.css';
                                 },
                             ]}
                         >
-                            <Input.Password onChange={(e) => getPW(e)}  id='password' type={"password"}
+                            <Input.Password onChange={(e) => getPW(e)} id='password' type={"password"}
                             />
                         </Form.Item>
                         <Form.Item
@@ -169,10 +179,10 @@ import 'react-toastify/dist/ReactToastify.css';
                                 height: "35px",
                                 marginBottom: "10px"
                             }} onClick={signup}>
-                             
+
                                 Sign Up
                             </Btn>
-                          
+
                             <div style={{
                                 marginLeft: "-50px"
                             }}>

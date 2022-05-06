@@ -7,8 +7,10 @@ const handleLoginAPI = (email, password)=>{
     }
 }
 
-const handleSignUpAPI = (email, password, role)=>{
+
+const handleSignUpAPI = (email, password)=>{
     try {
+        const role="User";
         return axios.post('https://suntify.herokuapp.com/signup',{email, password, role})
     } catch (error) {
         console.log(error);

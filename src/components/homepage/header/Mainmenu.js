@@ -8,8 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-
-
+import Cookies from 'js-cookie'
 const StyledMenu = styled((props) => (
   <Menu
     elevation={0}
@@ -54,8 +53,8 @@ const StyledMenu = styled((props) => (
 export default function MainMenu() {
   const navigate = useNavigate()
   const hadleLogout = () =>{
-    delete localStorage.token
-    navigate("/")
+    Cookies.remove('token')
+    navigate("/login")
   }
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);

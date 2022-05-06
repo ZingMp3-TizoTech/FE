@@ -6,11 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import Cookies from 'js-cookie'
 
 export default function Login() {
-
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -31,16 +29,16 @@ export default function Login() {
         try {
             console.log(email, password);
             const data = await handleLoginAPI(email, password);
-            console.log(data);
-            let token =data.data.token;
-            localStorage.setItem('token', token)                              
+          let token= Cookies.set("token",data.data.token)                                   
             if(token){
+                console.log("thành conng");
                 toast.success("Login success!")
                 navigate('/')
             } 
         } catch (error) {
             toast.error("Login failed")
             console.log(error);
+         
         }
     }
 
@@ -66,9 +64,9 @@ export default function Login() {
                     <div className="login-form">
                         <div className='form'>
                             <input type="email" placeholder="E-mail Address" autofocus onChange={handleEmailInput} />
-                            <div style={{marginLeft:'25px', color:'red'}}>
-                                {email==""?<p> *Please enter email </p>:<></>}
-                            </div>
+                           
+                                {email==""?<p style={{marginLeft:'25px', color:'red'}}> *Please enter email </p>:<></>}
+                            
                             <input type={hidden ? 'password' : 'text'} placeholder="Password" onChange={handlePasswordInput} className="password"/>
                             
                             <span 
@@ -87,7 +85,7 @@ export default function Login() {
                             </div>
                             <button type="submit" 
                             onClick={(e)=>{handleLogin(e)}}
-                            >LOG-IN</button>
+                            >Login</button>
                         </div>
                     </div>
 

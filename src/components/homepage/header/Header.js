@@ -5,12 +5,13 @@ import { BiSearchAlt } from 'react-icons/bi';
 import { useNavigate } from "react-router-dom";
 import './Header.css'
 import MainMenu from "./Mainmenu"
-
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import Cookies from 'js-cookie'
 
 export default function Header() {
   let navigate = useNavigate();
-  const loggedInUser = localStorage.getItem('token');
+  const loggedInUser =Cookies.get('token');
+ 
   return (
     <div className='wrapper-navbar'>
       <div class="search-container">
@@ -28,7 +29,7 @@ export default function Header() {
           <>
             <Button style={{ marginRight: '10px' }}
           onClick={(e)=>{
-            navigate('register');
+            navigate('/signup');
           }}
           variant="outlined" startIcon={<DriveFileRenameOutlineIcon />}>
           Register

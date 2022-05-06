@@ -1,13 +1,14 @@
 import React from 'react'
 import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from "react-h5-audio-player";
+import Login from '../account/Login';
+import ApiCaller from '../../utils/callAPI';
+function preSong(i, e) {
+
+}
+
 
 function Playing({ idSong, setIdNumber, setCircular, ...props }) {
-  // const [songs, setSongs] = useState(props?.songs)
-  // const idS= props.idSong - 1;
-  // const [id, setId] = useState(idS)
-
-
 
   const handleClickNext = () => {
     let _id = idSong;
