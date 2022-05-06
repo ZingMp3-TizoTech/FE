@@ -3,7 +3,6 @@ import { FaDownload } from 'react-icons/fa'
 import './ListSong.css'
 import ApiCaller from '../../utils/callAPI'
 import { Playing, preSong } from './Playing'
-import PlaySong from './PlaySong'
 import DetailSong from './DetailSong'
 export default function ListSongs() {
     const [songs, setSongs] = useState([])
@@ -23,7 +22,7 @@ export default function ListSongs() {
     return (
         <>
             <DetailSong
-            //  artistName={name} img={imgsong} 
+              artistName={name} img={imgsong} 
             />
             <div className='wrapper-list-song'>
                 <table>
@@ -61,15 +60,15 @@ export default function ListSongs() {
                                     <td
                                         onClick={(e) => {
                                             setIdNumber(index + 1);
-                                             setLink(song.url); setName(song.artist.name); setImg(song.image[0])
+                                             setLink(song.url); setName(song.artist.name); setImg(song.artist.image[0])
                                         }
                                         } scope="row">{(song._id != null) ? index + 1 : <></>
                                         }</td>
                                     <td
-                                    onClick={(e) => { setLink(song.url); setName(song.artist.name); setImg(song.image[0]) }} 
+                                    onClick={(e) => { setLink(song.url); setName(song.artist.name); setImg(song.artist.image[0]) }} 
                                     >{song.name}</td>
                                     <td
-                                   onClick={(e) => { setLink(song.url); setName(song.artist.name); setImg(song.image[0]) }} 
+                                   onClick={(e) => { setLink(song.url); setName(song.artist.name); setImg(song.artist.image[0]) }} 
                                     >{song.artist.name}</td>
                                     <td style={{
                                         textAlign: 'center'
