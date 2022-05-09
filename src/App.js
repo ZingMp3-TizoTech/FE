@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/account/Login";
 import Register from "./components/account/Register";
 import { ToastContainer, toast } from 'react-toastify';
+import Card from "./components/homepage/ListAll/Card";
 // import Demo from "./components/account/Register";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
        <Route path="/playsong" element={<PlaySong />} />
        <Route path="/login" element={<Login />} />
        <Route path="/signup" element={<Register />} />
+       <Route path="/test" element={<Card />} />
     </Routes>
     <ToastContainer />
     </>
