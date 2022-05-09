@@ -1,8 +1,11 @@
+.featured{
+    position: relative;
+}
 .more{
-    text-decoration: underline;
+    text-decoration: none;
     position: absolute;
-    right: 52px;
-    bottom: 335px;
+    right: 80px;
+    bottom: 280px;
     color: black;
 }
 .more:hover{

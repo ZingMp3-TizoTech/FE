@@ -7,41 +7,34 @@ import ApiCaller from '../../../utils/apiCaller'
 
 export default function Slidealbum() {
 
-        let settings = {
-            dots: false,
-            infinite: true,
-            speed: 1000,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            lazyLoad: true,
-        };
-        const [songs, setSongs] = useState([])
-        useEffect(() => {
-            ApiCaller('songs', 'GET')
-                .then(res => {
-                    setSongs(res.data.data)
-                })
-        }, [])
-        return (
-            <div className="slide-album">
-                <Slider {...settings}>
-                    <div className='img-item'>
-                        <img src='	https://photo-zmp3.zmdcdn.me/banner/8/5/c/5/85c57767a12c519aac6c4fce12b33dd9.jpg' alt="" />
+    let settings = {
+        dots: false,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        lazyLoad: true,
+    };
+    const [songs, setSongs] = useState([])
+    useEffect(() => {
+        ApiCaller('songs', 'GET')
+            .then(res => {
+                setSongs(res.data.data)
+            })
+    }, [])
+    let topSongs = songs?.slice(0, 5);
+    return (
+        <div className="slide-album">
+            <Slider {...settings}>
+                {topSongs.map((song, index) => (
+                    <div className='img-item' key={index}>
+                        <img src={song?.image[1]} alt="Image-song" />
                     </div>
-                    <div className='img-item'>
-                        <img src='	https://photo-zmp3.zmdcdn.me/banner/8/5/c/5/85c57767a12c519aac6c4fce12b33dd9.jpg' alt="" />
-                    </div>
-                    <div className='img-item'>
-                        <img src='	https://photo-zmp3.zmdcdn.me/banner/8/5/c/5/85c57767a12c519aac6c4fce12b33dd9.jpg' alt="" />
-                    </div>
-                    <div className='img-item'>
-                        <img src='	https://photo-zmp3.zmdcdn.me/banner/8/5/c/5/85c57767a12c519aac6c4fce12b33dd9.jpg' alt="" />
-                    </div>
-                    <div className='img-item'>
-                        <img src='	https://photo-zmp3.zmdcdn.me/banner/8/5/c/5/85c57767a12c519aac6c4fce12b33dd9.jpg' alt="" />
-                    </div>
-                </Slider>
-            </div>
-        );
-    
+                ))}
+
+
+            </Slider>
+        </div>
+    );
+
 }
