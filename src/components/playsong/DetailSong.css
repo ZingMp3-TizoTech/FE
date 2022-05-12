@@ -1,22 +1,21 @@
 .wrapper-detail-song{
     width: 34%;
+    position: relative;
 }
 .wrapper-detail-song h2{
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.5;
-    margin-left: 25px;
+    text-align: center;
 }
 .wrapper-detail-song h3{
     font-size: 24px;
     line-height: 32px;
     margin-left: 25px;
 }
-
-
 .img{
     width: 240px;
-    margin-top: 10px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -26,8 +25,9 @@
 .img-author{
     display: flex;
     align-items: center;
-    margin-left: 90px;
-    margin-top: 35px;
+    left: 70px;
+    bottom: 70px;
+    position: absolute;
 }
 .img-author img{
     max-width: 70px;
@@ -40,7 +40,7 @@
     line-height: 1.5;
     margin-left: 25px;
 }
-.img-author img{
+.img-author .animation-img{
     animation: rotation 8s infinite linear;
 }
 @keyframes rotation {

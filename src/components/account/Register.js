@@ -7,9 +7,10 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import 'animate.css';
 import { Button as Btn } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { handleLoginAPI, handleSignUpAPI } from '../../services/user';
-import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
+
+import { handleSignUpAPI } from '../../services/user';
+import {useNavigate} from "react-router-dom";
+import {toast}   from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'js-cookie';
 

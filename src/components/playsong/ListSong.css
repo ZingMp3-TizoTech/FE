@@ -11,6 +11,9 @@
     background-color: #85A5A5;
     border: 0px solid #85A5A5;
 }
+.wrapper-list-song .active-row{
+    background-color: #85A5A5;
+}
 .wrapper-list-song table, tr, td{
     border:none;
    }
@@ -32,16 +35,23 @@
     border: none;
 }
 
+.wrapper-list-song tbody tr td a{
+    color: black !important;
+}
+
 .play-parent{    
   
     display: flex;
 }
 .play-child{  
     width: 100%;  
-    align-self: flex-end;
+    position: fixed;
+    bottom: 0;
 }
 
-/* col-span-2 overflow-y-scroll
-
-
-*/
+.wrapper-song{
+    display: flex;
+}
+.wrapper-list-song tbody tr{
+    height: 100px;
+}

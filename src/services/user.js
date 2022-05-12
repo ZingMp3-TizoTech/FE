@@ -2,12 +2,13 @@ import axios from "axios";
 import * as Config from '../constant/config'
 const handleLoginAPI = (email, password)=>{
     try {
-       
+      
         return axios.post(`${Config.API_URL}/login`,{email, password})
     } catch (error) {
         console.log(error);
     }
 }
+
 
 const handleSignUpAPI = (email, password)=>{
     try {
