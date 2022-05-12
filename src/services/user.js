@@ -7,7 +7,7 @@ const handleLoginAPI = (email, password)=>{
     }
 }
 
-const handleSignupAPI = (email, password, role)=>{
+const handleSignUpAPI = (email, password, role)=>{
     try {
         return axios.post('https://suntify.herokuapp.com/signup',{email, password, role})
     } catch (error) {
@@ -26,4 +26,4 @@ const handleGetUserIdAPI = async ()=>{
         console.log(error)
     }
 }
-export{handleLoginAPI, handleSignupAPI, handleGetUserIdAPI}
+export{handleLoginAPI, handleSignUpAPI, handleGetUserIdAPI}
