@@ -25,34 +25,59 @@ export default function Sidebar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const [color, setColor] = React.useState('black')
+  const [i, setI] = React.useState(0)
+  const listColor = ["rgb(193, 149, 210)",
+                      "rgb(223, 188, 210)",
+                      "rgb(155, 224, 210)",
+                      "rgb(242, 224, 114)"];
+
+  React.useEffect(() => {
+    for (  let i = 0; i < listColor.length; i++) {
+    setTimeout(() => {  
+      setColor(listColor[i]);
+        console.log(i);
+      
+      }
+   , 1000)
+    }
+  },[i])
+
+
+
   const drawer = (
     <div>
       <Toolbar>
         <div
-        style={{
-          fontSize:'20px',
-          display:'flex',
-          alignItems:'center',
-        }}
-        >
-          <GraphicEqRoundedIcon/>
-          <p
           style={{
-            fontSize:'30px',
-            marginLeft:'15px',
-            textShadow:'2px 2px #d7d7d7'
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            width: "50px"
           }}
-          >Suntify</p>
+        >
+          <GraphicEqRoundedIcon style={{
+            color: `${color}`,
+            width: "100px",
+            height: "100px"
+          }} />
+          <p
+            style={{
+              fontSize: '30px',
+              marginLeft: '15px',
+              textShadow: '2px 2px #d7d7d7'
+            }}
+          >Suntify </p>
         </div>
       </Toolbar>
       <List>
         {['Personal', 'Disconver', 'Library'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {text==='Personal'?<ContactsRoundedIcon/>:
-              text==='Disconver'?<AlbumIcon/>:
-              text==='Library'?<LibraryMusicRoundedIcon/>:
-              <></>
+              {text === 'Personal' ? <ContactsRoundedIcon /> :
+                text === 'Disconver' ? <AlbumIcon /> :
+                  text === 'Library' ? <LibraryMusicRoundedIcon /> :
+                    <></>
               }
             </ListItemIcon>
             <ListItemText primary={text} />
@@ -70,16 +95,16 @@ export default function Sidebar(props) {
     //   display: 'flex',
     //   boxShadow:'-6px 1px 12px 6px #888888' }}
     // >
-      <Box
+    <Box
       style={{
-    
-        marginLeft:"-110px"
+
+        marginLeft: "-110px"
       }}
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* <Toolbar>
+      component="nav"
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      aria-label="mailbox folders"
+    >
+      {/* <Toolbar>
           <IconButton
             
           >  
@@ -90,8 +115,8 @@ export default function Sidebar(props) {
           </Typography>
 
         </Toolbar> */}
-        
-        {/* <Drawer
+
+      {/* <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
@@ -106,18 +131,18 @@ export default function Sidebar(props) {
         >
           {drawer}
         </Drawer> */}
-        
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
-        >       
-          {drawer}
-        </Drawer>
-      </Box>
+
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
     // </Box>
   );
 }
