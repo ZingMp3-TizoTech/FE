@@ -1,30 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ApiCaller from '../../../utils/apiCaller'
 import './Genre.css'
 
 export default function Genre() {
-  return (
-    <div className='wrapper-country'>
-        <div className='country-item'>
-            <img src='https://photo-zmp3.zmdcdn.me/cover/9/a/5/4/9a547c214248610d4907fa5b60b1b3b5.jpg'/>
-            <div className="after"></div>
-            <p>Vietnam</p>
+    const [genres, setgenres] = useState([])
+    useEffect(() => {
+        ApiCaller("genres", 'GET')
+            .then(res => {
+                setgenres(res.data.data)
+            })
+    }, [])
+    return (
+        <div className='wrapper-country'>
+            {genres.map((genre, index) => (
+                <div className='country-item' key={index}>
+                    <img src={genre?.image[0]} />
+                    <div className="after"></div>
+                    <p>{genre?.zone}</p>
+                </div>
+            ))}
         </div>
-        <div className='country-item'>
-            <img src='https://photo-zmp3.zmdcdn.me/cover/9/a/5/4/9a547c214248610d4907fa5b60b1b3b5.jpg'/>
-            <div className="after"></div>
-            <p>Vietnam</p>
-        </div>
-        <div className='country-item'>
-            <img src='https://photo-zmp3.zmdcdn.me/cover/9/a/5/4/9a547c214248610d4907fa5b60b1b3b5.jpg'/>
-            <div className="after"></div>
-            <p>Vietnam</p>
-        </div>
-        <div className='country-item'>
-            <img src='https://photo-zmp3.zmdcdn.me/cover/9/a/5/4/9a547c214248610d4907fa5b60b1b3b5.jpg'/>
-            <div className="after"></div>
-            <p>Vietnam</p>
-        </div>
-    </div>
-    
-  )
+
+    )
 }

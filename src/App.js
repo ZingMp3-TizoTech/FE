@@ -17,7 +17,6 @@ function App() {
        <Route path="/playsong" element={<PlaySong />} />
        <Route path="/login" element={<Login />} />
        <Route path="/signup" element={<Register />} />
-       {/* <Route path="/listall/:id" element={<ListAll />} /> */}
        <Route path="/artists" element={<ListAll />} />
        <Route path="/albums" element={<ListAll type="albums" />} />
     </Routes>
