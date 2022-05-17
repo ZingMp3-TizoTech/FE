@@ -47,7 +47,7 @@ export default function CardItem({artist, album, type='artist'}) {
             cover={
                 <img
                     alt="example"
-                    src={album?.artist?.image[0]}
+                    src={ album?.artist != null? album?.artist?.image[0] : "https://play-lh.googleusercontent.com/aA2rpO5sXUJmnkB-H9GlLz8BqhpIw27wG2xc1-9j5rg1h_LmcGxnAd6vOVXTZO8F-D0"}
                     style={{ maxWidth: 300,
                              maxHeight: 300,
                              overflow:'hidden',

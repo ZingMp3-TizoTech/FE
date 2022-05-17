@@ -29,19 +29,19 @@ export default function Sidebar(props) {
     <div>
       <Toolbar>
         <div
-        style={{
-          fontSize:'20px',
-          display:'flex',
-          alignItems:'center',
-        }}
-        >
-          <GraphicEqRoundedIcon/>
-          <p
           style={{
-            fontSize:'30px',
-            marginLeft:'15px',
-            textShadow:'2px 2px #d7d7d7'
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center',
           }}
+        >
+          <GraphicEqRoundedIcon />
+          <p
+            style={{
+              fontSize: '30px',
+              marginLeft: '15px',
+              textShadow: '2px 2px #d7d7d7'
+            }}
           >Suntify</p>
         </div>
       </Toolbar>
@@ -49,10 +49,10 @@ export default function Sidebar(props) {
         {['Personal', 'Disconver', 'Library'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
-              {text==='Personal'?<ContactsRoundedIcon/>:
-              text==='Disconver'?<AlbumIcon/>:
-              text==='Library'?<LibraryMusicRoundedIcon/>:
-              <></>
+              {text === 'Personal' ? <ContactsRoundedIcon /> :
+                text === 'Disconver' ? <AlbumIcon /> :
+                  text === 'Library' ? <LibraryMusicRoundedIcon /> :
+                    <></>
               }
             </ListItemIcon>
             <ListItemText primary={text} />
@@ -65,59 +65,25 @@ export default function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-
-    // <Box sx={{ 
-    //   display: 'flex',
-    //   boxShadow:'-6px 1px 12px 6px #888888' }}
-    // >
-      <Box
+    <Box
       style={{
-    
-        marginLeft:"-110px"
-      }}
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* <Toolbar>
-          <IconButton
-            
-          >  
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
 
-        </Toolbar> */}
-        
-        {/* <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer> */}
-        
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
-        >       
-          {drawer}
-        </Drawer>
-      </Box>
-    // </Box>
+        marginLeft: "-110px"
+      }}
+      component="nav"
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      aria-label="mailbox folders"
+    >
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+        }}
+        open
+      >
+        {drawer}
+      </Drawer>
+    </Box>
   );
 }
