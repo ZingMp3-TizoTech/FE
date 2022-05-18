@@ -6,6 +6,7 @@ export default function PlaySong({type}) {
   return (
     <>
         <div className='container-page'>
+
         <ListSongs type={type} />
     </div> 
     </>

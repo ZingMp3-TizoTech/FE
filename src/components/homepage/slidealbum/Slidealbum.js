@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slidealbum.css"
-import ApiCaller from '../../../utils/apiCaller'
+import ApiCaller from "../../../utils/callAPI";
 
 export default function Slidealbum() {
 

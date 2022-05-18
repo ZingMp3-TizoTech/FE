@@ -1,8 +1,16 @@
+.loading{
+   justify-content: center;
+    margin-left: 50%;
+    margin-top: 250px;
+
+}
 .wrapper-list-song{
+    display: flex;
     overflow-y: scroll;
     width: 100%;
     background-color: #D7E9ED;
     max-height: 700px;
+    
 }
 .wrapper-list-song table{
     width: 100%;

@@ -1,5 +1,6 @@
+
 import React, { useEffect, useState } from 'react'
-import ApiCaller from '../../../utils/apiCaller'
+import ApiCaller from '../../../utils/callAPI'
 import './Genre.css'
 
 export default function Genre() {
@@ -22,4 +23,5 @@ export default function Genre() {
         </div>
 
     )
+
 }

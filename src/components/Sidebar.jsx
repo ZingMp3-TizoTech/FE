@@ -25,6 +25,26 @@ export default function Sidebar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+  const [color, setColor] = React.useState('black')
+  const [i, setI] = React.useState(0)
+  const listColor = ["rgb(193, 149, 210)",
+                      "rgb(223, 188, 210)",
+                      "rgb(155, 224, 210)",
+                      "rgb(242, 224, 114)"];
+
+  React.useEffect(() => {
+    for (  let i = 0; i < listColor.length; i++) {
+    setTimeout(() => {  
+      setColor(listColor[i]);
+        console.log(i);
+      
+      }
+   , 1000)
+    }
+  },[i])
+
+
+
   const drawer = (
     <div>
       <Toolbar>
@@ -33,6 +53,7 @@ export default function Sidebar(props) {
             fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
+
           }}
         >
           <GraphicEqRoundedIcon />
@@ -42,6 +63,7 @@ export default function Sidebar(props) {
               marginLeft: '15px',
               textShadow: '2px 2px #d7d7d7'
             }}
+
           >Suntify</p>
         </div>
       </Toolbar>
@@ -65,6 +87,12 @@ export default function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+
+
+    // <Box sx={{ 
+    //   display: 'flex',
+    //   boxShadow:'-6px 1px 12px 6px #888888' }}
+    // >
     <Box
       style={{
 
@@ -74,6 +102,35 @@ export default function Sidebar(props) {
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="mailbox folders"
     >
+      {/* <Toolbar>
+          <IconButton
+            
+          >  
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Responsive drawer
+          </Typography>
+
+        </Toolbar> */}
+
+      {/* <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer> */}
+
+
       <Drawer
         variant="permanent"
         sx={{
@@ -85,5 +142,6 @@ export default function Sidebar(props) {
         {drawer}
       </Drawer>
     </Box>
+
   );
 }

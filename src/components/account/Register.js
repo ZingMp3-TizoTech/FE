@@ -7,10 +7,13 @@ import 'animate.css';
 import { Button as Btn } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { handleSignUpAPI } from '../../services/User';
+
+import { handleSignUpAPI } from '../../services/user1';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
+
 function Register() {
     const navigate = useNavigate();
     const [validate, setValidate] = useState(false)
@@ -27,7 +30,6 @@ function Register() {
     const getPW1 = (e) => {
         setPw1(e.target.value);
     }
-
     async function signup() {
         if (pw == pw1) {
             setValidate(true)
@@ -41,8 +43,8 @@ function Register() {
             const acc = await handleSignUpAPI(email, pw);        
             console.log(acc.status);
             if (acc.status == 200) {
-              
-                navigate("/");
+               
+                navigate("/login");
             }
               if (acc.status == 205){
                  setError('Email already exists, please try again!');               
@@ -186,7 +188,9 @@ function Register() {
                             <div style={{
                                 marginLeft: "-50px"
                             }}>
-                                <div style={{ fontSize: "16px", fontFamily: "sans-serif" }}>If you have account, <a href='/login'>click here!</a></div>
+                                <div style={{ fontSize: "16px", fontFamily: "sans-serif" }}>
+                                    If you have account, 
+                                     <a style={{color:"blue",textDecoration:'none'}}  onClick={(e)=>{navigate('/login')}}> click here!</a></div>
 
                             </div>
                         </Form.Item>

@@ -9,6 +9,7 @@ import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
 
 
+
 export default function Homepage() {
   const [artists, setArtists] = useState([])
   const [albums, setAlbums] = useState([])
@@ -29,6 +30,7 @@ export default function Homepage() {
       <Sidebar />
 
       <div>
+     
         <Header />
         <Slidealbum />
         <p className='title-album'>Featured Artists</p>

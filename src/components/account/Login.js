@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import {handleLoginAPI} from '../../services/User'
+import {handleLoginAPI} from '../../services/user1'
 import { useNavigate } from 'react-router-dom';
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { toast } from 'react-toastify';
@@ -77,6 +77,7 @@ export default function Login() {
 
                     <div className="login-form">
                         <div className='form'>
+
                             <input type="email" 
                             placeholder="E-mail Address" 
                             autofocus 
@@ -84,6 +85,7 @@ export default function Login() {
                             <a style={{marginLeft:'25px', color:'red', height:'20px'}}>{message}</a>
                                 {/* {email==""?<p style={{marginLeft:'25px', color:'red'}}> *Please enter email </p>:<></>} */}
                             
+
                             <input type={hidden ? 'password' : 'text'} placeholder="Password" onChange={handlePasswordInput} className="password"/>
                             <a style={{marginLeft:'25px', color:'red',height:'20px'}}>{messagePassWord}</a>
                             <span 

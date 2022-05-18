@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "../Homepage.css"
-import ApiCaller from '../../../utils/apiCaller'
 import CardItem from './Card'
 import Sidebar from '../../Sidebar'
 import Header from '../header/Header'
 import "./ListAll.css"
+import ApiCaller from '../../../utils/callAPI'
 
 
 export default function ListAll({ type = 'artists'}) {

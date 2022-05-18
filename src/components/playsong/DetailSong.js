@@ -1,10 +1,9 @@
+
 import { style } from '@mui/system'
 import React from 'react'
 import './DetailSong.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import { useNavigate } from 'react-router-dom';
-
-
 export default function DetailSong({idSong, songs, circular}) {
   let navigate = useNavigate();
   return (

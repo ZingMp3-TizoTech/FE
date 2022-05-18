@@ -1,3 +1,10 @@
+
+.result-search{
+  background-color: red;
+}
+.result-search .result-search-songs{
+  background-color: blue;
+}
 .wrapper-navbar{
     display: flex;
     justify-content: right;
@@ -14,7 +21,12 @@
 .search-container {
     margin-right: 300px;
   }
-  
+.box-result{
+  width: 200px;
+  height: 400px;
+  border:  1px solid  red;
+  margin-top: 200px;
+}
 input[type=text] {
     padding: 6px;
     margin-top: 2px;
