@@ -53,21 +53,18 @@ export default function Sidebar(props) {
             fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
-            width: "50px"
+
           }}
         >
-          <GraphicEqRoundedIcon style={{
-            color: `${color}`,
-            width: "100px",
-            height: "100px"
-          }} />
+          <GraphicEqRoundedIcon />
           <p
             style={{
               fontSize: '30px',
               marginLeft: '15px',
               textShadow: '2px 2px #d7d7d7'
             }}
-          >Suntify </p>
+
+          >Suntify</p>
         </div>
       </Toolbar>
       <List>
@@ -90,6 +87,7 @@ export default function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
+
 
     // <Box sx={{ 
     //   display: 'flex',
@@ -132,6 +130,7 @@ export default function Sidebar(props) {
           {drawer}
         </Drawer> */}
 
+
       <Drawer
         variant="permanent"
         sx={{
@@ -143,6 +142,6 @@ export default function Sidebar(props) {
         {drawer}
       </Drawer>
     </Box>
-    // </Box>
+
   );
 }

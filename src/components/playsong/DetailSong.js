@@ -25,9 +25,9 @@ export default function DetailSong({idSong, songs, circular}) {
         <div className='img-author'>       
             <img 
             className={circular?'animation-img':''}
-            src={songs[idSong]?.artist.image[0]} 
+            src={songs[idSong]?.artist?.image[0]} 
             alt='avatar' />
-            <span>{songs[idSong]?.artist.name}</span>            
+            <span>{songs[idSong]?.artist?.name}</span>            
         </div>
     </div>
   )

@@ -1,21 +1,15 @@
-import axios from "axios";
-import * as Config from '../constant/config'
+import axios from "axios"
 const handleLoginAPI = (email, password)=>{
     try {
-      
-        return axios.post(`${Config.API_URL}/login`,{email, password})
+        return axios.post('https://suntify.herokuapp.com/login',{email, password})
     } catch (error) {
         console.log(error);
     }
 }
 
-
-const handleSignUpAPI = (email, password)=>{
+const handleSignUpAPI = (email, password, role)=>{
     try {
-        const role="User";
-
         return axios.post('https://suntify.herokuapp.com/signup',{email, password, role})
-
     } catch (error) {
         console.log(error);
     }
@@ -23,7 +17,7 @@ const handleSignUpAPI = (email, password)=>{
 const handleGetUserIdAPI = async ()=>{
     try {
         let token = await localStorage.getItem('token')
-        return axios.get(`${Config.API_URL}/user/profile`,{
+        return axios.get('https://suntify.herokuapp.com/user/profile',{
             headers: {
                 'Authorization': `Bearer ${token}` 
               }
@@ -32,17 +26,4 @@ const handleGetUserIdAPI = async ()=>{
         console.log(error)
     }
 }
-const handelChangePassWord = async (oldPassword,newPassword)=>{
-    try {
-        let token = await localStorage.getItem('token');
-        console.log(token);
-        return await axios.put('https://suntify.herokuapp.com/change-password',{oldPassword,newPassword},{
-            headers: {
-                'Authorization': `Bearer ${token}` 
-              }
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
-export{handleLoginAPI, handleSignUpAPI, handleGetUserIdAPI,handelChangePassWord}
+export{handleLoginAPI, handleSignUpAPI, handleGetUserIdAPI}

@@ -17,10 +17,12 @@ function App() {
     <Route path="/changepassword" element={  <ChangePassword/>} />
     
        <Route path="/" element={<Homepage />} />
+       <Route path="/playsong/artist/:id" element={<PlaySong type="artists" />} />
+       {/* /:type */}
+       <Route path="/playsong/album/:id" element={<PlaySong type="albums" />} />
        <Route path="/playsong" element={<PlaySong />} />
        <Route path="/login" element={<Login />} />
        <Route path="/signup" element={<Register />} />
-       {/* <Route path="/listall/:id" element={<ListAll />} /> */}
        <Route path="/artists" element={<ListAll />} />
        <Route path="/albums" element={<ListAll type="albums" />} />
     </Routes>

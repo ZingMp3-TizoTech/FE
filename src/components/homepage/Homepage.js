@@ -35,7 +35,7 @@ export default function Homepage() {
         <Slidealbum />
         <p className='title-album'>Featured Artists</p>
         <Featured items={artists} type={'artists'} />
-        <p className='title-album'>Countries</p>
+        <p className='title-album'>Genres</p>
         <Genre />
         <p className='title-album'>Featured Albums</p>
         <Featured items={albums} type={'albums'}/>
