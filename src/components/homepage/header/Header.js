@@ -14,10 +14,13 @@ export default function Header() {
   let navigate = useNavigate();
   const [result, setResult] = useState([])
   const loggedInUser = Cookies.get('token');
- 
+  const type=['album','artist']
   const handleOnSearch = async (string, results) => {
+    
+
 
     let handleSearch = await handleSearchByKeyword(string)
+   
     handleSearch = handleSearch.data.data;
     let _result = [];
     Object.keys(handleSearch).forEach(key => {
@@ -25,7 +28,7 @@ export default function Header() {
       _result = _result?.concat((handleSearch[key] || []).map(item => {
         return {
           id: item?._id,
-          name: item?.name,
+          name: item?.name,        
           url: item?.url, //song
           age: item?.age, //artist
           artist: item?.artist, //album
@@ -44,20 +47,33 @@ export default function Header() {
   }
 
   const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item)
+    if(item?.artist)
+      navigate(`/playsong/${type[0]}/${item.id}`)
+    if(item?.age)
+      navigate(`/playsong/${type[1]}/${item.id}`)
+    if(item?.url)
+      navigate(`/playsong/${item.id}`)
   }
 
   const handleOnFocus = () => {
     console.log('Focused')
   }
+  const formatResult = (item) => {
+   
+    return (
+         <div onClick={()=>{navigate('/')}}>
+ <a >{item?.name}</a>    
+         </div>
+       
+       
+    );
+  };
 
-
-
+  
   return (
     <div className='wrapper-navbar'>
       <div style={{ width: 400 }}>
-
+     
         <ReactSearchAutocomplete
           items={result}
           showIcon='false'
@@ -66,7 +82,7 @@ export default function Header() {
           onHover={handleOnHover}
           onSelect={handleOnSelect}
           onFocus={handleOnFocus}
-          // formatResult={formatResult}
+          formatResult={formatResult}
           styling={{ zIndex: 4 }} // To display it on top of the search box below
 
         />

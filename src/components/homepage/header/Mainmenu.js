@@ -12,11 +12,11 @@ import Cookies from 'js-cookie'
 import MyVerticallyCenteredModal from '../../account/ChangePassword';
 import ChangePassword from '../../account/ChangePassword';
 import { Modal, Button } from 'react-bootstrap';
-import PageChange from '../../account/ChangePassword';
+
 import { Input } from '@mui/material';
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { handelChangePassWord } from '../../../services/user';
+import { handelChangePassWord } from '../../../services/User';
 import { toast, ToastContainer } from 'react-toastify';
 const StyledMenu = styled((props) => (
 
@@ -113,7 +113,7 @@ export default function MainMenu() {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        size="xl"
+        size="lg"
       >
         <Modal.Header closeButton>
           <Modal.Title>Change Password</Modal.Title>

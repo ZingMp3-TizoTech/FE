@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const handleSearchByKeyword = async (key)=>{
     try {
-        return axios.post('http://localhost:5000/search',{key},{
+        return axios.post('https://suntify.herokuapp.com/search',{key},{
            
         })
     } catch (error) {

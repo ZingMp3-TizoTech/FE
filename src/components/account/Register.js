@@ -8,7 +8,7 @@ import { Button as Btn } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import { handleSignUpAPI } from '../../services/user';
+import { handleSignUpAPI } from '../../services/User';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -188,7 +188,9 @@ function Register() {
                             <div style={{
                                 marginLeft: "-50px"
                             }}>
-                                <div style={{ fontSize: "16px", fontFamily: "sans-serif" }}>If you have account, <a href='/login'>click here!</a></div>
+                                <div style={{ fontSize: "16px", fontFamily: "sans-serif" }}>
+                                    If you have account, 
+                                     <a style={{color:"blue",textDecoration:'none'}}  onClick={(e)=>{navigate('/login')}}> click here!</a></div>
 
                             </div>
                         </Form.Item>
