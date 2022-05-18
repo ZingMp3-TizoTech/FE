@@ -16,7 +16,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { Input } from '@mui/material';
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { handelChangePassWord } from '../../../services/user1';
+import { handelChangePassWord } from '../../../services/User';
 import { toast, ToastContainer } from 'react-toastify';
 const StyledMenu = styled((props) => (
 

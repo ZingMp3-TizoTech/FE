@@ -23,12 +23,9 @@ function App() {
        <Route path="/playsong/artist/:id" element={<PlaySong type="artists" />} />
        {/* /:type */}
        <Route path="/playsong/album/:id" element={<PlaySong type="albums" />} />
-
-       <Route path="/playsong/genre/:id" element={<PlaySong type="gerens" />} />
+       <Route path="/playsong/genre/:id" element={<PlaySong type="genres" />} />
        <Route path="/playsong" element={<PlaySong />} />
-
        <Route path="/playsong/:id" element={<PlaySong type="songs" />} />
-
        <Route path="/login" element={<Login />} />
        <Route path="/signup" element={<Register />} />
        <Route path="/artists" element={<ListAll />} />
