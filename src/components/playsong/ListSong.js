@@ -2,22 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { FaDownload } from 'react-icons/fa'
 import './ListSong.css'
 import ApiCaller from '../../utils/callAPI'
-import {Playing} from './Playing'
+import Playing from './Playing'
 import DetailSong from './DetailSong'
-import { style } from '@mui/system'
-import { Button, StepButton } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-export default function ListSongs(params) {
-    const id =params.id
-    const navigate=useNavigate();
+export default function ListSongs() {
     const [songs, setSongs] = useState([])
-    const [link, setLink] = useState("");
-    const [name, setName] = useState('');
-    const [imgsong, setImg] = useState('');
-    const [filterSongs,setFilterSongs]=useState('');
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
-   
     useEffect(() => {
         ApiCaller('songs', 'GET')
             .then(res => {
@@ -26,11 +16,7 @@ export default function ListSongs(params) {
     }, [])
     //onst songsbyablum(props.songsbyablum)
     return (
-
-        <div>   
-            <div>
-               
-            </div>
+        <div>
             <div className='wrapper-song'>
                 
                 <DetailSong
@@ -41,7 +27,8 @@ export default function ListSongs(params) {
                     <table>
                         <thead
                             style={{
-                                background: '#85A5A5'
+                                background: 'rgb(72 137 137)',
+                                height:'90px'
                             }}
                         >
                             <tr>
@@ -49,7 +36,7 @@ export default function ListSongs(params) {
                                     width: '5%'
                                 }}>#</th>
                                 <th style={{
-                                    width: '50%',
+                                    width: '40%',
                                     textAlign: 'left'
                                 }}>Name song</th>
                                 <th style={{
@@ -81,25 +68,22 @@ export default function ListSongs(params) {
                                         <td scope="row">{(song._id != null) ? index + 1 : <></>
                                             }</td>
                                         <td
-                                        >{song.name}</td>
+                                        >{song?.name}</td>
                                         <td
-                                        >{song.artist.name}</td>
+                                        >{song.artist?.name}</td>
                                         <td style={{
                                             textAlign:'center',
                                         }}>{
-                                                song.album ? <>{song.album.name}</> : <></>}</td>
+                                                song.album ? <>{song.album?.name}</> : <></>}</td>
                                         <td style={{
                                             textAlign:'center'                                      
                                             }}>
-                                            <a href={song.url}><FaDownload /></a>
+                                            <a href={song?.url}><FaDownload /></a>
                                         </td>
                                     </tr>
                                 
                             ))
                             }
-
-
-
                         </tbody>
 
                     </table>
@@ -108,12 +92,10 @@ export default function ListSongs(params) {
                     }}>
 
                     </div>
-
                 </div>
             </div>
             <div >
                 <div className='play-child'>
-
                     {<Playing setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={songs} />}
                 </div>
             </div>

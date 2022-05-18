@@ -8,11 +8,6 @@ function preSong(i, e) {
 }
 
 function Playing({ idSong, setIdNumber, setCircular, ...props }) {
-  // const [songs, setSongs] = useState(props?.songs)
-  // const idS= props.idSong - 1;
-  // const [id, setId] = useState(idS)
-
-
 
   const handleClickNext = () => {
     let _id = idSong;
@@ -49,4 +44,4 @@ function Playing({ idSong, setIdNumber, setCircular, ...props }) {
     />
   )
 };
-export { Playing, preSong } 
+export default Playing

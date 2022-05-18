@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -7,44 +7,98 @@ import './Header.css'
 import MainMenu from "./Mainmenu"
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import Cookies from 'js-cookie'
-
+import { handleSearchByKeyword } from '../../../services/Search';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { FaMusic, FaList } from "react-icons/fa";
 export default function Header() {
   let navigate = useNavigate();
-  const loggedInUser =Cookies.get('token');
+  const [result, setResult] = useState([])
+  const loggedInUser = Cookies.get('token');
  
+  const handleOnSearch = async (string, results) => {
+
+    let handleSearch = await handleSearchByKeyword(string)
+    handleSearch = handleSearch.data.data;
+    let _result = [];
+    Object.keys(handleSearch).forEach(key => {
+      console.log(key);
+      _result = _result?.concat((handleSearch[key] || []).map(item => {
+        return {
+          id: item?._id,
+          name: item?.name,
+          url: item?.url, //song
+          age: item?.age, //artist
+          artist: item?.artist, //album
+          image: item?.image
+        }
+      }))
+    })
+    console.log(handleSearch);
+    results = _result;
+    setResult(results)
+  };
+  console.log(result);
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+
+
   return (
     <div className='wrapper-navbar'>
-      <div class="search-container">
-        <form action="#">
-          <input type="text" placeholder="Search..." name="search"/>
-            <button type="submit"><BiSearchAlt style={{fontSize:'20px'}}/></button>
-        </form>
+      <div style={{ width: 400 }}>
+
+        <ReactSearchAutocomplete
+          items={result}
+          showIcon='false'
+          showClear='false'
+          onSearch={handleOnSearch}
+          onHover={handleOnHover}
+          onSelect={handleOnSelect}
+          onFocus={handleOnFocus}
+          // formatResult={formatResult}
+          styling={{ zIndex: 4 }} // To display it on top of the search box below
+
+        />
+
       </div>
+
       <div
         style={{
           marginRight: '10px'
         }}
       >
-        {!loggedInUser?
+      
+        {!loggedInUser ?
           <>
             <Button style={{ marginRight: '10px' }}
-          onClick={(e)=>{
-            navigate('/signup');
-          }}
-          variant="outlined" startIcon={<DriveFileRenameOutlineIcon />}>
-          Register
-        </Button>
-        <Button variant="contained" endIcon={<ExitToAppIcon />}
-        onClick={(e)=>{
-          navigate('login');
-        }}>
-          Login
-        </Button> 
+              onClick={(e) => {
+                navigate('/signup');
+              }}
+              variant="outlined" startIcon={<DriveFileRenameOutlineIcon />}>
+              Register
+            </Button>
+            <Button variant="contained" endIcon={<ExitToAppIcon />}
+              onClick={(e) => {
+                navigate('login');
+              }}>
+              Login
+            </Button>
           </>
-        :
-        <MainMenu/>
+          :
+          <MainMenu />
         }
-        
+
       </div>
     </div>
   )

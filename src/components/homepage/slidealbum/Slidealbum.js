@@ -4,16 +4,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slidealbum.css"
 import ApiCaller from "../../../utils/callAPI";
-import { handleGetAlbumById } from "../../../services/Album";
-import { Navigate } from "react-router-dom";
 
-export default  function Slidealbum() {
-    const [albums, setAlbums] = useState();
-    const   handleChooseAlbum= async (id_album)=>{
-       //navigate('/play/:idablum')
-    const albumByID=   await handleGetAlbumById(id_album)
-        console.log("chọn",albumByID);
-    }
+export default function Slidealbum() {
+
     let settings = {
         dots: false,
         infinite: true,
@@ -21,28 +14,27 @@ export default  function Slidealbum() {
         slidesToShow: 3,
         slidesToScroll: 1,
         lazyLoad: true,
-    }
-    
+    };
+    const [songs, setSongs] = useState([])
     useEffect(() => {
-        ApiCaller('albums', 'GET')
+        ApiCaller('songs', 'GET')
             .then(res => {
-
-                setAlbums(res.data.data)
+                setSongs(res.data.data)
             })
     }, [])
-   
+    let topSongs = songs?.slice(0, 5);
     return (
-        <>
-            <div className="slide-album">
-                <Slider {...settings}>
-                    {albums?.map(album => (
-                            <div className = 'img-item' onClick={(e)=>handleChooseAlbum(album?._id)} >
-                                <img src={album?.artist?.image[0]} alt="" />
-                            </div>
-                        ))}
+        <div className="slide-album">
+            <Slider {...settings}>
+                {topSongs.map((song, index) => (
+                    <div className='img-item' key={index}>
+                        <img src={song?.image[1]} alt="Image-song" />
+                    </div>
+                ))}
+
+
             </Slider>
-        </div >
-       
-       </>
-       )
+        </div>
+    );
+
 }

@@ -1,0 +1,8 @@
+.wrapper-card{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 40px;
+    margin-left: 100px;
+    width: 100%;
+}

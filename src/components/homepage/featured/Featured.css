@@ -1,3 +1,16 @@
+.featured{
+    position: relative;
+}
+.more{
+    text-decoration: none;
+    position: absolute;
+    right: 80px;
+    bottom: 280px;
+    color: black;
+}
+.more:hover{
+    color: rgb(119, 118, 118);
+}
 .title-album{
     margin-left: 45px;
     margin-bottom: -20px;
