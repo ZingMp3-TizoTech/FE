@@ -7,12 +7,11 @@ function preSong(i, e) {
 
 }
 
-function Playing({i, type, idSong, setIdNumber, setCircular, ...props }) {
+function Playing({ i, type, idSong, setIdNumber, setCircular, ...props }) {
   const [action, setAction] = useState(type)
-  if(action == "songs"){
+  if (action == "songs") {
     setIdNumber(i)
-  } 
-
+  }
   const handleClickNext = () => {
     let _id = idSong;
     _id = idSong < props.songs.length ? idSong + 1 : 0;
@@ -20,7 +19,6 @@ function Playing({i, type, idSong, setIdNumber, setCircular, ...props }) {
     setIdNumber && setIdNumber(_id);
     setAction("abc")
   }
-
   const handleClickPrev = () => {
     let _id = idSong;
     console.log('id', idSong)
@@ -29,15 +27,14 @@ function Playing({i, type, idSong, setIdNumber, setCircular, ...props }) {
     setIdNumber && setIdNumber(_id);
     setAction("abc")
   }
-  const handleClickPlay = () =>{
+  const handleClickPlay = () => {
     setCircular(true)
   }
-  const handleClickPause = () =>{
+  const handleClickPause = () => {
     setCircular(false)
   }
 
   return (
-  
     <AudioPlayer
       src={props.songs[idSong]?.url}
       layout="stacked-reverse"

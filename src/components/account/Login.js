@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import {handleLoginAPI} from '../../services/User'
+import {handleLoginAPI} from '../../services/User12'
 import { useNavigate } from 'react-router-dom';
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { toast } from 'react-toastify';

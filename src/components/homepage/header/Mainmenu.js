@@ -16,7 +16,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { Input } from '@mui/material';
 
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { handelChangePassWord } from '../../../services/User';
+import { handelChangePassWord } from '../../../services/User12';
 import { toast, ToastContainer } from 'react-toastify';
 const StyledMenu = styled((props) => (
 
@@ -68,8 +68,9 @@ export default function MainMenu() {
   const handleCloseModal = () => setShow(false);
   const handleShow = () => setShow(true);
   const [hidden, setHidden] = useState(true)
-  const [pwOld,setPwOld]=useState('')
-  const [pwNew,setPwNew]=useState('')
+  const [pwOld, setPwOld] = useState('')
+  const [pwNew, setPwNew] = useState('')
+  const [messageError, setError] = useState('')
   const handleHidden = () => {
     setHidden(!hidden)
   }
@@ -85,25 +86,32 @@ export default function MainMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handelGetOldPW =(e)=>{
+  const handelGetOldPW = (e) => {
     console.log(e.target.value);
     setPwOld(e.target.value)
   }
-  const handelGetNewPW =(e)=>{
+  const handelGetNewPW = (e) => {
     console.log(e.target.value);
     setPwNew(e.target.value)
+   
+    if (e.target.value == '')
+      setError('Please input your password!')
+    else
+    if (e.target.value.length < 6)
+    setError('Password must be 6 characters!')
+  else setError('')
   }
-  const  ChangePassWord= async()=>{
-      const change= await handelChangePassWord(pwOld,pwNew)
-      if(change){
-        toast.success('Success!')
-        Cookies.remove('token')
-        navigate("/login")
-      }
-      if(!change) {
-        toast.error('False!')
-        navigate("/")
-      }
+  const ChangePassWord = async () => {
+    const change = await handelChangePassWord(pwOld, pwNew)
+    if (change) {
+      toast.success('Success!')
+      Cookies.remove('token')
+      navigate("/login")
+    }
+    if (!change) {
+      toast.error('False!')
+      navigate("/")
+    }
   }
   return (
     <div>
@@ -111,7 +119,7 @@ export default function MainMenu() {
       <Modal
         show={show}
         onHide={handleClose}
-        backdrop="static"
+
         keyboard={false}
         size="lg"
       >
@@ -126,31 +134,34 @@ export default function MainMenu() {
             justifyContent: "center",
 
           }}>
-            <ToastContainer/>
+            <ToastContainer />
             <div style={{ width: "400px" }}>
               <label style={{
-                fontSize: "30px"
+                fontSize: "25px"
               }}>Old password</label>
-              <input  onChange={(e)=>handelGetOldPW(e)} style={{
+              <input onChange={(e) => handelGetOldPW(e)} style={{
                 height: "40px",
                 width: "300px"
-              }} type={hidden ? 'text' : 'password'} placeholder='Old password' />
-                <span className='icon-hidden' onClick={handleHidden}>
-          {hidden ? <AiOutlineEye style={{width:"30px",height:"30px"}}/>:<AiOutlineEyeInvisible style={{width:"30px",height:"30px"}}/>}
-         </span>
+              }} type={hidden ? 'text' : 'password'} placeholder='Enter old password' />
+              <span className='icon-hidden' onClick={handleHidden}>
+                {hidden ? <AiOutlineEye style={{ width: "30px", height: "30px" }} /> : <AiOutlineEyeInvisible style={{ width: "30px", height: "30px" }} />}
+              </span>
             </div>
 
             <div style={{ width: "400px" }}>
               <label style={{
-                fontSize: "30px"
+                fontSize: "25px"
               }}>New password</label>
-             <input onChange={(e)=>handelGetNewPW(e)} style={{
+              <input onChange={(e) => handelGetNewPW(e)} style={{
                 height: "40px",
                 width: "300px"
-              }} type={hidden ? 'text' : 'password'} placeholder='New password' />
- <span className='icon-hidden' onClick={handleHidden}>
-          {hidden ? <AiOutlineEye style={{width:"30px",height:"30px"}}/>:<AiOutlineEyeInvisible style={{width:"30px",height:"30px"}}/>}
-         </span>
+              }} type={hidden ? 'text' : 'password'} placeholder='Enter new password' />
+             
+              <span className='icon-hidden' onClick={handleHidden}>
+                {hidden ? <AiOutlineEye style={{ width: "30px", height: "30px" }} /> : <AiOutlineEyeInvisible style={{ width: "30px", height: "30px" }} />}
+              </span>
+              <br/>
+              <a style={{color:"red"}}> {messageError}</a>
             </div>
           </div>
 
