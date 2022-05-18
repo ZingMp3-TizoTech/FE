@@ -5,8 +5,8 @@ import ApiCaller from '../../utils/callAPI'
 import Playing from './Playing'
 import DetailSong from './DetailSong'
 import { useParams } from 'react-router-dom'
-export default function ListSongs({ type = "artists" }) {
-    const idArtist = useParams();
+export default function ListSongs({ type }) {
+    const id = useParams();
     const [songs, setSongs] = useState([])
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
@@ -25,24 +25,21 @@ export default function ListSongs({ type = "artists" }) {
                 setAlbums(res.data.data)
             })
     }, [])
-
-    console.log(idArtist);
-    console.log(songs);
+    const albumResult = albums?.find((album) => {
+        return album?._id == id.id
+    })
     const items =
-        idArtist?.id && type == "artists" ?
+        id?.id && type == "artists" ?
             songs?.filter((song) => {
                 return (
-                    song.artist?._id === idArtist.id
+                    song.artist?._id === id.id
                 )
             })
-            : idArtist?.id && type == "albums" ?
-                albums?.filter((album) => {
-                    return (
-                        album._id == idArtist.id
-                    )
-                }).songs
-                    : songs
-         
+            // : id?.id && type == "albums" ?
+            //     albumResult?.songs
+                : songs
+    console.log(id);
+    console.log(albumResult);
     return (
         <div>
             <div className='wrapper-song'>
