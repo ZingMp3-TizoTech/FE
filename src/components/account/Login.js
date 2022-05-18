@@ -11,6 +11,8 @@ import Cookies from 'js-cookie'
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("")
+    const [messagePassWord, setMessagePassWord] = useState("")
 
     const [hidden, setHidden] = useState(true)
     const handleHidden = () =>{
@@ -19,17 +21,29 @@ export default function Login() {
     const navigate = useNavigate()
     const handleEmailInput = (e) => {
         setEmail(e.target.value)
+        if(e.target.value == ""){
+            setMessage("Email cannot be blank!")
+        } else {
+            if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.e.target.value){
+                setMessage("Invalid email!")
+            }
+        }
     }
     const handlePasswordInput = (e) => {
         setPassword(e.target.value)
+        if( e.target.value.length<=6){
+            setMessagePassWord("Password must be 6 characters!")
+        }
+        else{
+            setMessagePassWord("")
+        }
     }
-    
-
+ 
     const handleLogin = async()=>{
         try {
             console.log(email, password);
             const data = await handleLoginAPI(email, password);
-          let token= Cookies.set("token",data.data.token)                                   
+            let token= Cookies.set("token",data.data.token)                                   
             if(token){
                 console.log("thành conng");
                 toast.success("Login success!")
@@ -63,12 +77,15 @@ export default function Login() {
 
                     <div className="login-form">
                         <div className='form'>
-                            <input type="email" placeholder="E-mail Address" autofocus onChange={handleEmailInput} />
-                           
-                                {email==""?<p style={{marginLeft:'25px', color:'red'}}> *Please enter email </p>:<></>}
+                            <input type="email" 
+                            placeholder="E-mail Address" 
+                            autofocus 
+                            onChange={handleEmailInput} />
+                            <a style={{marginLeft:'25px', color:'red', height:'20px'}}>{message}</a>
+                                {/* {email==""?<p style={{marginLeft:'25px', color:'red'}}> *Please enter email </p>:<></>} */}
                             
                             <input type={hidden ? 'password' : 'text'} placeholder="Password" onChange={handlePasswordInput} className="password"/>
-                            
+                            <a style={{marginLeft:'25px', color:'red',height:'20px'}}>{messagePassWord}</a>
                             <span 
                             className='icon-hidden'
                             onClick={handleHidden}

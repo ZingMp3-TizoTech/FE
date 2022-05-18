@@ -158,8 +158,8 @@
     font-size: 32px;
     color: #636060;
     position: absolute;
-    right: 22px;
-    top: 415px;
+    right: 28px;
+    top: 437px;
   }
   .login .container .login-form .form button[type=submit] {
     background: -webkit-linear-gradient(110deg, #9495f7 0%, #fdd6bd 100%);
@@ -217,7 +217,7 @@
   .login .container .forget-pass {
     position: absolute;
     right: 0;
-    margin-top: 189px;
+    margin-top: 225px;
   }
   .login .container .forget-pass a {
     font-size: 16px;
