@@ -10,6 +10,9 @@ import ListAll from "./components/homepage/ListAll/ListAll";
 // import Demo from "./components/account/Register";
 
 function App() {
+  const log = ()=>{
+    console.log("heroku");
+  }
   return (
     <>
     <Routes>
