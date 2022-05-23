@@ -15,6 +15,7 @@ export default function ListSongs({ type }) {
     const [circular, setCircular] = useState(true);
     const [loading,setLoading] =useState(false)
     const [albums, setAlbums] = useState([])
+    const [action, setAction] = useState(type)
     let a = songs.findIndex(i => i._id === id.id)
 
 
@@ -25,11 +26,10 @@ export default function ListSongs({ type }) {
                 setSongs(res.data.data)
             })
             .finally(() => {
-                setLoading(true)
+                setLoading(false)
             }) 
     }, [])
 
-console.log(songs);
 
 
     useEffect(() => {
@@ -107,6 +107,7 @@ console.log(songs);
                                         key={index}
                                         onClick={(e) => {
                                             setIdNumber(index);
+                                            setAction(" ");
                                         }
                                         }
                                         className={index === idNumber ? "active-row" : ""}
@@ -150,7 +151,7 @@ console.log(songs);
             </div>
             <div >
                 <div className='play-child'>
-                    {<Playing i={a} type={type} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
+                    {<Playing i={a} action={action} setAction={setAction} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
                 </div>
             </div>
         </div>

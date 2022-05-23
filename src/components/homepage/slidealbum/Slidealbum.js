@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slidealbum.css"
 import ApiCaller from "../../../utils/callAPI";
+import { useNavigate } from 'react-router-dom';
 
 export default function Slidealbum() {
 
@@ -22,13 +23,17 @@ export default function Slidealbum() {
                 setSongs(res.data.data)
             })
     }, [])
+    let navigate = useNavigate();
+    const handlePlaySong = (e)=>{
+        navigate('/playsong/'+`${e.target.id}`);
+    }
     let topSongs = songs?.slice(0, 5);
     return (
         <div className="slide-album">
             <Slider {...settings}>
                 {topSongs.map((song, index) => (
-                    <div className='img-item' key={index}>
-                        <img src={song?.image[1]} alt="Image-song" />
+                    <div className='img-item' key={index} onClick={handlePlaySong}>
+                        <img src={song?.image[1]} alt="Image-song" id={song._id} />
                     </div>
                 ))}
 
