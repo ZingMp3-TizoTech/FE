@@ -9,8 +9,6 @@ import ReactLoading from 'react-loading';
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
-    console.log(id.id);
-   
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
     const [loading,setLoading] =useState(false)
@@ -22,9 +20,7 @@ export default function ListSongs({ type }) {
             .then(res => {
                 setSongs(res.data.data)  
                  
-               })
-               
-              
+               })     
         }, [])
 
     useEffect(() => {
@@ -33,17 +29,28 @@ export default function ListSongs({ type }) {
                 setAlbums(res.data.data)
             })
     }, [])
-    const albumResult = albums?.find((album) => {
-        return album?._id == id.id
-    })
-        let items=[];
-        items =
+    const albumResult = 
+        albums?.find((album) => {
+            return album?._id == id?.id
+        }) 
+    console.log(albumResult);
+    console.log(id);
+    console.log('abc');
+        const items =
         id?.id && type == "artists" ?
             songs?.filter((song) => {
                 return (
                     song.artist?._id === id.id
                 )
             })          
+                :id?.id && type == "genres" ?
+                songs?.filter((song) => {
+                    return (
+                        song.genre?._id === id.id
+                    )
+                })    
+                :id?.id && type == "albums" ?
+                albumResult.songs         
                 :songs
  
 
