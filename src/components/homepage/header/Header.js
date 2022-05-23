@@ -9,7 +9,6 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import Cookies from 'js-cookie'
 import { handleSearchByKeyword } from '../../../services/Search';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-
 import {MdLibraryMusic } from "react-icons/md";
 import { GiMusicalNotes } from "react-icons/gi";
 export default function Header() {
