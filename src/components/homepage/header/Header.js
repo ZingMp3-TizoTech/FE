@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { BiSearchAlt } from 'react-icons/bi';
 import { useNavigate } from "react-router-dom";
 import './Header.css'
 import MainMenu from "./Mainmenu"
@@ -9,7 +8,8 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import Cookies from 'js-cookie'
 import { handleSearchByKeyword } from '../../../services/Search';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import { FaMusic, FaList } from "react-icons/fa";
+
+
 export default function Header() {
   let navigate = useNavigate();
   const [result, setResult] = useState([])
@@ -40,7 +40,6 @@ export default function Header() {
     results = _result;
     setResult(results)
   };
-  console.log(result);
   const handleOnHover = (result) => {
     // the item hovered
     console.log(result)
@@ -72,7 +71,7 @@ export default function Header() {
   
   return (
     <div className='wrapper-navbar'>
-      <div style={{ width: 400 }}>
+      <div style={{ width: 400, marginRight: 300, }}>
      
         <ReactSearchAutocomplete
           items={result}

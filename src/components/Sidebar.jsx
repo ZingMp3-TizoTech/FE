@@ -36,8 +36,6 @@ export default function Sidebar(props) {
     for (  let i = 0; i < listColor.length; i++) {
     setTimeout(() => {  
       setColor(listColor[i]);
-        console.log(i);
-      
       }
    , 1000)
     }

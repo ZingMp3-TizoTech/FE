@@ -1,7 +1,10 @@
 .loading{
-   justify-content: center;
-    margin-left: 50%;
     margin-top: 250px;
+    height: 900px;
+    width: 100px;
+    color: #a696d5;
+    position: absolute;
+    left: 500px;
 
 }
 .wrapper-list-song{
@@ -14,6 +17,7 @@
 }
 .wrapper-list-song table{
     width: 100%;
+    position: relative;
 }
 .wrapper-list-song tr:hover{
     background-color: #85A5A5;

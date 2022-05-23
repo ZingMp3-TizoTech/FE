@@ -16,7 +16,6 @@ export default function ListAll({ type = 'artists'}) {
       })
   }, [])
   
-  
   return (
     <div className='container'>
       <Sidebar />

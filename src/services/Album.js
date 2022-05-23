@@ -39,10 +39,7 @@ const handleUpdateAlbumAPI = async (id,data)=>{
 }
 const handleGetAlbumById = async (id)=>{
     try {  
-        
-        return await axios.get('http://localhost:5000/album/', { params: {
-            id
-        }})      
+        return await axios.get(`https://suntify.herokuapp.com/album/${id}`)      
     } catch (error) {
         console.log(error)
     }

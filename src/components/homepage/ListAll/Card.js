@@ -2,10 +2,18 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Card, Avatar } from 'antd';
 import { HeartOutlined, PlayCircleOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function CardItem({artist, album, type='artist'}) {
     const { Meta } = Card;
+    let navigate = useNavigate();
+    const handlePlayByArtist = (e)=>{
+        navigate('/playsong/artist/'+`${e.target.id}`);
+    }
+    const handlePlayByAlbum = (e)=>{
+        navigate('/playsong/album/'+`${e.target.id}`);
+    }
     return (
         <>
             {type == 'artist'?
@@ -26,7 +34,12 @@ export default function CardItem({artist, album, type='artist'}) {
             }
             actions={[
                 <HeartOutlined key="like" />,
-                <PlayCircleOutlined key="play" />,
+                <div
+                id={artist._id}
+                onClick={handlePlayByArtist}
+                >
+                    <PlayCircleOutlined key="play"  />
+                </div>,
             ]}
         >
             <Meta
@@ -56,7 +69,12 @@ export default function CardItem({artist, album, type='artist'}) {
             }
             actions={[
                 <HeartOutlined key="like" />,
-                <PlayCircleOutlined key="play" />,
+                <div
+                id={album._id}
+                onClick={handlePlayByAlbum}
+                >
+                    <PlayCircleOutlined key="play"  />
+                </div>,
             ]}
         >
             <Meta
