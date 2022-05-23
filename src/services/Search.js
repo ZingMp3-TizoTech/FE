@@ -1,8 +1,9 @@
 import axios from 'axios'
 
+import * as Config from '../constant/config'
 const handleSearchByKeyword = async (key)=>{
     try {
-        return axios.post('https://suntify.herokuapp.com/search',{key},{
+        return axios.post(`${Config.API_URL}/search`,{key},{
            
         })
     } catch (error) {

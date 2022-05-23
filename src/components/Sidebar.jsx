@@ -35,7 +35,7 @@ export default function Sidebar(props) {
   const drawer = (
     <div>
       <Toolbar>
-        <div
+        <div onClick={(e)=>navigate('/')}
           style={{
             fontSize: '20px',
             display: 'flex',
