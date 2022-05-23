@@ -57,7 +57,7 @@ export default function Sidebar(props) {
           }}
         >
           <GraphicEqRoundedIcon style={{fontSize:"50px"}} />
-          <p
+          <p 
             style={{
               fontSize: '30px',
               marginLeft: '15px',

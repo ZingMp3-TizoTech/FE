@@ -71,6 +71,7 @@ export default function MainMenu() {
   const [pwOld, setPwOld] = useState('')
   const [pwNew, setPwNew] = useState('')
   const [messageError, setError] = useState('')
+  const [messageError0, setError0] = useState('')
   const handleHidden = () => {
     setHidden(!hidden)
   }
@@ -89,6 +90,12 @@ export default function MainMenu() {
   const handelGetOldPW = (e) => {
     console.log(e.target.value);
     setPwOld(e.target.value)
+    if (e.target.value == '')
+    setError0('Please input your password!')
+  else
+  if (e.target.value.length < 6)
+  setError0('Password must be 6 characters!')
+else setError0('')
   }
   const handelGetNewPW = (e) => {
     console.log(e.target.value);
@@ -146,6 +153,8 @@ export default function MainMenu() {
               <span className='icon-hidden' onClick={handleHidden}>
                 {hidden ? <AiOutlineEye style={{ width: "30px", height: "30px" }} /> : <AiOutlineEyeInvisible style={{ width: "30px", height: "30px" }} />}
               </span>
+              <br/>
+              <a style={{color:"red"}}> {messageError0}</a>
             </div>
 
             <div style={{ width: "400px" }}>
