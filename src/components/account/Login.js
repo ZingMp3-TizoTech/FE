@@ -13,7 +13,6 @@ export default function Login() {
     const [password, setPassword] = useState("")
     const [message, setMessage] = useState("")
     const [messagePassWord, setMessagePassWord] = useState("")
-
     const [hidden, setHidden] = useState(true)
     const handleHidden = () =>{
         setHidden(!hidden)
@@ -21,13 +20,14 @@ export default function Login() {
     const navigate = useNavigate()
     const handleEmailInput = (e) => {
         setEmail(e.target.value)
-        if(e.target.value == ""){
+        if(e.target.value.length == 0){
             setMessage("Email cannot be blank!")
         } else {
-            if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.e.target.value){
-                setMessage("Invalid email!")
-            }
-        }
+            setMessage("")
+            // if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.e.target.value){
+                // setMessage("Invalid email!")
+            // }
+        } 
     }
     const handlePasswordInput = (e) => {
         setPassword(e.target.value)
@@ -41,11 +41,12 @@ export default function Login() {
  
     const handleLogin = async()=>{
         try {
-            console.log(email, password);
+            // console.log(email, password);
             const data = await handleLoginAPI(email, password);
+            console.log(data);
             let token= Cookies.set("token",data.data.token)                                   
             if(token){
-                console.log("thành conng");
+               
                 toast.success("Login success!")
                 navigate('/')
             } 
@@ -59,7 +60,9 @@ export default function Login() {
     return (
         <div className="parent clearfix">
             <div className="bg-illustration">
-                <div className='suntify'>
+                <div className='suntify'
+                onClick={()=>(navigate('/'))}
+                >
                     <GraphicEqRoundedIcon style={{ fontSize: '55px', marginRight: '15px' }} />
                     <p>Suntify</p>
                 </div>
@@ -95,14 +98,15 @@ export default function Login() {
                                 {hidden ? <AiOutlineEye/>:<AiOutlineEyeInvisible/>}
                             </span>
                             
-                            <div className="remember-form">
+                            {/* <div className="remember-form">
                                 <input type="checkbox" />
                                 <span>Remember me</span>
-                            </div>
+                            </div> */}
                             <div className="forget-pass">
                                 <a href="facebook.com">Forgot Password ?</a>
                             </div>
                             <button type="submit" 
+                            style={{marginTop:'40px'}}
                             onClick={(e)=>{handleLogin(e)}}
                             >Login</button>
                         </div>

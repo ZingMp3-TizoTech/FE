@@ -7,7 +7,7 @@ import Register from "./components/account/Register";
 import { ToastContainer, toast } from 'react-toastify';
 import Card from "./components/homepage/ListAll/Card";
 import ListAll from "./components/homepage/ListAll/ListAll";
-import ChangePassword from "./components/account/ChangePassword"
+import AllPlaylists from "./components/homepage/ListAll/AllPlaylists";
 // import Demo from "./components/account/Register";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   return (
     <>
     <Routes>
-    <Route path="/changepassword" element={  <ChangePassword/>} />
+  
     
        <Route path="/" element={<Homepage />} />
        <Route path="/playsong/artist/:id" element={<PlaySong type="artists" />} />
@@ -30,6 +30,7 @@ function App() {
        <Route path="/signup" element={<Register />} />
        <Route path="/artists" element={<ListAll />} />
        <Route path="/albums" element={<ListAll type="albums" />} />
+       <Route path="/Library" element={<AllPlaylists/>}/>
     </Routes>
     <ToastContainer />
     </>

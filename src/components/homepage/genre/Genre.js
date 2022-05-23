@@ -23,7 +23,7 @@ export default function Genre() {
                     className='country-item' 
                     key={index}
                 >
-                    <img src={genre?.image[0]} />
+                    <img src={genre?.image[0]} />   
                     <div className="after" 
                     id={genre._id}
                     onClick={playByGenre}></div>

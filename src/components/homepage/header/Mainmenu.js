@@ -9,8 +9,6 @@ import Stack from '@mui/material/Stack';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
-import MyVerticallyCenteredModal from '../../account/ChangePassword';
-import ChangePassword from '../../account/ChangePassword';
 import { Modal, Button } from 'react-bootstrap';
 
 import { Input } from '@mui/material';

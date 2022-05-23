@@ -31,12 +31,20 @@ export default function Homepage() {
 
       <div>
      
-        <Header />
+        <div style={{
+          zIndex:"4"
+        }}>
+          <Header />
+        </div>
         <Slidealbum />
         <p className='title-album'>Featured Artists</p>
         <Featured items={artists} type={'artists'} />
         <p className='title-album'>Genres</p>
+        <div style={{
+          zIndex:"1"
+        }}>
         <Genre />
+        </div>
         <p className='title-album'>Featured Albums</p>
         <Featured items={albums} type={'albums'}/>
       </div>

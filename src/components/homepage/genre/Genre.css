@@ -11,7 +11,6 @@
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    z-index: 1;
 }
 .wrapper-country .country-item .after{
     position: absolute;
@@ -25,7 +24,6 @@
 .wrapper-country .country-item img{
     max-width: 275px;
     opacity: 0.9;
-    z-index: 0;
 }
 .wrapper-country .country-item P{
     position: absolute;

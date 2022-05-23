@@ -150,6 +150,7 @@ img {
   border: none;
   padding: 0 30px;
   border-radius: 10px;
+  width: 525px;
 }
 .login .container .login-form .password{
   position: relative;
@@ -158,8 +159,8 @@ img {
   font-size: 32px;
   color: #636060;
   position: absolute;
-  right: 22px;
-  top: 415px;
+  right: 10px;
+  top: 498px;
 }
 .login .container .login-form .form button[type=submit] {
   background: -webkit-linear-gradient(110deg, #9495f7 0%, #fdd6bd 100%);
@@ -217,7 +218,7 @@ img {
 .login .container .forget-pass {
   position: absolute;
   right: 0;
-  margin-top: 189px;
+  margin-top: 202px;
 }
 .login .container .forget-pass a {
   font-size: 16px;
@@ -363,7 +364,7 @@ img {
   }
   .login .container .login-form .form button[type=submit] {
     height: 45px;
-    margin-top: 100px;
+    margin-top: 40px;
   }
   .login .container .login-form .remember-form {
     position: relative;
