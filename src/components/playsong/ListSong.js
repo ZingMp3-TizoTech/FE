@@ -7,15 +7,17 @@ import DetailSong from './DetailSong'
 import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
 import { handleGetAlbumById } from '../../services/Album'
+import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
 
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
-    const [loading,setLoading] =useState(false)
+    const [loading, setLoading] = useState(false)
     const [albums, setAlbums] = useState([])
     const [action, setAction] = useState(type)
+    const [playlist, setPlaylist] = useState([])
     let a = songs.findIndex(i => i._id === id.id)
 
 
@@ -27,10 +29,19 @@ export default function ListSongs({ type }) {
             })
             .finally(() => {
                 setLoading(false)
+
             }) 
     }, [])
+    
+    const getPlaylist = async (id) => {
+        const pl = await handleGetPlaylistById(id)    
+        setPlaylist(pl.data.data);
+    }
 
-
+    useEffect(() => {
+        getPlaylist(id.id)
+    }, [])      
+    console.log(playlist);
 
     useEffect(() => {
         setLoading(true);
@@ -40,9 +51,8 @@ export default function ListSongs({ type }) {
             })
             .finally(() => {
                 setLoading(false)
-            }) 
+            })
     }, [])
-
     const items =
         id?.id && type == "artists" ?
             songs?.filter((song) => {
@@ -58,6 +68,8 @@ export default function ListSongs({ type }) {
                 })
                 : id?.id && type == "albums" ?
                     albums[0]?.songs
+                    :type == "playlists"?
+                    playlist?.song
                     : songs
     return (
         <div>
@@ -115,7 +127,7 @@ export default function ListSongs({ type }) {
                                         <td scope="row">{(song._id != null) ? index + 1 : <></>
                                         }</td>
                                         <td
-                                        >{song?.name}</td>
+                                        >{type == "playlists" ? song?.name : song?.name}</td>
                                         <td
                                         >{song?.artist?.name}</td>
                                         <td style={{
@@ -132,12 +144,12 @@ export default function ListSongs({ type }) {
                                 ))
                                 }
                             </tbody>
-                        </> : <><ReactLoading 
-                        height='900px' 
-                        width='100px' 
-                        className='loading' 
-                        type='bars'
-                        color='#a696d5' /></>}
+                        </> : <><ReactLoading
+                            height='900px'
+                            width='100px'
+                            className='loading'
+                            type='bars'
+                            color='#a696d5' /></>}
 
                     </table>
 

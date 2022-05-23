@@ -43,9 +43,10 @@ export default function Login() {
         try {
             // console.log(email, password);
             const data = await handleLoginAPI(email, password);
+            console.log(data);
             let token= Cookies.set("token",data.data.token)                                   
             if(token){
-                console.log("thành conng");
+               
                 toast.success("Login success!")
                 navigate('/')
             } 

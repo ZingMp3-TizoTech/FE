@@ -14,39 +14,31 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
-
-
 export default function Sidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  let navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const [color, setColor] = React.useState('black')
-  const [i, setI] = React.useState(0)
-  const listColor = ["rgb(193, 149, 210)",
-                      "rgb(223, 188, 210)",
-                      "rgb(155, 224, 210)",
-                      "rgb(242, 224, 114)"];
-
-  React.useEffect(() => {
-    for (  let i = 0; i < listColor.length; i++) {
-    setTimeout(() => {  
-      setColor(listColor[i]);
-      }
-   , 1000)
-    }
-  },[i])
+  const token = Cookies.get('token');
 
 
-
+  let list = ['Personal', 'Discover'];
+  if (token) {
+    list.push('Library')
+  }
   const drawer = (
     <div>
       <Toolbar>
         <div
+          onClick={() => {
+            navigate('/')
+          }}
           style={{
             fontSize: '20px',
             display: 'flex',
@@ -54,7 +46,7 @@ export default function Sidebar(props) {
 
           }}
         >
-          <GraphicEqRoundedIcon />
+          <GraphicEqRoundedIcon style={{ fontSize: "50px" }} />
           <p
             style={{
               fontSize: '30px',
@@ -66,16 +58,18 @@ export default function Sidebar(props) {
         </div>
       </Toolbar>
       <List>
-        {['Personal', 'Disconver', 'Library'].map((text, index) => (
+        {list.map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {text === 'Personal' ? <ContactsRoundedIcon /> :
-                text === 'Disconver' ? <AlbumIcon /> :
-                  text === 'Library' ? <LibraryMusicRoundedIcon /> :
-                    <></>
+            <ListItemIcon onClick={(e) => navigate(`/${text}`)}>
+              {
+                text === 'Personal' ? <ContactsRoundedIcon /> :
+                  text === 'Discover' ? <AlbumIcon /> :
+                    text === 'Library' ? <LibraryMusicRoundedIcon /> :
+                      <></>
+
               }
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text} onClick={(e) => navigate(`/${text}`)} />
           </ListItem>
         ))}
       </List>

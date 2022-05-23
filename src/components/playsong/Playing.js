@@ -2,19 +2,18 @@ import React, { useState } from 'react'
 import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from "react-h5-audio-player";
 
-function Playing({i, idSong, setIdNumber, setCircular, action, setAction, ...props }) {
-  
-  if(action == "songs"){
-    setIdNumber(i)
-  } 
 
+function Playing({ i, type, idSong, setIdNumber, setCircular, ...props }) {
+  const [action, setAction] = useState(type)
+  if (action == "songs") {
+    setIdNumber(i)
+  }
   const handleClickNext = () => {
     let _id = idSong;
     _id = idSong < props.songs.length - 1  ? idSong + 1 : 0;
     setIdNumber && setIdNumber(_id);
     setAction(" ")
   }
-
   const handleClickPrev = () => {
     let _id = idSong;
     console.log('id', idSong)
@@ -22,15 +21,14 @@ function Playing({i, idSong, setIdNumber, setCircular, action, setAction, ...pro
     setIdNumber && setIdNumber(_id);
     setAction(" ")
   }
-  const handleClickPlay = () =>{
+  const handleClickPlay = () => {
     setCircular(true)
   }
-  const handleClickPause = () =>{
+  const handleClickPause = () => {
     setCircular(false)
   }
 
   return (
-  
     <AudioPlayer
       src={props.songs?.[idSong]?.url}
       layout="stacked-reverse"

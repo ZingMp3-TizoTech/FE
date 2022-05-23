@@ -3,9 +3,10 @@ import 'antd/dist/antd.css';
 import { Card, Avatar } from 'antd';
 import { HeartOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-
-export default function CardItem({artist, album, type='artist'}) {
+export default function CardItem({artist, album, type='artist', loading}) {
     const { Meta } = Card;
     let navigate = useNavigate();
     const handlePlayByArtist = (e)=>{
@@ -16,7 +17,7 @@ export default function CardItem({artist, album, type='artist'}) {
     }
     return (
         <>
-            {type == 'artist'?
+            {type == 'artist' && !loading?
             <Card
             style={{ width: 300,
             marginRight:50,
@@ -51,7 +52,7 @@ export default function CardItem({artist, album, type='artist'}) {
                 </>}
             />
         </Card>
-        :
+        : !loading?
         <Card
             style={{ width: 300,
             marginRight:50,
@@ -85,7 +86,24 @@ export default function CardItem({artist, album, type='artist'}) {
                     <div>Date: {album?.date_create}</div>
                 </>}
             />
-        </Card>
+        </Card> : 
+        <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'>
+        
+        <p 
+        style={{
+            width: '300px',
+            marginLeft:'50px'
+        }}
+        >
+            <Skeleton
+            height={300}
+            />
+            <Skeleton 
+            count={3} 
+            height={20}
+            />
+        </p>
+    </SkeletonTheme>
             }
         </>
     )

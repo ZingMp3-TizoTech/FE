@@ -9,6 +9,8 @@ import Cookies from 'js-cookie'
 import { handleSearchByKeyword } from '../../../services/Search';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 
+import {MdLibraryMusic } from "react-icons/md";
+import { GiMusicalNotes } from "react-icons/gi";
 
 export default function Header() {
   let navigate = useNavigate();
@@ -16,8 +18,6 @@ export default function Header() {
   const loggedInUser = Cookies.get('token');
   const type=['album','artist']
   const handleOnSearch = async (string, results) => {
-    
-
 
     let handleSearch = await handleSearchByKeyword(string)
    
@@ -60,8 +60,12 @@ export default function Header() {
   const formatResult = (item) => {
    
     return (
-         <div onClick={()=>{navigate('/')}}>
- <a >{item?.name}</a>    
+         <div>
+          {item?.age? <img style={{
+      width:"50px",
+      height:"50px",
+      borderRadius:"50%"
+     }} src={item?.image}/> :item?.url?<GiMusicalNotes/>:<MdLibraryMusic/>}  <a>{item?.name}</a>
          </div>
        
        

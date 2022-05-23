@@ -9,10 +9,14 @@ import ApiCaller from '../../../utils/callAPI'
 
 export default function ListAll({ type = 'artists'}) {
   const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     ApiCaller(type=='artists'?'artists':'albums', 'GET')
       .then(res => {
         setItems(res.data.data)
+      })
+      .finally(()=>{
+        setLoading(false)
       })
   }, [])
   
@@ -22,13 +26,13 @@ export default function ListAll({ type = 'artists'}) {
       {type=='artists'?
         <div className='wrapper-card'>
         {items.map((item,index)=>(
-            <CardItem key={index} artist={item} type='artist'/>
+            <CardItem loading={loading} key={index} artist={item} type='artist'/>
         ))}
       </div>
       :
       <div className='wrapper-card'>
         {items.map((item,index)=>(
-            <CardItem key={index} album={item} type='album'/>
+            <CardItem loading={loading} key={index} album={item} type='album'/>
         ))}
       </div>
       }

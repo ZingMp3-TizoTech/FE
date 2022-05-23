@@ -20,17 +20,17 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
         {!loading?
       <div className='img'>
           <img
-          src={type != 'albums' ? songs[idSong]?.image[0] : albums[0]?.artist?.image[0]}
+          src={type != 'albums' ? songs?.[idSong]?.image?.[0] : albums?.[0]?.artist?.image?.[0]}
           alt='avatar' /> 
           </div>
-          : <Loading
-              type='spinningBubbles'
-              height='900px' 
+          : <Loading    
+                        type='spinningBubbles'
+                        height='900px' 
                         width='100px' 
                         color='#a696d5'
           /> 
        }
-      <h2> {type != 'albums' ? songs[idSong]?.name : albums[0]?.name} </h2>
+      <h2> {type != 'albums' ? songs?.[idSong]?.name : albums?.[0]?.name} </h2>
       {!loading? 
         <div className='img-author'>
         <img
