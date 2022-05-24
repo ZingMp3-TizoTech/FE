@@ -5,6 +5,7 @@ import './DetailSong.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import { useNavigate } from 'react-router-dom';
 import Loading from 'react-loading';
+import avt from '../../style/avata.png'
 export default function DetailSong({ idSong, songs, circular, type, albums, loading }) {
   let navigate = useNavigate();
   return (

@@ -4,9 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slidealbum.css"
 import ApiCaller from "../../../utils/callAPI";
-
+import ReactPlaceholder from 'react-placeholder';
+import "react-placeholder/lib/reactPlaceholder.css";
+import { TextBlock, MediaBlock, TextRow, RectShape, RoundShape } from 'react-placeholder/lib/placeholders';
 export default function Slidealbum() {
 
+    const [loading, setLoading] = useState(false)
     let settings = {
         dots: false,
         infinite: true,
@@ -20,21 +23,35 @@ export default function Slidealbum() {
         ApiCaller('songs', 'GET')
             .then(res => {
                 setSongs(res.data.data)
+                setTimeout(() => {
+                    setLoading(true)
+                }, 500)
+
             })
     }, [])
     let topSongs = songs?.slice(0, 5);
-    return (
-        <div className="slide-album">
-            <Slider {...settings}>
-                {topSongs.map((song, index) => (
-                    <div className='img-item' key={index}>
-                        <img src={song?.image[1]} alt="Image-song" />
-                    </div>
-                ))}
+    const awesomePlaceholder = (
+        <div >
+            <RectShape
+                color='darkgray ' style={{ width: 372, height: 210, borderRadius: 10 }} />
 
-
-            </Slider>
         </div>
+    );
+    return (
+        <>
+            <div className="slide-album">
+                <Slider {...settings}>
+                    {topSongs.map((song, index) => (
+                        <div className='img-item' key={index}>
+                            {loading ? <img src={song?.image[1]} alt="Image-song" /> : <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={awesomePlaceholder} ready={false} />}
+
+                        </div>
+                    ))}
+                </Slider>
+            </div>
+
+
+        </>
     );
 
 }

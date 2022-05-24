@@ -17,8 +17,9 @@ export default function Header() {
   const [result, setResult] = useState([])
   const loggedInUser = Cookies.get('token');
   const type=['album','artist']
+  
   const handleOnSearch = async (string, results) => {
-
+    
     let handleSearch = await handleSearchByKeyword(string)
    
     handleSearch = handleSearch.data.data;
@@ -54,8 +55,28 @@ export default function Header() {
       navigate(`/playsong/${item.id}`)
   }
 
-  const handleOnFocus = () => {
-    console.log('Focused')
+  const handleOnFocus = async(results) => {
+    
+    let handleSearch = await handleSearchByKeyword(' ')
+   
+    handleSearch = handleSearch.data.data;
+    let _result = [];
+    Object.keys(handleSearch).forEach(key => {
+      console.log(key);
+      _result = _result?.concat((handleSearch[key] || []).map(item => {
+        return {
+          id: item?._id,
+          name: item?.name,        
+          url: item?.url, //song
+          age: item?.age, //artist
+          artist: item?.artist, //album
+          image: item?.image
+        }
+      }))
+    })
+    console.log(handleSearch);
+    results = _result;
+    setResult(results);
   }
   const formatResult = (item) => {
    
@@ -75,7 +96,7 @@ export default function Header() {
   
   return (
     <div className='wrapper-navbar'>
-      <div style={{ width: 400, marginRight: 300, }}>
+      <div style={{ width: 400, marginRight: 300 }}>
      
         <ReactSearchAutocomplete
           items={result}

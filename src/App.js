@@ -24,6 +24,7 @@ function App() {
        {/* /:type */}
        <Route path="/playsong/album/:id" element={<PlaySong type="albums" />} />
        <Route path="/playsong/genre/:id" element={<PlaySong type="genres" />} />
+       <Route path="/playsong/playlist/:id" element={<PlaySong type="playlists" />} />
        <Route path="/playsong" element={<PlaySong />} />
        <Route path="/playsong/:id" element={<PlaySong type="songs" />} />
        <Route path="/login" element={<Login />} />

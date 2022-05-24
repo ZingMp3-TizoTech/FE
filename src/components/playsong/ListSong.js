@@ -10,16 +10,15 @@ import { handleGetAlbumById } from '../../services/Album'
 import { handleGetPlaylistByUser } from '../../services/Playlist'
 
 export default function ListSongs({ type }) {
-    const id = useParams();
+    const  {id}  = useParams();
     const [songs, setSongs] = useState([])
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
     const [loading, setLoading] = useState(false)
     const [albums, setAlbums] = useState([])
     const [playlist, setPlaylist] = useState([])
-    let a = songs.findIndex(i => i._id === id.id)
-
-
+    let a = songs.findIndex(i => i._id === id)
+   console.log(id);
     useEffect(() => {
         setLoading(true);
         ApiCaller('songs', 'GET')
@@ -28,145 +27,134 @@ export default function ListSongs({ type }) {
             })
             .finally(() => {
                 setLoading(false)
-            })
+            }) 
     }, [])
-
-    console.log(songs);
-
-    
-    const getPlaylist = async () => {
-        const pl = await handleGetPlaylistByUser()
-        setPlaylist(pl.data.data);
-    }
-
-    useEffect(() => {
-        getPlaylist()
-    }, [])          //setPlaylist(res.data.data)
-    console.log(playlist);
-
     useEffect(() => {
         setLoading(true);
-        ApiCaller(`album/${id.id}`, 'GET')
+        ApiCaller(`album/${id}`, 'GET')
             .then(res => {
                 setAlbums(res.data.data)
             })
             .finally(() => {
                 setLoading(false)
-            })
+            }) 
     }, [])
 
     const items =
-        id?.id && type == "artists" ?
+        id && type == "artists" ?
             songs?.filter((song) => {
                 return (
-                    song.artist?._id === id.id
+                    song.artist?._id === id
                 )
             })
-            : id?.id && type == "genres" ?
+            : id && type == "genres" ?
                 songs?.filter((song) => {
                     return (
-                        song.genre?._id === id.id
+                        song.genre?._id === id
                     )
                 })
-                : id?.id && type == "albums" ?
+                : id && type == "albums" ?
                     albums[0]?.songs
-                    :type == "playlist"?
-                    playlist?.song
                     : songs
-    return (
-        <div>
-            <div className='wrapper-song'>
 
-                <DetailSong
-                    idSong={idNumber} songs={items} circular={circular} type={type} albums={albums} loading={loading}
-                />
+return (
+    <div>
+        <div className='wrapper-song'>
 
-                <div className='wrapper-list-song'>
+            <DetailSong
+                idSong={idNumber} songs={items} circular={circular} type={type} albums={albums} loading={loading}
+            />
 
-                    <table>
+            <div className='wrapper-list-song'>
 
-                        <thead
-                            style={{
-                                background: 'rgb(72 137 137)',
-                                height: '90px'
-                            }}
-                        >
-                            <tr>
-                                <th style={{
-                                    width: '5%'
-                                }}>#</th>
-                                <th style={{
-                                    width: '40%',
-                                    textAlign: 'left'
-                                }}>Name song</th>
-                                <th style={{
-                                    width: '15%',
-                                    textAlign: 'left'
-                                }}>Artist</th>
-                                <th style={{
-                                    width: '20%',
-                                    textAlign: 'center'
-                                }}>Author</th>
-                                <th style={{
-                                    width: '10%',
-                                    textAlign: 'center'
-                                }}> <FaDownload /> </th>
-                            </tr>
-                        </thead>
-                        {!loading ? <>
-                            <tbody>
-                                {items?.map((song, index) => (
+                <table>
 
-                                    <tr
-                                        key={index}
-                                        onClick={(e) => {
-                                            setIdNumber(index);
-                                        }
-                                        }
-                                        className={index === idNumber ? "active-row" : ""}
-                                    >
-                                        <td scope="row">{(song._id != null) ? index + 1 : <></>
-                                        }</td>
-                                        <td
-                                        >{song?.name}</td>
-                                        <td
-                                        >{song?.artist?.name}</td>
-                                        <td style={{
-                                            textAlign: 'center',
-                                        }}>{
-                                                song?.album ? <>{song?.album?.name}</> : <></>}</td>
-                                        <td style={{
-                                            textAlign: 'center'
-                                        }}>
-                                            <a href={song?.url}><FaDownload /></a>
-                                        </td>
-                                    </tr>
+                    <thead
+                        style={{
+                            background: 'rgb(72 137 137)',
+                            height: '90px'
+                        }}
+                    >
+                        <tr>
+                            <th style={{
+                                width: '5%'
+                            }}>#</th>
+                            <th style={{
+                                width: '40%',
+                                textAlign: 'left'
+                            }}>Name song</th>
+                            <th style={{
+                                width: '15%',
+                                textAlign: 'left'
+                            }}>Artist</th>
+                            <th style={{
+                                width: '20%',
+                                textAlign: 'center'
+                            }}>Author</th>
+                            <th style={{
+                                width: '10%',
+                                textAlign: 'center'
+                            }}> <FaDownload /> </th>
+                           
+                        </tr>
+                    </thead>
+                    {!loading ? <>
+                        <tbody>
+                            {items?.map((song, index) => (
 
-                                ))
-                                }
-                            </tbody>
-                        </> : <><ReactLoading
-                            height='900px'
-                            width='100px'
-                            className='loading'
-                            type='bars'
-                            color='#a696d5' /></>}
+                                <tr
+                                    key={index}
+                                    onClick={(e) => {
+                                        setIdNumber(index);
+                                    }
+                                    }
+                                    className={index === idNumber ? "active-row" : ""}
+                                >
+                                    <td scope="row">{(song._id != null) ? index + 1 : <></>
+                                    }</td>
+                                    <td
+                                    >{song?.name}</td>
+                                    <td
+                                    >{song?.artist?.name}</td>
+                                    <td style={{
+                                        textAlign: 'center',
+                                    }}>{
+                                            song?.album ? <>{song?.album?.name}</> : <></>}</td>
+                                    <td style={{
+                                        textAlign: 'center'
+                                    }}>
+                                        <a href={song?.url}><FaDownload /></a>
+                                    </td>
+                                   
+                                    
+                                </tr>
+                                
+                            )
+                            )
+                            } 
+                        </tbody>
+                    </> : <><ReactLoading
+                        height='900px'
+                        width='100px'
+                        className='loading'
+                        type='bars'
+                        color='#a696d5' /></>}
 
-                    </table>
+                </table>
 
 
-                    <div style={{
-                        marginTop: "100px"
-                    }}>
+                <div style={{
+                    marginTop: "100px"
+                }}>
 
-                    </div>
-                </div>
-            </div>
-            <div >
-                <div className='play-child'>
-                    {<Playing i={a} type={type} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
                 </div>
             </div>
         </div>
-    )
+        <div >
+            <div className='play-child'>
+                {<Playing i={a} type={type} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
+            </div>
+        </div>
+    </div>
+)
 }

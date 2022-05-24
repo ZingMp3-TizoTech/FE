@@ -6,21 +6,20 @@ import { Card, Avatar } from 'antd';
 import { handleGetPlaylistByUser } from '../../../services/Playlist';
 import { HeartOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import ApiCaller from '../../../utils/callAPI';
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function AllPlaylists() {
+    const navigate= useNavigate()
     const { Meta } = Card;
     const [playlist, setPlaylist] = useState([])
     const getPlaylist = async () => {
         const pl = await handleGetPlaylistByUser()
-
         setPlaylist(pl.data.data);
     }
-
     useEffect(() => {
         getPlaylist()
     }, [])          //setPlaylist(res.data.data)
     console.log(playlist);
-
+   
 
     return (
         <>
@@ -53,7 +52,7 @@ function AllPlaylists() {
                             <div
 
                             >
-                                <PlayCircleOutlined key="play" onClick={(e)=>console.log(item?._id)} />
+                                <PlayCircleOutlined key="play" onClick={(e)=> navigate('/playsong/playlist/'+`${item?._id}`)} />
                             </div>,
                         ]}
                     >
