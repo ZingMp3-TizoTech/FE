@@ -26,5 +26,19 @@ const handleGetPlaylistById = async (id)=>{
         console.log(error)
     }
 }
-export {handleGetPlaylistByUser, handleGetPlaylistById
+
+const handleAddSongToPlayList = async (id, song)=>{
+    try {  
+        console.log('song:',song);
+        const token = Cookies.get('token')
+        return await axios.put(`https://suntify.herokuapp.com/playlist/add/${id}`,{song},{
+            headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+        })  
+    } catch (error) {
+        console.log(error)
+    }
+}
+export {handleGetPlaylistByUser, handleGetPlaylistById, handleAddSongToPlayList
 }

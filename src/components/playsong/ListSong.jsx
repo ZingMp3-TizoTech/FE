@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
 import { handleGetAlbumById } from '../../services/Album'
 import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
+import Extend from './Extend'
 
 export default function ListSongs({ type }) {
     const id = useParams();
@@ -41,7 +42,7 @@ export default function ListSongs({ type }) {
     useEffect(() => {
         getPlaylist(id.id)
     }, [])      
-    console.log(playlist);
+
     useEffect(() => {
         setLoading(true);
         ApiCaller(`album/${id.id}`, 'GET')
@@ -76,7 +77,9 @@ export default function ListSongs({ type }) {
             <div className='wrapper-song'>
 
                 <DetailSong
-                    idSong={idNumber} songs={items} circular={circular} type={type} albums={albums} loading={loading}
+                    idSong={idNumber} songs={items} circular={circular} 
+                    type={type} albums={albums} loading={loading}
+                    playlist={playlist}
                 />
 
                 <div className='wrapper-list-song'>
@@ -108,13 +111,12 @@ export default function ListSongs({ type }) {
                                 <th style={{
                                     width: '10%',
                                     textAlign: 'center'
-                                }}> <FaDownload /> </th>
+                                }}>    </th>
                             </tr>
                         </thead>
                         {!loading ? <>
                             <tbody>
                                 {items?.map((song, index) => (
-
                                     <tr
                                         key={index}
                                         onClick={(e) => {
@@ -137,10 +139,9 @@ export default function ListSongs({ type }) {
                                         <td style={{
                                             textAlign: 'center'
                                         }}>
-                                            <a href={song?.url}><FaDownload /></a>
+                                            <a><Extend url={song?.url} id={song._id} /></a>
                                         </td>
                                     </tr>
-
                                 ))
                                 }
                             </tbody>

@@ -3,8 +3,8 @@ import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from "react-h5-audio-player";
 
 
-function Playing({ i, type, idSong, setIdNumber, setCircular, ...props }) {
-  const [action, setAction] = useState(type)
+function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction, ...props }) {
+
   if (action == "songs") {
     setIdNumber(i)
   }

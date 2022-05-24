@@ -9,6 +9,8 @@ import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import Extend from '../playsong/Extend'
+import AddSong from '../playsong/ModalPlaylist'
 
 export default function Homepage() {
   const [artists, setArtists] = useState([])

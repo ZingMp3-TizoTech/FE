@@ -1,0 +1,29 @@
+.list-item{
+    width: 265px;
+    height: 200px;
+    overflow-y: scroll;
+}
+.list-item::-webkit-scrollbar {
+    width: 10px;
+  }
+.list-item .item{
+    margin-bottom: 10px;
+    position: relative;
+    background-color: rgb(215 233 237);
+    height: 50px;
+}
+.list-item .item:hover{
+    box-shadow: 3px 3px rgb(186, 187, 188);
+}
+.list-item .item p{
+    position: absolute;
+    font-weight: 600;
+    left: 10px;
+    top: 5px;
+}
+.list-item .item i{
+    position: absolute;
+    right: 20px;
+    top: 7px;
+    font-size: 20px;
+}
