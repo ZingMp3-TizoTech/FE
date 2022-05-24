@@ -1,71 +1,147 @@
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../../Sidebar'
-
 import 'antd/dist/antd.css';
 import { Card, Avatar } from 'antd';
 import { handleGetPlaylistByUser } from '../../../services/Playlist';
-import { HeartOutlined, PlayCircleOutlined } from '@ant-design/icons';
+import { FolderAddFilled, PlayCircleOutlined } from '@ant-design/icons';
 import ApiCaller from '../../../utils/callAPI';
-import { useNavigate } from 'react-router-dom';
+
+import { useNavigate, useParams } from 'react-router-dom';
+import { display } from '@mui/system';
+import Delete from './ModalDeletePlayList';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import CreatePlayList from './ModalCreatePlayList';
+import './Card.css'
+
+
 function AllPlaylists() {
-    const navigate= useNavigate()
+    let navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
+    const handlePlayByPlaylist = (e) => {
+        navigate('/playsong/playlist/' + `${e.target.id}`);
+    }
     const { Meta } = Card;
     const [playlist, setPlaylist] = useState([])
     const getPlaylist = async () => {
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
+        setTimeout(()=>{
+            setLoading(true)
+        },1000)
+       
     }
     useEffect(() => {
         getPlaylist()
-    }, [])          //setPlaylist(res.data.data)
-    console.log(playlist);
-   
+
+    }, [])
 
     return (
         <>
             <Sidebar />
-            {playlist.map(item =>(
-
-                <>
-            
-                    <Card
+            {
+                <div
+                    className='play-list'
+                    style={{
+                        width: '1110px',
+                        margin: '40px 0 0 340px',
+                        display: 'flex',
+                        flexWrap:'wrap',
+                    }}
+                >
+                    <div
+                        className='card'
                         style={{
-                            width: 300,
-                            marginRight: 50,
-                            marginBottom: 50,
-                            marginTop: 50,
-                            marginLeft: 300
+                            height: '433px',
+                            width: '300px',
+                            backgroundColor: '#fffff',
+                            marginRight:'50px',
+                            border:'1px #d9d9d9d9 solid',
+                            display:'flex',
+                           
+                            flexDirection:'column',
+                            alignItems:'center',
+                            justifyContent:'center',
                         }}
-                        cover={
-                            <img
-                                alt="example"
-                                src={item ? item?.song[0]?.image[0] : "https://play-lh.googleusercontent.com/aA2rpO5sXUJmnkB-H9GlLz8BqhpIw27wG2xc1-9j5rg1h_LmcGxnAd6vOVXTZO8F-D0"}
-                                style={{
-                                    maxWidth: 300,
-                                    maxHeight: 300,
-                                    overflow: 'hidden',
-                                }}
-                            />
-                        }
-                        actions={[
-                            <HeartOutlined key="like" />,
-                            <div
 
-                            >
-                                <PlayCircleOutlined key="play" onClick={(e)=> navigate('/playsong/playlist/'+`${item?._id}`)} />
-                            </div>,
-                        ]}
                     >
-                        <Meta
-                            avatar={<Avatar src={item ? item?.song[0]?.image[0] : "https://play-lh.googleusercontent.com/aA2rpO5sXUJmnkB-H9GlLz8BqhpIw27wG2xc1-9j5rg1h_LmcGxnAd6vOVXTZO8F-D0"} />}
-                        />
-
-                    </Card>
-                </>
-           
-
+                        <CreatePlayList />
+                        <p
+                            style={{
+                                fontSize:'23px',
+                                fontWeight:'400'
+                            }}
+                        >Create a new playlist</p>
+                    </div>
+                    {playlist.map(item => (
+                        loading?
+                            <Card
+                                className='card'
+                               
+                                cover={
+                                    <img
+                                        alt="example"
+                                        src={item?.song?.[0]?.image?.[0]?item?.song?.[0]?.image?.[0]:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCebaMsn7crR47zGdjApJzDoxM0t2-oCEyt07l6Ecvg0-3ZNOwv75SrgRcNKJr6g211a4&usqp=CAU'}
+                                        style={{
+                                            maxWidth: 300,
+                                            maxHeight: 300,
+                                            overflow: 'hidden',
+                                        }}
+                                    />
+                                }
+                                actions={[
+                                    <Delete value={item?.name} id={item?._id}/>,
+                                    <div
+                                        id={item._id}
+                                        onClick={handlePlayByPlaylist}
+                                    >
+                                        <PlayCircleOutlined key="play" onClick={handlePlayByPlaylist} />
+                                    </div>,
+                                ]}
+                            >
+                                <Meta
+                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]} />}
+                                    title={item?.name}
+                                    description={<>
+                                        <p>{item?.genre?.zone}</p>
+                                        {/* <div className='text-bold'>Age: {item?.age}</div> */}
+                                    </>}
+                                />
+                             </Card>:  
+                                <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent:'space-between',
+                                    marginRight:'30px'
+                                }}>
+                                    
+                                    <p
+                                        style={{
+                                            width: '300px',
+                                            marginLeft: '0px'
+                                        }}
+                                    >
+                                        <Skeleton
+                                            height={350}
+                                        />
+                                        <Skeleton
+                                            count={3}
+                                            height={20}
+                                        />
+                                    </p>
+                                 
+                                    
+                                </div>
+                            </SkeletonTheme> 
+                        
+                        
+                    )
+                      
+                    )}
+                </div>
                 
-            ))}
+              
+            }
 
         </>
     )

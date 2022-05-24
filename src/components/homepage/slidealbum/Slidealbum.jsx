@@ -7,6 +7,8 @@ import ApiCaller from "../../../utils/callAPI";
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { TextBlock, MediaBlock, TextRow, RectShape, RoundShape } from 'react-placeholder/lib/placeholders';
+
+import { useNavigate } from 'react-router-dom';
 export default function Slidealbum() {
 
     const [loading, setLoading] = useState(false)
@@ -29,6 +31,10 @@ export default function Slidealbum() {
 
             })
     }, [])
+    let navigate = useNavigate();
+    const handlePlaySong = (e)=>{
+        navigate('/playsong/'+`${e.target.id}`);
+    }
     let topSongs = songs?.slice(0, 5);
     const awesomePlaceholder = (
         <div >

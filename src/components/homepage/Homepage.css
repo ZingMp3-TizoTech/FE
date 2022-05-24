@@ -1,5 +1,6 @@
 .container{
     display: flex;
+  
 }
 .loading-album{
     max-width: 213px;

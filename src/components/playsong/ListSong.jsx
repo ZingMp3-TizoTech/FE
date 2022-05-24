@@ -6,8 +6,6 @@ import Playing from './Playing'
 import DetailSong from './DetailSong'
 import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
-import { handleGetAlbumById } from '../../services/Album'
-import { handleGetPlaylistByUser } from '../../services/Playlist'
 
 export default function ListSongs({ type }) {
     const  {id}  = useParams();
@@ -95,7 +93,7 @@ return (
                                 width: '10%',
                                 textAlign: 'center'
                             }}> <FaDownload /> </th>
-                           
+                          
                         </tr>
                     </thead>
                     {!loading ? <>
@@ -108,8 +106,7 @@ return (
                                         setIdNumber(index);
                                     }
                                     }
-                                    className={index === idNumber ? "active-row" : ""}
-                                >
+                                    className={index === idNumber ? "active-row" : ""}>
                                     <td scope="row">{(song._id != null) ? index + 1 : <></>
                                     }</td>
                                     <td
@@ -125,7 +122,7 @@ return (
                                     }}>
                                         <a href={song?.url}><FaDownload /></a>
                                     </td>
-                                   
+                                 
                                     
                                 </tr>
                                 

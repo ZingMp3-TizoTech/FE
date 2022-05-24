@@ -10,7 +10,6 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, ...props }) {
   const handleClickNext = () => {
     let _id = idSong;
     _id = idSong < props.songs.length - 1  ? idSong + 1 : 0;
-    // console.log("Nam ca", idSong)
     setIdNumber && setIdNumber(_id);
     setAction(" ")
   }
@@ -18,7 +17,6 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, ...props }) {
     let _id = idSong;
     console.log('id', idSong)
     _id = idSong > 0 ? idSong - 1 : props.songs.length - 1;
-    // console.log("Nam ca", _id)
     setIdNumber && setIdNumber(_id);
     setAction(" ")
   }
@@ -42,7 +40,7 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, ...props }) {
       onPlay={handleClickPlay}
       
     />
-    <FaRandom/>
+    
     </>
    
     

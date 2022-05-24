@@ -16,35 +16,40 @@ import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
+import { style } from '@mui/system';
 
 const drawerWidth = 240;
 export default function Sidebar(props) {
-  const navigate =useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  let navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const  token = Cookies.get('token');
-  
+  const token = Cookies.get('token');
 
-  let list= ['Personal', 'Discover'];
-  if(token) {
+
+  let list = ['Personal', 'Discover'];
+  if (token) {
     list.push('Library')
   }
   const drawer = (
     <div>
-      <Toolbar>
-        <div onClick={(e)=>navigate('/')}
+      
+      <Toolbar style={{
+        backgroundColor:'#48589c'
+      }}>
+        <div onClick={(e)=>navigate('/')} 
+
           style={{
             fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
-
+            
           }}
         >
-          <GraphicEqRoundedIcon style={{fontSize:"50px"}} />
-          <p 
+          <GraphicEqRoundedIcon style={{ fontSize: "50px" }} />
+          <p
             style={{
               fontSize: '30px',
               marginLeft: '15px',
@@ -54,22 +59,30 @@ export default function Sidebar(props) {
           >Suntify</p>
         </div>
       </Toolbar>
-      <List>
+      
+      <List style={{
+        backgroundColor:'#48589c',
+        minHeight:'657px'
+      }}>
         {list.map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon onClick={(e)=>navigate(`/${text}`)}>
+            <ListItemIcon onClick={(e) => navigate(`/${text}`)}>
               {
-              text === 'Personal' ? <ContactsRoundedIcon /> :
-                text === 'Discover' ? <AlbumIcon /> :
-                  text === 'Library' ? <LibraryMusicRoundedIcon/> :                                  
-                    <></>
-                    
+                text === 'Personal' ? <ContactsRoundedIcon /> :
+                  text === 'Discover' ? <AlbumIcon /> :
+                    text === 'Library' ? <LibraryMusicRoundedIcon /> :
+                      <></>
+
               }
             </ListItemIcon>
-            <ListItemText primary={text} onClick={(e)=>navigate(`/${text}`)} />
+            
+            <ListItemText primary={text} onClick={(e) => navigate(`/${text}`)} />
           </ListItem>
+          
         ))}
+         
       </List>
+      
     </div>
   );
 
@@ -82,45 +95,22 @@ export default function Sidebar(props) {
     //   display: 'flex',
     //   boxShadow:'-6px 1px 12px 6px #888888' }}
     // >
+    
     <Box
       style={{
-
+       
         marginLeft: "-110px"
       }}
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="mailbox folders"
     >
-      {/* <Toolbar>
-          <IconButton
-            
-          >  
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
+    
 
-        </Toolbar> */}
-
-      {/* <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer> */}
-
-
+       
+  
       <Drawer
+     
         variant="permanent"
         sx={{
           display: { xs: 'none', sm: 'block' },
@@ -129,7 +119,9 @@ export default function Sidebar(props) {
         open
       >
         {drawer}
+       
       </Drawer>
+      
     </Box>
 
   );

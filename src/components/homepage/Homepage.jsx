@@ -11,16 +11,20 @@ import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
 
+
 export default function Homepage() {
   const [artists, setArtists] = useState([])
   const [albums, setAlbums] = useState([])
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     ApiCaller('artists', 'GET')
       .then(res => {
         setArtists(res.data.data)
         setLoading(false)
       })
+      .finally(()=>(
+        setLoading(false)
+      ))
   }, [])
   useEffect(() => {
     ApiCaller('albums', 'GET')
@@ -28,23 +32,25 @@ export default function Homepage() {
         setAlbums(res.data.data)
         setLoading(true)
       })
+      .finally(()=>(
+        setLoading(false)
+      ))
   }, [])
  ;
   return (
-    <div className='container'>
+    <div className='container' style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
       <Sidebar />
-    
       <div>
-     
         <div style={{
           zIndex:"4",
-          marginTop:"20px"
+          marginTop:"20px",
+          paddingLeft:'30px'
         }}>
           <Header/>
           
         
         </div>
-        <Slidealbum />
+          <Slidealbum />
         <p className='title-album'>Featured Artists</p>
         <Featured items={artists} type={'artists'} />
         <p className='title-album'>Genres</p>
