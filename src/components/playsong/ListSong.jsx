@@ -42,7 +42,6 @@ export default function ListSongs({ type }) {
         getPlaylist(id.id)
     }, [])      
     console.log(playlist);
-
     useEffect(() => {
         setLoading(true);
         ApiCaller(`album/${id.id}`, 'GET')
@@ -71,6 +70,7 @@ export default function ListSongs({ type }) {
                     :type == "playlists"?
                     playlist?.song
                     : songs
+
     return (
         <div>
             <div className='wrapper-song'>

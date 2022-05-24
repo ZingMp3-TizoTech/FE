@@ -29,7 +29,7 @@ function App() {
        <Route path="/playsong/:id" element={<PlaySong type="songs" />} />
        <Route path="/login" element={<Login />} />
        <Route path="/signup" element={<Register />} />
-       <Route path="/artists" element={<ListAll />} />
+       <Route path="/artists" element={<ListAll type="artists" />} />
        <Route path="/albums" element={<ListAll type="albums" />} />
        <Route path="/Library" element={<AllPlaylists/>}/>
     </Routes>

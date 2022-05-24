@@ -1,4 +1,4 @@
-.wrapper-card{
+/* .wrapper-card{
     height: 450px;
     width: 300px;
     margin: 200px;
@@ -12,4 +12,7 @@
 }
 .wrapper-card .image img{
     max-width: 298px;
+} */
+.card:hover{
+    box-shadow: 3px 3px #d7d7d7d7;
 }

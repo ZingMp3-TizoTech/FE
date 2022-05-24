@@ -1,6 +1,7 @@
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import 'antd/dist/antd.css';
+import { FolderAddFilled } from '@ant-design/icons';
 const CreatePlayList = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -18,9 +19,12 @@ const CreatePlayList = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
+      <FolderAddFilled  onClick={showModal}
+                            style={{
+                                fontSize:'60px'
+                            }}
+                        />
+      
       <Modal title="Create a new playlist" 
       visible={isModalVisible} 
       onOk={handleOk} 
