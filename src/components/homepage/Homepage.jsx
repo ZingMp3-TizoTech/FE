@@ -40,14 +40,8 @@ export default function Homepage() {
  ;
 
 
- function scrollFunction(e) {
-   console.log(e);
-  //  if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-  //   console.log(document.documentElement.scrollTop);
-  //  }
- }
   return (
-    <div className='container' onScroll={(e)=>scrollFunction(e)}  style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
+    <div className='container'   style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
    
        
    <Sidebar />

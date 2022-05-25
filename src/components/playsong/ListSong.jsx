@@ -81,12 +81,15 @@ return (
 
             <div className='wrapper-list-song'>
 
-                <table>
+                <table style={{
+                            background: '#48589c',
+                          
+                        }}>
 
                     <thead
                         style={{
-                            background: 'rgb(72 137 137)',
-                            height: '90px'
+                            background: '#48589c',
+                          
                         }}
                     >
                         <tr>
@@ -113,10 +116,10 @@ return (
                         </tr>
                     </thead>
                     {!loading ? <>
-                        <tbody>
+                        <tbody style={{height:'10px'}}>
                             {items?.map((song, index) => (
 
-                                <tr
+                                <tr 
                                     key={index}
                                     onClick={(e) => {
                                         setIdNumber(index);
