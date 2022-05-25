@@ -46,6 +46,7 @@ export default function Header() {
     console.log(result)
   }
 
+  
   const handleOnSelect = (item) => {
     if(item?.artist)
       navigate(`/playsong/${type[0]}/${item.id}`)
@@ -95,7 +96,7 @@ export default function Header() {
 
   
   return (
-    <div className='wrapper-navbar'>
+    <div className='wrapper-navbar' style={{maxWidth:'100%',width:'82%'}}>
       <div style={{ width: 400, marginRight: 300 }}>
      
         <ReactSearchAutocomplete

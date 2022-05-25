@@ -54,17 +54,30 @@ const handleGetPlaylistById = async (id)=>{
         console.log(error)
     }
 }
-const handelAddSongToPlaylist =async(id,data)=>{
+
+
+const handleAddSongToPlayList = async (id, song)=>{
+   
+        
     try {
-        return await axios.put(`https://suntify.herokuapp.com/playlist/add/${id}`,{data})
+        console.log('song:',song);
+        const token = Cookies.get('token')
+        return await axios.put(`https://suntify.herokuapp.com/playlist/add/${id}`,{song},{
+            headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+        })  
     } catch (error) {
         console.log(error)
     }
+    
 }
+
 export {
     handleCreatePlaylist,
-    handleDeletePlaylist,
     handleGetPlaylistByUser,
      handleGetPlaylistById,
-     handelAddSongToPlaylist
+      handleAddSongToPlayList,
+      handleDeletePlaylist
+
 }

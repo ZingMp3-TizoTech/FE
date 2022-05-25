@@ -36,12 +36,10 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                     }
                     actions={[
                         <HeartOutlined key="like" />,
-                        <div
-                            id={artist._id}
-                            onClick={handlePlayByArtist}
-                        >
+                        <div id={artist._id}
+                            onClick={handlePlayByArtist}>
                             <PlayCircleOutlined key="play" />
-                        </div>,
+                        </div>
                     ]}
                 >
                     <Meta

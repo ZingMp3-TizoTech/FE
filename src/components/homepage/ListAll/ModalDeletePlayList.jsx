@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
 import { handleDeletePlaylist } from '../../../services/Playlist';
 
-const Delete = ({value,id}) => {
+const Delete = ({value,id,onSuccess}) => {
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -17,10 +17,7 @@ const Delete = ({value,id}) => {
   const handleOk = (e) => {
     console.log(id);
     handleDeletePlaylist(id)
-    navigate('/')
-    setTimeout(()=>{
-      navigate('/Library')
-    },1)
+    onSuccess && onSuccess()
     setIsModalVisible(false);   
   };
 

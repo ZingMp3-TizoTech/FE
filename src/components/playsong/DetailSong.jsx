@@ -5,9 +5,11 @@ import './DetailSong.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import { useNavigate } from 'react-router-dom';
 import Loading from 'react-loading';
-import avt from '../../style/avata.png'
-export default function DetailSong({ idSong, songs, circular, type, albums, loading }) {
+import Extend from './Extend';
+export default function DetailSong({ idSong, songs, circular, type, albums, loading, playlist }) {
+
   let navigate = useNavigate();
+  
   return (
     <div className='wrapper-detail-song'>
       <div
@@ -23,6 +25,7 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
           <img
           src={type != 'albums' ? songs?.[idSong]?.image?.[0] : albums?.[0]?.artist?.image?.[0]}
           alt='avatar' /> 
+          <Extend/>
           </div>
           : <Loading    
                         type='spinningBubbles'
@@ -31,7 +34,7 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
                         color='#a696d5'
           /> 
        }
-      <h2> {type != 'albums' ? songs?.[idSong]?.name : albums?.[0]?.name} </h2>
+      <h2> {type != 'albums' ? songs?.[idSong]?.name : type == 'playlists'? playlist.name: albums?.[0]?.name} </h2>
       {!loading? 
         <div className='img-author'>
         <img

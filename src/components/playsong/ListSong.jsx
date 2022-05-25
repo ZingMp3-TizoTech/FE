@@ -7,6 +7,10 @@ import DetailSong from './DetailSong'
 import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
 
+import { handleGetAlbumById } from '../../services/Album'
+import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
+import Extend from './Extend'
+
 export default function ListSongs({ type }) {
     const  {id}  = useParams();
     const [songs, setSongs] = useState([])
@@ -27,6 +31,15 @@ export default function ListSongs({ type }) {
                 setLoading(false)
             }) 
     }, [])
+    
+    const getPlaylist = async (id) => {
+        const pl = await handleGetPlaylistById(id)    
+        setPlaylist(pl.data.data);
+    }
+
+    useEffect(() => {
+        getPlaylist(id.id)
+    }, [])      
     useEffect(() => {
         setLoading(true);
         ApiCaller(`album/${id}`, 'GET')
@@ -59,9 +72,12 @@ return (
     <div>
         <div className='wrapper-song'>
 
-            <DetailSong
-                idSong={idNumber} songs={items} circular={circular} type={type} albums={albums} loading={loading}
-            />
+
+                <DetailSong
+                    idSong={idNumber} songs={items} circular={circular} 
+                    type={type} albums={albums} loading={loading}
+                    playlist={playlist}
+                />
 
             <div className='wrapper-list-song'>
 
@@ -138,6 +154,7 @@ return (
                         color='#a696d5' /></>}
 
                 </table>
+
 
 
                 <div style={{
