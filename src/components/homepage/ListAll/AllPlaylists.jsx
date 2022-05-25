@@ -18,8 +18,8 @@ import './Card.css'
 function AllPlaylists() {
     let navigate = useNavigate();
     const [loading, setLoading] = useState(false)
-    const handlePlayByPlaylist = (e) => {
-        navigate('/playsong/playlist/' + `${e.target.id}`);
+    const handlePlayByPlaylist = (id) => {
+        navigate('/playsong/playlist/' + `${id}`);
     }
     const { Meta } = Card;
     const [playlist, setPlaylist] = useState([])
@@ -33,7 +33,6 @@ function AllPlaylists() {
     }
     useEffect(() => {
         getPlaylist()
-
     }, [])
 
     return (
@@ -65,7 +64,7 @@ function AllPlaylists() {
                         }}
 
                     >
-                        <CreatePlayList />
+                        <CreatePlayList onSuccess={getPlaylist} />
                         <p
                             style={{
                                 fontSize:'23px',
@@ -90,13 +89,12 @@ function AllPlaylists() {
                                     />
                                 }
                                 actions={[
-                                    <Delete value={item?.name} id={item?._id}/>,
-                                    <div
-                                        id={item._id}
-                                        onClick={handlePlayByPlaylist}
-                                    >
-                                        <PlayCircleOutlined key="play" onClick={handlePlayByPlaylist} />
-                                    </div>,
+                                    <Delete onSuccess={getPlaylist()}  value={item?.name} id={item?._id}/>,
+                                    <div onClick={() => handlePlayByPlaylist(item?._id)} >
+                                           <PlayCircleOutlined  key="play"/>
+                                    </div>
+                                 
+                                   
                                 ]}
                             >
                                 <Meta

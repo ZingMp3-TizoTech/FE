@@ -5,20 +5,20 @@ import 'antd/dist/antd.css';
 import './ModalCreatePlaylist.css'
 import { FolderAddFilled } from '@ant-design/icons';
 import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../services/Playlist';
-const CreatePlayList = () => {
+const CreatePlayList = ({ onSuccess }) => {
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [playlist, setPlaylist] = useState([])
   const [nameList, setName] = useState('')
   const [error, setError] = useState(false)
   let i = Object.keys(playlist).length
-  useEffect(() => {
-    getPlaylist()
-  }, [])
-  const getPlaylist = async () => {
-    const pl = await handleGetPlaylistByUser() 
-    setPlaylist(pl.data.data);
-  }
+  // useEffect(() => {
+  //   getPlaylist()
+  // }, [])
+  // const getPlaylist = async () => {
+  //   const pl = await handleGetPlaylistByUser() 
+  //   setPlaylist(pl.data.data);
+  // }
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -28,12 +28,10 @@ const CreatePlayList = () => {
   let song = []
   const handleOk = async () => {
     if (!error) {  
-    const created= await handleCreatePlaylist(name, date_create, song)
-    setIsModalVisible(false)
-    navigate('/')
-    setTimeout(()=>{
-      navigate('/Library')
-    },10)
+      const created= await handleCreatePlaylist(name, date_create, song)
+      setIsModalVisible(false)
+     
+      onSuccess && onSuccess()
     }
     else setIsModalVisible(true)
 

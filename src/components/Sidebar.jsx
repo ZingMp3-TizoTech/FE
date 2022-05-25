@@ -34,18 +34,22 @@ export default function Sidebar(props) {
     list.push('Library')
   }
   const drawer = (
-    <div>
-      
+    <div style={{
+      overflowY: "clip",
+      minHeight:'100%'
+    }}>
+
       <Toolbar style={{
-        backgroundColor:'#48589c'
+        backgroundColor: '#48589c',
+       
       }}>
-        <div onClick={(e)=>navigate('/')} 
+        <div onClick={(e) => navigate('/')}
 
           style={{
             fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
-            
+          
           }}
         >
           <GraphicEqRoundedIcon style={{ fontSize: "50px" }} />
@@ -53,16 +57,18 @@ export default function Sidebar(props) {
             style={{
               fontSize: '30px',
               marginLeft: '15px',
-              textShadow: '2px 2px #d7d7d7'
+              textShadow: '2px 2px #d7d7d7',
+            
             }}
 
           >Suntify</p>
         </div>
       </Toolbar>
-      
+
       <List style={{
-        backgroundColor:'#48589c',
-        minHeight:'657px'
+        backgroundColor: '#48589c',
+        minHeight: '100%',
+        color:'black'
       }}>
         {list.map((text, index) => (
           <ListItem button key={text}>
@@ -72,17 +78,16 @@ export default function Sidebar(props) {
                   text === 'Discover' ? <AlbumIcon /> :
                     text === 'Library' ? <LibraryMusicRoundedIcon /> :
                       <></>
-
               }
             </ListItemIcon>
-            
+
             <ListItemText primary={text} onClick={(e) => navigate(`/${text}`)} />
           </ListItem>
-          
+
         ))}
-         
+
       </List>
-      
+
     </div>
   );
 
@@ -95,7 +100,7 @@ export default function Sidebar(props) {
     //   display: 'flex',
     //   boxShadow:'-6px 1px 12px 6px #888888' }}
     // >
-    
+
     <Box
       style={{
        
@@ -105,12 +110,12 @@ export default function Sidebar(props) {
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="mailbox folders"
     >
-    
 
-       
-  
+
+
+
       <Drawer
-     
+
         variant="permanent"
         sx={{
           display: { xs: 'none', sm: 'block' },
@@ -119,9 +124,9 @@ export default function Sidebar(props) {
         open
       >
         {drawer}
-       
+
       </Drawer>
-      
+
     </Box>
 
   );

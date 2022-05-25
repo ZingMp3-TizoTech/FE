@@ -7,14 +7,11 @@ import Header from "./header/Header"
 import "./Homepage.css"
 import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
+
+import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Extend from '../playsong/Extend'
 import AddSong from '../playsong/ModalPlaylist'
-
-// import ReactPlaceholder from 'react-placeholder';
-// import "react-placeholder/lib/reactPlaceholder.css";
-// import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
-
 
 export default function Homepage() {
   const [artists, setArtists] = useState([])
@@ -41,14 +38,27 @@ export default function Homepage() {
       ))
   }, [])
  ;
+
+
+ function scrollFunction(e) {
+   console.log(e);
+  //  if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+  //   console.log(document.documentElement.scrollTop);
+  //  }
+ }
   return (
-    <div className='container' style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
-      <Sidebar />
+    <div className='container' onScroll={(e)=>scrollFunction(e)}  style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
+   
+       
+   <Sidebar />
+    
       <div>
+        
         <div style={{
-          zIndex:"4",
+          zIndex:"1",
           marginTop:"20px",
-          paddingLeft:'30px'
+          paddingLeft:'30px',
+         
         }}>
           <Header/>
           
