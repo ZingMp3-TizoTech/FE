@@ -6,6 +6,7 @@ import { height } from '@mui/system';
 import './ChoosePlaylist.css'
 import {FiCheckCircle} from 'react-icons/fi'
 import { handleAddSongToPlayList, handleGetPlaylistByUser } from '../../services/Playlist';
+import { PixOutlined } from '@mui/icons-material';
 const AddSong = ({id}) => {
   
     const [playlist, setPlaylist] = useState([])

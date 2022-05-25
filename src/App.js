@@ -11,9 +11,7 @@ import AllPlaylists from "./components/homepage/ListAll/AllPlaylists";
 // import Demo from "./components/account/Register";
 
 function App() {
-  const log = ()=>{
-    console.log("heroku");
-  }
+  
   return (
     <>
     <Routes>

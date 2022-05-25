@@ -29,7 +29,8 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction,
   }
 
   return (
-    <AudioPlayer
+    <>
+     <AudioPlayer
       src={props.songs?.[idSong]?.url}
       layout="stacked-reverse"
       showSkipControls={true}
@@ -38,7 +39,12 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction,
       onClickPrevious={handleClickPrev}
       onPause={handleClickPause}
       onPlay={handleClickPlay}
+      
     />
+    
+    </>
+   
+    
   )
 };
 export default Playing

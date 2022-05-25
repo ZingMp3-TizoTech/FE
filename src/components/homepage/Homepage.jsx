@@ -7,10 +7,14 @@ import Header from "./header/Header"
 import "./Homepage.css"
 import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
-import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Extend from '../playsong/Extend'
 import AddSong from '../playsong/ModalPlaylist'
+
+// import ReactPlaceholder from 'react-placeholder';
+// import "react-placeholder/lib/reactPlaceholder.css";
+// import {TextBlock, MediaBlock, TextRow, RectShape, RoundShape} from 'react-placeholder/lib/placeholders';
+
 
 export default function Homepage() {
   const [artists, setArtists] = useState([])
@@ -20,6 +24,7 @@ export default function Homepage() {
     ApiCaller('artists', 'GET')
       .then(res => {
         setArtists(res.data.data)
+        setLoading(false)
       })
       .finally(()=>(
         setLoading(false)
@@ -29,19 +34,25 @@ export default function Homepage() {
     ApiCaller('albums', 'GET')
       .then(res => {
         setAlbums(res.data.data)
+        setLoading(true)
       })
       .finally(()=>(
         setLoading(false)
       ))
   }, [])
+ ;
   return (
-    <div className='container'>
+    <div className='container' style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
       <Sidebar />
       <div>
         <div style={{
-          zIndex:"4"
+          zIndex:"4",
+          marginTop:"20px",
+          paddingLeft:'30px'
         }}>
-          <Header />
+          <Header/>
+          
+        
         </div>
           <Slidealbum />
         <p className='title-album'>Featured Artists</p>
@@ -53,7 +64,8 @@ export default function Homepage() {
         <Genre />
         </div>
         <p className='title-album'>Featured Albums</p>
-        <Featured items={albums} type={'albums'}/>
+        <Featured  items={albums} type={'albums'}/>
+          
       </div>
     </div>
   )

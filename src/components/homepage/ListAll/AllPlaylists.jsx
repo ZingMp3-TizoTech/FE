@@ -5,6 +5,7 @@ import { Card, Avatar } from 'antd';
 import { handleGetPlaylistByUser } from '../../../services/Playlist';
 import { FolderAddFilled, PlayCircleOutlined } from '@ant-design/icons';
 import ApiCaller from '../../../utils/callAPI';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { display } from '@mui/system';
 import Delete from './ModalDeletePlayList';
@@ -16,7 +17,7 @@ import './Card.css'
 
 function AllPlaylists() {
     let navigate = useNavigate();
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const handlePlayByPlaylist = (e) => {
         navigate('/playsong/playlist/' + `${e.target.id}`);
     }
@@ -25,22 +26,27 @@ function AllPlaylists() {
     const getPlaylist = async () => {
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
-        setLoading(false)
+        setTimeout(()=>{
+            setLoading(true)
+        },1000)
+       
     }
     useEffect(() => {
         getPlaylist()
+
     }, [])
 
     return (
         <>
             <Sidebar />
-            {!loading ?
+            {
                 <div
                     className='play-list'
                     style={{
                         width: '1110px',
                         margin: '40px 0 0 340px',
-                        display: 'flex'
+                        display: 'flex',
+                        flexWrap:'wrap',
                     }}
                 >
                     <div
@@ -52,10 +58,12 @@ function AllPlaylists() {
                             marginRight:'50px',
                             border:'1px #d9d9d9d9 solid',
                             display:'flex',
+                           
                             flexDirection:'column',
                             alignItems:'center',
                             justifyContent:'center',
                         }}
+
                     >
                         <CreatePlayList />
                         <p
@@ -66,96 +74,73 @@ function AllPlaylists() {
                         >Create a new playlist</p>
                     </div>
                     {playlist.map(item => (
-                        <Card
-                            className='card'
-                            style={{
-                                width: 300,
-                                marginRight: 50,
-                                marginBottom: 50,
-                            }}
-                            cover={
-                                <img
-                                    alt="example"
-                                    src={item?.song?.[0]?.image?.[0]}
-                                    style={{
-                                        maxWidth: 300,
-                                        maxHeight: 300,
-                                        overflow: 'hidden',
-                                    }}
+                        loading?
+                            <Card
+                                className='card'
+                               
+                                cover={
+                                    <img
+                                        alt="example"
+                                        src={item?.song?.[0]?.image?.[0]?item?.song?.[0]?.image?.[0]:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCebaMsn7crR47zGdjApJzDoxM0t2-oCEyt07l6Ecvg0-3ZNOwv75SrgRcNKJr6g211a4&usqp=CAU'}
+                                        style={{
+                                            maxWidth: 300,
+                                            maxHeight: 300,
+                                            overflow: 'hidden',
+                                        }}
+                                    />
+                                }
+                                actions={[
+                                    <Delete value={item?.name} id={item?._id}/>,
+                                    <div
+                                        id={item._id}
+                                        onClick={handlePlayByPlaylist}
+                                    >
+                                        <PlayCircleOutlined key="play" onClick={handlePlayByPlaylist} />
+                                    </div>,
+                                ]}
+                            >
+                                <Meta
+                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]} />}
+                                    title={item?.name}
+                                    description={<>
+                                        <p>{item?.genre?.zone}</p>
+                                        {/* <div className='text-bold'>Age: {item?.age}</div> */}
+                                    </>}
                                 />
-                            }
-                            actions={[
-                                <Delete value={item?.name} />,
-                                <div
-                                    id={item._id}
-                                    onClick={handlePlayByPlaylist}
-                                >
-                                    <PlayCircleOutlined key="play" onClick={handlePlayByPlaylist} />
-                                </div>,
-                            ]}
-                        >
-                            <Meta
-                                avatar={<Avatar src={item?.song?.[0]?.image?.[0]} />}
-                                title={item?.name}
-                                description={<>
-                                    <p>{item?.genre?.zone}</p>
-                                    {/* <div className='text-bold'>Age: {item?.age}</div> */}
-                                </>}
-                            />
-                        </Card>
-                    ))}
-                </div>
-                :
-                <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'>
-                    <div style={{
-                        display: 'flex',
-                        margin: '40px 0 0 340px'
-                    }}>
+                             </Card>:  
+                                <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent:'space-between',
+                                    marginRight:'30px'
+                                }}>
+                                    
+                                    <p
+                                        style={{
+                                            width: '300px',
+                                            marginLeft: '0px'
+                                        }}
+                                    >
+                                        <Skeleton
+                                            height={350}
+                                        />
+                                        <Skeleton
+                                            count={3}
+                                            height={20}
+                                        />
+                                    </p>
+                                 
+                                    
+                                </div>
+                            </SkeletonTheme> 
                         
-                        <p
-                            style={{
-                                width: '300px',
-                                marginLeft: '0px'
-                            }}
-                        >
-                            <Skeleton
-                                height={300}
-                            />
-                            <Skeleton
-                                count={3}
-                                height={20}
-                            />
-                        </p>
-                        <p
-                            style={{
-                                width: '300px',
-                                marginLeft: '80px'
-                            }}
-                        >
-                            <Skeleton
-                                height={300}
-                            />
-                            <Skeleton
-                                count={3}
-                                height={20}
-                            />
-                        </p>
-                        <p
-                            style={{
-                                width: '300px',
-                                marginLeft: '80px'
-                            }}
-                        >
-                            <Skeleton
-                                height={300}
-                            />
-                            <Skeleton
-                                count={3}
-                                height={20}
-                            />
-                        </p>
-                    </div>
-                </SkeletonTheme>
+                        
+                    )
+                      
+                    )}
+                </div>
+                
+              
             }
 
         </>

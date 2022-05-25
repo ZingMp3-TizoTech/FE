@@ -1,9 +1,37 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-const handleGetPlaylistByUser = async (id)=>{
+import * as Config from '../constant/config'
+
+const handleCreatePlaylist=async(name,date_create,song)=>{
+    try {
+        const token = Cookies.get('token')
+        return await axios.post(`${Config.API_URL}/playlist`,{name,date_create,song},{
+            headers: {
+                'Authorization': `Bearer ${token}` 
+              }})
+    } catch (error) {
+        console.log(error);
+    }
+}
+const handleDeletePlaylist = async (id)=>{
     try {  
         const token = Cookies.get('token')
-        return await axios.get('https://suntify.herokuapp.com/playlist',{
+
+        return await axios.delete(`${Config.API_URL}/playlist/${id}`,{
+            headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+        })  
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const handleGetPlaylistByUser = async ()=>{
+    try {  
+        const token = Cookies.get('token')
+
+        return await axios.get(`${Config.API_URL}/playlist`,{
             headers: {
                 'Authorization': `Bearer ${token}` 
               }
@@ -27,6 +55,7 @@ const handleGetPlaylistById = async (id)=>{
     }
 }
 
+
 const handleAddSongToPlayList = async (id, song)=>{
     try {  
         console.log('song:',song);
@@ -36,9 +65,16 @@ const handleAddSongToPlayList = async (id, song)=>{
                 'Authorization': `Bearer ${token}` 
               }
         })  
+
     } catch (error) {
         console.log(error)
     }
 }
-export {handleGetPlaylistByUser, handleGetPlaylistById, handleAddSongToPlayList
+
+export {
+    handleCreatePlaylist,
+    handleDeletePlaylist,
+    handleGetPlaylistByUser,
+     handleGetPlaylistById,
+     handleAddSongToPlayList,
 }

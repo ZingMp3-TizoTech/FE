@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './Card.css'
-
+import moment from 'moment';
 export default function CardItem({ artist, album, type = 'artist', loading }) {
     const { Meta } = Card;
     let navigate = useNavigate();
@@ -22,11 +22,7 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
             {type == 'artist' && !loading ?
                 <Card
                 className='card'
-                    style={{
-                        width: 300,
-                        marginRight: 50,
-                        marginBottom: 50,
-                    }}
+                   
                     cover={
                         <img
                             alt="example"
@@ -60,11 +56,7 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                 : type == 'album' && !loading ?
                     <Card
                         className='card'
-                        style={{
-                            width: 300,
-                            marginRight: 50,
-                            marginBottom: 50,
-                        }}
+                       
                         cover={
                             <img
                                 alt="example"
@@ -91,7 +83,7 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                             title={album?.name}
                             description={<>
                                 <p>{album?.artist?.name}</p>
-                                <div>Date: {album?.date_create}</div>
+                                <div>Date: {moment(album?.date_create).format("ddd MM yyyy")}</div>
                             </>}
                         />
                     </Card> :

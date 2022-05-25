@@ -10,18 +10,18 @@ import { handleGetAlbumById } from '../../services/Album'
 import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
 import Extend from './Extend'
 
+
 export default function ListSongs({ type }) {
-    const id = useParams();
+    const  {id}  = useParams();
     const [songs, setSongs] = useState([])
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
     const [loading, setLoading] = useState(false)
     const [albums, setAlbums] = useState([])
-    const [action, setAction] = useState(type)
     const [playlist, setPlaylist] = useState([])
-    let a = songs.findIndex(i => i._id === id.id)
-
-
+    const [action, setAction] = useState(type)
+    let a = songs.findIndex(i => i._id === id)
+   console.log(id);
     useEffect(() => {
         setLoading(true);
         ApiCaller('songs', 'GET')
@@ -30,7 +30,6 @@ export default function ListSongs({ type }) {
             })
             .finally(() => {
                 setLoading(false)
-
             }) 
     }, [])
     
@@ -45,34 +44,34 @@ export default function ListSongs({ type }) {
 
     useEffect(() => {
         setLoading(true);
-        ApiCaller(`album/${id.id}`, 'GET')
+        ApiCaller(`album/${id}`, 'GET')
             .then(res => {
                 setAlbums(res.data.data)
             })
             .finally(() => {
                 setLoading(false)
-            })
+            }) 
     }, [])
+
     const items =
-        id?.id && type == "artists" ?
+        id && type == "artists" ?
             songs?.filter((song) => {
                 return (
-                    song.artist?._id === id.id
+                    song.artist?._id === id
                 )
             })
-            : id?.id && type == "genres" ?
+            : id && type == "genres" ?
                 songs?.filter((song) => {
                     return (
-                        song.genre?._id === id.id
+                        song.genre?._id === id
                     )
                 })
-                : id?.id && type == "albums" ?
+                : id && type == "albums" ?
                     albums[0]?.songs
-                    :type == "playlists"?
-                    playlist?.song
                     : songs
 
     return (
+    <div>
         <div>
             <div className='wrapper-song'>
 
@@ -160,13 +159,15 @@ export default function ListSongs({ type }) {
                     }}>
 
                     </div>
-                </div>
-            </div>
-            <div >
-                <div className='play-child'>
-                    {<Playing i={a} action={action} setAction={setAction} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
+
                 </div>
             </div>
         </div>
-    )
+        <div >
+            <div className='play-child'>
+                {<Playing action={action} setAction={setAction} i={a} type={type} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
+            </div>
+        </div>
+    </div>
+)
 }
