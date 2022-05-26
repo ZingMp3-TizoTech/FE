@@ -41,7 +41,12 @@ function AllPlaylists() {
     },[])
     return (
         <div style={{
-            backgroundColor:'#48589c'
+            backgroundColor:'#1e293b',
+            minHeight:'100%',
+            minWidth:'100%',
+            position:'absolute',
+         
+
         }}>
             <Sidebar />
             
@@ -50,7 +55,7 @@ function AllPlaylists() {
                    
                     style={{
                         minWidth:'fit-content',
-                        backgroundImage: 'linear-gradient(to right, #48589c , #93b8c4)',
+                        backgroundColor: '#1e293b',
                         margin: '0 0 0 340px',
                         display: 'flex',
                         flexWrap: 'wrap',
@@ -72,25 +77,20 @@ function AllPlaylists() {
                             marginTop:'40px'
                         }}
                        
-                    >
+                    >   
                         <CreatePlayList  onSuccess={()=>getPlaylist()} />
-                        <p
-                            style={{
-                                fontSize: '23px',
-                                fontWeight: '400'
-                            }}
-                        >Create a new playlist</p>
+                       
                     </div>
                     {loading ? "" :
                 <div style={{  
                    
                     margin: '0 100px 0 340px',
                 }}>
-                    <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex' >
+                    <SkeletonTheme baseColor="#9c9c9c" highlightColor="#cac8c8" display='flex' >
                         <div>
                             <p style={{
                                     width: '300px',
-                                    marginLeft: '0px'
+                                    marginTop: '30px'
                                 }}
                             >
                                 <Skeleton
@@ -109,7 +109,7 @@ function AllPlaylists() {
                         loading ?
                             <Card
                                 className='card'
-                                style={{ marginTop:'40px',}}
+                                style={{ marginTop:'40px'}}
                                 cover={
                                     <img
                                         alt="example"
@@ -137,7 +137,8 @@ function AllPlaylists() {
                                 ]}
                             >
                                 <Meta
-                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]} />}
+                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]?item?.song?.[0]?.image?.[0]
+                                        :'https://lh3.googleusercontent.com/T7sdPCzUmJYQwX1aFl6__pbg6XJSt3HY7Nsfqy0QorxUgBilR_5ZixYlX0VM7yjowLHl=w512'} />}
                                     title={item?.name}
                                     description={<>
                                         <p>{item?.genre?.zone}</p>
@@ -145,7 +146,7 @@ function AllPlaylists() {
                                     </>}
                                 />
                             </Card> :
-                            <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'>
+                            <SkeletonTheme baseColor="#9c9c9c" highlightColor="#cac8c8" display='flex'>
                                 <div style={{
                                     display: 'flex',
                                     justifyContent: 'space-between',

@@ -4,10 +4,8 @@ import Featured from './featured/Featured'
 import Slidealbum from './slidealbum/Slidealbum'
 import "./Homepage.css"
 import Header from "./header/Header"
-import "./Homepage.css"
 import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
-
 import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Extend from '../playsong/Extend'
@@ -41,7 +39,9 @@ export default function Homepage() {
 
 
   return (
-    <div className='container'   style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
+    <div className='container'   
+    style={{backgroundColor:'#1e293b',maxWidth:'100%',paddingLeft:"6%"}}
+    >
    
        
    <Sidebar />
@@ -59,15 +59,15 @@ export default function Homepage() {
         
         </div>
           <Slidealbum />
-        <p className='title-album'>Featured Artists</p>
+        <p className='title-album' style={{color:"white"}}>Featured Artists</p>
         <Featured items={artists} type={'artists'} />
-        <p className='title-album'>Genres</p>
+        <p className='title-album' style={{color:"white"}}>Genres</p>
         <div style={{
           zIndex:"1"
         }}>
         <Genre />
         </div>
-        <p className='title-album'>Featured Albums</p>
+        <p className='title-album' style={{color:"white"}}>Featured Albums</p>
         <Featured  items={albums} type={'albums'}/>
           
       </div>

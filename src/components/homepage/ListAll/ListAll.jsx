@@ -28,7 +28,13 @@ export default function ListAll({ type = 'artists' }) {
       <div 
       style={{
         marginLeft:"120px",
-        paddingLeft:'120px'
+        paddingLeft:'120px',
+        minHeight:"100%",
+        minWidth:"100%",
+        display:"flex",
+        flexWrap:"wrap",
+        position:"absolute",
+        backgroundColor:'#1e293b'
       }}
       >
         {type == 'artists' && !loading ?
@@ -43,7 +49,7 @@ export default function ListAll({ type = 'artists' }) {
                 <CardItem loading={loading} key={index} album={item} type='album' />
               ))}
             </div> :
-            <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'>
+            <SkeletonTheme baseColor="#9c9c9c" highlightColor="#cac8c8" display='flex'>
               <div style={{
                 display: 'flex',
                 margin: '40px 0 0 100px'
@@ -51,7 +57,8 @@ export default function ListAll({ type = 'artists' }) {
                 <p
                   style={{
                     width: '300px',
-                    marginLeft: '0px'
+                    marginLeft: '80px',
+                  
                   }}
                 >
                   <Skeleton

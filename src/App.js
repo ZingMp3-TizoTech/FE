@@ -11,13 +11,19 @@ import AllPlaylists from "./components/homepage/ListAll/AllPlaylists";
 // import Demo from "./components/account/Register";
 
 function App() {
-  
+  const NotFound = () => (
+    <div>
+      <h1 style={{
+        color:'red'
+      }}>404 - Not Found!</h1>
+      
+    </div>
+  );
   return (
     <>
-    <Routes>
-  
-    
-       <Route path="/" element={<Homepage />} />
+    <Routes>   
+       <Route path="*" element={<NotFound/>} />
+       <Route  exact path="/" element={<Homepage />} />
        <Route path="/playsong/artist/:id" element={<PlaySong type="artists" />} />
        {/* /:type */}
        <Route path="/playsong/album/:id" element={<PlaySong type="albums" />} />

@@ -11,19 +11,19 @@ const CreatePlayList = ({ onSuccess }) => {
   const [playlist, setPlaylist] = useState([])
   const [nameList, setName] = useState('')
   const [error, setError] = useState(false)
-  
+
   const showModal = () => {
     setIsModalVisible(true);
   };
- 
+
   let name = nameList
   let date_create = ""
   let song = []
   const handleOk = async () => {
-    if (!error) {  
-      const created= await handleCreatePlaylist(name, date_create, song)
+    if (!error) {
+      const created = await handleCreatePlaylist(name, date_create, song)
       setIsModalVisible(false)
-     
+
       onSuccess && onSuccess()
     }
     else setIsModalVisible(true)
@@ -33,21 +33,30 @@ const CreatePlayList = ({ onSuccess }) => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
- 
-  const handleCreate = (e) => {   
-    const names = (playlist?.map(pl => pl?.name))   
+
+  const handleCreate = (e) => {
+    const names = (playlist?.map(pl => pl?.name))
     setError(names.includes(e.target.value))
     setName(e.target.value)
   }
 
   return (
     <>
-      <FolderAddFilled onClick={showModal}
-        style={{
-          fontSize: '60px'
-        }}
-      />
-
+      <div onClick={showModal} style={{display:'flex',justifyContent:'center',flexDirection:'column'}}>
+        <FolderAddFilled
+          style={{
+            fontSize: '60px',
+            color: "white"
+          }}
+        />
+        <p
+          style={{
+            fontSize: '23px',
+            fontWeight: '400',
+            color: "white"
+          }}
+        >Create playlist in here</p>
+      </div>
       <Modal title="Create a new playlist"
         visible={isModalVisible}
         onOk={handleOk}
@@ -73,7 +82,7 @@ const CreatePlayList = ({ onSuccess }) => {
             marginBottom: '-10px',
             marginLeft: '10px'
           }}
-        >{error?"Playlist name already exists!":""}</p>
+        >{error ? "Playlist name already exists!" : ""}</p>
 
       </Modal>
     </>

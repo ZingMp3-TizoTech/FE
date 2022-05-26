@@ -17,7 +17,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { style } from '@mui/system';
-import  '../components/sidebar.scss'
+import '../components/sidebar.scss'
 const drawerWidth = 240;
 export default function Sidebar(props) {
   const { window } = props;
@@ -36,12 +36,12 @@ export default function Sidebar(props) {
   const drawer = (
     <div style={{
       overflowY: "clip",
-      minHeight:'100%'
+      minHeight: '100%'
     }}>
 
       <Toolbar style={{
-        backgroundColor: '#48589c',
-       
+        backgroundColor: '#334155',
+
       }}>
         <div onClick={(e) => navigate('/')}
 
@@ -49,29 +49,29 @@ export default function Sidebar(props) {
             fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
-          
+
           }}
         >
-         
-          <div style={{marginTop:'30px'}} onClick={()=>navigate('/')}> 
-            
-                 <h1 style={{
-                   maxWidth:'fit-content'
-                 }}>
+
+          <div style={{ marginTop: '30px' }} onClick={() => navigate('/')}>
+
+            <h1 style={{
+              maxWidth: 'fit-content'
+            }}>
               <span>Suntify</span>
-              <span>Suntify</span>      
-         </h1>  
-         <h2>Music and chill</h2></div> 
-         
+              <span>Suntify</span>
+            </h1>
+            <h2>Music and chill</h2></div>
+
         </div>
-       
-      
+
+
       </Toolbar>
 
       <List style={{
-        backgroundColor: '#48589c',
+        backgroundColor: '#334155',
         minHeight: '100%',
-        color:'black'
+        color: 'black'
       }}>
         {list.map((text, index) => (
           <ListItem button key={text}>
@@ -99,14 +99,9 @@ export default function Sidebar(props) {
   return (
 
 
-    // <Box sx={{ 
-    //   display: 'flex',
-    //   boxShadow:'-6px 1px 12px 6px #888888' }}
-    // >
-
     <Box
       style={{
-       
+
         marginLeft: "-110px"
       }}
       component="nav"

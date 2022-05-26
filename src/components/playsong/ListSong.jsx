@@ -10,6 +10,8 @@ import { handleGetAlbumById } from '../../services/Album'
 import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
 import Extend from './Extend'
 
+import { AiOutlineHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
+import { handelGetUser } from '../../services/User'
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
@@ -19,8 +21,9 @@ export default function ListSongs({ type }) {
     const [albums, setAlbums] = useState([])
     const [action, setAction] = useState(type)
     const [playlist, setPlaylist] = useState([])
-    let a = songs.findIndex(i => i._id === id.id)
-
+    const [islike, setLiked] = useState()
+    const [listLike, setListLike] = useState([])
+    let a = songs.findIndex(i => i._id === id)
 
     useEffect(() => {
         setLoading(true);
@@ -31,17 +34,17 @@ export default function ListSongs({ type }) {
             .finally(() => {
                 setLoading(false)
 
-            }) 
+            })
     }, [])
-    
+
     const getPlaylist = async (id) => {
-        const pl = await handleGetPlaylistById(id)    
+        const pl = await handleGetPlaylistById(id)
         setPlaylist(pl.data.data);
     }
 
     useEffect(() => {
         getPlaylist(id.id)
-    }, [])      
+    }, [])
 
     useEffect(() => {
         setLoading(true);
@@ -68,34 +71,44 @@ export default function ListSongs({ type }) {
                 })
                 : id?.id && type == "albums" ?
                     albums[0]?.songs
-                    :type == "playlists"?
-                    playlist?.song
-                    : songs
-
+                    : type == "playlists" ?
+                        playlist?.song
+                        : songs
+    const liked = async (id) => {
+        console.log('hover');
+        const user = await handelGetUser();
+        setListLike(user.data.data[0].liked);
+        console.log(listLike.includes(`${id}`) );
+        if (listLike.includes(`${id}`) == true) {
+            setLiked(true)
+        }
+        else {
+            setLiked(false)
+        }
+    }
     return (
         <div>
             <div className='wrapper-song'>
-
                 <DetailSong
-                    idSong={idNumber} songs={items} circular={circular} 
+                    idSong={idNumber} songs={items} circular={circular}
                     type={type} albums={albums} loading={loading}
                     playlist={playlist}
                 />
 
+
                 <div className='wrapper-list-song'>
-
                     <table>
-
                         <thead
                             style={{
-                                background: '#48589c',
-                             
+                                background: '#334155',
+                                height: '70px'
                             }}
                         >
                             <tr>
                                 <th style={{
-                                    width: '5%'
-                                }}>#</th>
+                                    width: '5%',
+
+                                }}> </th>
                                 <th style={{
                                     width: '40%',
                                     textAlign: 'left'
@@ -111,41 +124,62 @@ export default function ListSongs({ type }) {
                                 <th style={{
                                     width: '10%',
                                     textAlign: 'center'
-                                }}>    </th>
+                                }}>  </th>
+                                {/* <th style={{
+                                width: '10%',
+                                textAlign: 'center'
+                            }}>  </th> */}
+
                             </tr>
                         </thead>
                         {!loading ? <>
-                            <tbody style={{
-                                 background: '#48589c',
-                            }}>
+                            <tbody>
                                 {items?.map((song, index) => (
+
                                     <tr
                                         key={index}
                                         onClick={(e) => {
                                             setIdNumber(index);
-                                            setAction(" ");
+                                            setAction(" ")
                                         }
                                         }
-                                        className={index === idNumber ? "active-row" : ""}
-                                    >
-                                        <td scope="row">{(song._id != null) ? index + 1 : <></>
-                                        }</td>
+                                        className={index === idNumber ? "active-row" : ""}>
+                                        <td scope="row"
+                                            className={index === idNumber ? "color" : ""}
+                                        >
+                                            {(song._id != null) ? index + 1 : <></>
+                                            }</td>
                                         <td
-                                        >{type == "playlists" ? song?.name : song?.name}</td>
+                                            className={index === idNumber ? "color" : ""}
+                                        >{song?.name}</td>
                                         <td
+                                            className={index === idNumber ? "color" : ""}
                                         >{song?.artist?.name}</td>
-                                        <td style={{
-                                            textAlign: 'center',
-                                        }}>{
+                                        <td
+                                            className={index === idNumber ? "color" : ""}
+                                            style={{
+                                                textAlign: 'center',
+                                            }}>{
                                                 song?.album ? <>{song?.album?.name}</> : <></>}</td>
-                                        <td style={{
-                                            textAlign: 'center'
-                                        }}>
-                                            <a><Extend url={song?.url} id={song._id} /></a>
+                                        {/* <td 
+                                    className={index === idNumber ? "color" : ""}
+                                    style={{
+                                        textAlign: 'center',
+                                    }}>{song?.album ? <div><AiOutlineHeart/><p>{song?.rates}</p></div> : <></>}</td> */}
+                                        <td
+                                            className={index === idNumber ? "color" : ""}
+                                            style={{
+                                                textAlign: 'center'
+                                            }}> <div 
+                                            onMouseEnter ={(e) => liked(song._id)}
+                                                        //onMouseOverCapture={liked}
+                                            >
+
+                                                <Extend  liked={islike} url={song?.url} id={song._id} />
+                                            </div>
                                         </td>
                                     </tr>
-                                ))
-                                }
+                                ))}
                             </tbody>
                         </> : <><ReactLoading
                             height='900px'
@@ -155,7 +189,6 @@ export default function ListSongs({ type }) {
                             color='#a696d5' /></>}
 
                     </table>
-
 
                     <div style={{
                         marginTop: "100px"
@@ -171,4 +204,5 @@ export default function ListSongs({ type }) {
             </div>
         </div>
     )
+
 }
