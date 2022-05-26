@@ -11,7 +11,9 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
   let navigate = useNavigate();
   
   return (
-    <div className='wrapper-detail-song'>
+    <div className='wrapper-detail-song' style={{
+      backgroundColor: '#48589c',   
+    }}>
       <div
         onClick={() => {
           navigate('/')
@@ -23,7 +25,7 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
         {!loading?
       <div className='img'>
           <img
-          src={type != 'albums' ? songs?.[idSong]?.image?.[0] : albums?.[0]?.artist?.image?.[0]}
+          src={type != 'albums' ? songs?.[idSong]?.image?.[0] : albums[0]?.artist?.image?.[0]}
           alt='avatar' /> 
           <Extend/>
           </div>
@@ -39,7 +41,7 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
         <div className='img-author'>
         <img
           className={circular ? 'animation-img' : ''}
-          src={type != 'albums' ? songs?.[idSong]?.artist?.image?.[0] : songs?.[idSong]?.image?.[0]}
+          src={type != 'albums' ? songs?.[idSong]?.image?.[0] : songs?.[idSong]?.image?.[0]}
           alt='avatar' />
         <span>{type != 'albums' ? songs?.[idSong]?.artist?.name : songs?.[idSong]?.name}</span>
       </div> : <></>

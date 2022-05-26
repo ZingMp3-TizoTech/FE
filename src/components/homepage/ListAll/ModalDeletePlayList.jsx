@@ -5,8 +5,8 @@ import 'antd/dist/antd.css';
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
 import { handleDeletePlaylist } from '../../../services/Playlist';
-
-const Delete = ({value,id,onSuccess}) => {
+import { FaRegTrashAlt } from "react-icons/fa";
+const Delete = ({ value, id, onSuccess }) => {
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -14,11 +14,10 @@ const Delete = ({value,id,onSuccess}) => {
     setIsModalVisible(true);
   };
 
-  const handleOk = (e) => {
-    console.log(id);
-    handleDeletePlaylist(id)
+  const handleOk = async() => { 
+   const del= await handleDeletePlaylist(id)
+    setIsModalVisible(false);
     onSuccess && onSuccess()
-    setIsModalVisible(false);   
   };
 
   const handleCancel = () => {
@@ -27,13 +26,17 @@ const Delete = ({value,id,onSuccess}) => {
 
   return (
     <>
-      <DeleteOutlined onClick={showModal}/>
+      <FaRegTrashAlt style={{
+        width: '20px',
+        height: '20px'
 
-      <Modal title="Delete playlist" 
-      visible={isModalVisible} 
-      onOk={handleOk} 
-      onCancel={handleCancel}
-      width={300}
+      }} onClick={showModal} />
+
+      <Modal title="Delete playlist"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={300}
       >
         <p>Do you want delete this playlist</p>
         <p>{value}</p>

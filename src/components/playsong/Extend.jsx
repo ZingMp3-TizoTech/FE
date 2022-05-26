@@ -4,7 +4,9 @@ import { Button, Dropdown, Menu, Space } from 'antd';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
 import { AiOutlineHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
 import AddSong from './ModalPlaylist';
-
+const handleLike = ()=>{
+  console.log('liked');
+}
 export default function Extend({ url, id }) {
 
   const menu = (
@@ -15,6 +17,8 @@ export default function Extend({ url, id }) {
     >
       <Menu.Item>
         <AiOutlineHeart
+        style={{color:'red'}}
+        onClick={handleLike}
           fontSize={'20px'}
         />
       </Menu.Item>

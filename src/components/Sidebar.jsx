@@ -17,7 +17,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { style } from '@mui/system';
-
+import  '../components/sidebar.scss'
 const drawerWidth = 240;
 export default function Sidebar(props) {
   const { window } = props;
@@ -52,17 +52,20 @@ export default function Sidebar(props) {
           
           }}
         >
-          <GraphicEqRoundedIcon style={{ fontSize: "50px" }} />
-          <p
-            style={{
-              fontSize: '30px',
-              marginLeft: '15px',
-              textShadow: '2px 2px #d7d7d7',
+         
+          <div style={{marginTop:'30px'}} onClick={()=>navigate('/')}> 
             
-            }}
-
-          >Suntify</p>
+                 <h1 style={{
+                   maxWidth:'fit-content'
+                 }}>
+              <span>Suntify</span>
+              <span>Suntify</span>      
+         </h1>  
+         <h2>Music and chill</h2></div> 
+         
         </div>
+       
+      
       </Toolbar>
 
       <List style={{
@@ -81,7 +84,7 @@ export default function Sidebar(props) {
               }
             </ListItemIcon>
 
-            <ListItemText primary={text} onClick={(e) => navigate(`/${text}`)} />
+            <ListItemText primary={text} onClick={(e) => navigate(`/${text.toLowerCase()}`)} />
           </ListItem>
 
         ))}

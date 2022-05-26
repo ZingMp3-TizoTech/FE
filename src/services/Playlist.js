@@ -30,7 +30,6 @@ const handleDeletePlaylist = async (id)=>{
 const handleGetPlaylistByUser = async ()=>{
     try {  
         const token = Cookies.get('token')
-
         return await axios.get(`${Config.API_URL}/playlist`,{
             headers: {
                 'Authorization': `Bearer ${token}` 

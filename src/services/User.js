@@ -8,7 +8,19 @@ const handleLoginAPI = (email, password)=>{
         console.log(error);
     }
 }
-
+const handelGetUser=async()=>{
+    try {
+        let token = await localStorage.getItem('token');
+      
+        return await axios.get(`${Config.API_URL}/user`,{
+            headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 const handleSignUpAPI = (email, password)=>{
     try {
@@ -45,4 +57,4 @@ const handelChangePassWord = async (oldPassword,newPassword)=>{
         console.log(error)
     }
 }
-export{handleLoginAPI, handleSignUpAPI, handleGetUserIdAPI,handelChangePassWord}
+export{handleLoginAPI,handelGetUser, handleSignUpAPI, handleGetUserIdAPI,handelChangePassWord}

@@ -9,17 +9,21 @@
 .list-item .item{
     margin-bottom: 10px;
     position: relative;
-    background-color: rgb(215 233 237);
+    background-color: rgb(176, 205, 239);
     height: 50px;
+    display: flex;
+    justify-items: center;
 }
 .list-item .item:hover{
     box-shadow: 3px 3px rgb(186, 187, 188);
+   
 }
 .list-item .item p{
     position: absolute;
     font-weight: 600;
     left: 10px;
     top: 5px;
+    
 }
 .list-item .item i{
     position: absolute;

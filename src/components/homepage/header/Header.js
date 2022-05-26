@@ -122,11 +122,11 @@ export default function Header() {
       
         {!loggedInUser ?
           <>
-            <Button style={{ marginRight: '10px' }}
+            <Button style={{ marginRight: '10px',color:'white' }}
               onClick={(e) => {
                 navigate('/signup');
               }}
-              variant="outlined" startIcon={<DriveFileRenameOutlineIcon />}>
+              variant="contained" startIcon={<DriveFileRenameOutlineIcon />}>
               Register
             </Button>
             <Button variant="contained" endIcon={<ExitToAppIcon />}

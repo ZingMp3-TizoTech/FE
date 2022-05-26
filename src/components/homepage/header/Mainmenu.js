@@ -10,12 +10,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import { Modal, Button } from 'react-bootstrap';
-
-import { Input } from '@mui/material';
-
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { handelChangePassWord } from '../../../services/User';
+import { handelChangePassWord, handelGetUser } from '../../../services/User';
 import { toast, ToastContainer } from 'react-toastify';
+import { Cookie } from '@mui/icons-material';
 const StyledMenu = styled((props) => (
 
   <Menu
@@ -63,8 +61,13 @@ const StyledMenu = styled((props) => (
 export default function MainMenu() {
   const navigate = useNavigate()
   const [show, setShow] = useState(false);
+  const [email,setEmail] = useState('')
   const handleCloseModal = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = async() => {setShow(true);
+    if( Cookies.get('token')!=null){
+    const user =await handelGetUser()
+    setEmail(user.data.data[0].email);
+    } };
   const [hidden, setHidden] = useState(true)
   const [pwOld, setPwOld] = useState('')
   const [pwNew, setPwNew] = useState('')
@@ -118,6 +121,9 @@ else setError0('')
       navigate("/")
     }
   }
+  
+
+
   return (
     <div>
 
@@ -130,14 +136,14 @@ else setError0('')
       >
         <Modal.Header closeButton>
           <Modal.Title>Change Password</Modal.Title>
+         
         </Modal.Header>
-
+      <a style={{marginLeft:'20px'}}>Hello {email} !</a>
         <Modal.Body>
           <div style={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-
           }}>
             <ToastContainer />
             <div style={{ width: "400px" }}>
