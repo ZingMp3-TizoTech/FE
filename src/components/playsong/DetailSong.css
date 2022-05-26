@@ -1,5 +1,5 @@
 body{   
-        background-color: #48589c;       
+        background-color: #5ce0ba;       
 }
 .wrapper-detail-song{
     width: 34%;
@@ -31,8 +31,8 @@ body{
     margin-left: 25px;
 }
 .img{
-    width: 240px;
-    height: 240px;
+    width: 200px;
+    height: 200px;
     overflow: hidden;
     margin-top: 30px;
     margin-left: auto;
