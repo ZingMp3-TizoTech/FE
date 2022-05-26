@@ -32,6 +32,10 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction,
   return (
     <>
      <AudioPlayer
+     style={{
+       backgroundColor:'#111827',
+       color:'#ffff'
+     }}
       src={props.songs?.[idSong]?.url}
       layout="stacked-reverse"
       showSkipControls={true}
@@ -40,9 +44,7 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction,
       onClickPrevious={handleClickPrev}
       onPause={handleClickPause}
       onPlay={handleClickPlay}
-      
     />
-    
     </>
    
     

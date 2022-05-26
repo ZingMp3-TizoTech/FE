@@ -84,19 +84,17 @@ return (
 
 
             <div className='wrapper-list-song'>
-
                 <table>
-
                     <thead
                         style={{
-                            background: 'rgb(72 137 137)',
-                            height: '90px'
+                            background: '#334155',
+                            height: '70px'
                         }}
                     >
                         <tr>
                             <th style={{
                                 width: '5%'
-                            }}>#</th>
+                            }}> </th>
                             <th style={{
                                 width: '40%',
                                 textAlign: 'left'
@@ -112,7 +110,7 @@ return (
                             <th style={{
                                 width: '10%',
                                 textAlign: 'center'
-                            }}> <FaDownload /> </th>
+                            }}>  </th>
                           
                         </tr>
                     </thead>
@@ -124,23 +122,33 @@ return (
                                     key={index}
                                     onClick={(e) => {
                                         setIdNumber(index);
+                                        setAction(" ")
                                     }
                                     }
                                     className={index === idNumber ? "active-row" : ""}>
-                                    <td scope="row">{(song._id != null) ? index + 1 : <></>
+                                    <td scope="row"
+                                     className={index === idNumber ? "color" : ""}
+                                    >
+                                        {(song._id != null) ? index + 1 : <></>
                                     }</td>
                                     <td
+                                     className={index === idNumber ? "color" : ""}
                                     >{song?.name}</td>
                                     <td
+                                    className={index === idNumber ? "color" : ""}
                                     >{song?.artist?.name}</td>
-                                    <td style={{
+                                    <td 
+                                    className={index === idNumber ? "color" : ""}
+                                    style={{
                                         textAlign: 'center',
                                     }}>{
                                             song?.album ? <>{song?.album?.name}</> : <></>}</td>
-                                    <td style={{
+                                    <td
+                                    className={index === idNumber ? "color" : ""}
+                                    style={{
                                         textAlign: 'center'
                                     }}>
-                                        <a href={song?.url}><FaDownload /></a>
+                                        <Extend/>
                                     </td>
                                  
                                     

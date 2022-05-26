@@ -2,6 +2,7 @@
     width: 34%;
     position: relative;
     height: 710px;
+    background-color: #334155;
 }
 .wrapper-detail-song .suntify{
     display: flex;
@@ -14,6 +15,7 @@
 .wrapper-detail-song .suntify p{
     text-shadow: 2px 2px #918F8F;
     margin-top: 10px;
+    color: #ffff;
 }
 .wrapper-detail-song h2{
     font-size: 20px;
@@ -21,11 +23,13 @@
     line-height: 1.5;
     text-align: center;
     margin-top: 12px;
+    color: #ffff;
 }
 .wrapper-detail-song h3{
     font-size: 24px;
     line-height: 32px;
     margin-left: 25px;
+    color: #ffff;
 }
 .img{
     width: 240px;
@@ -57,6 +61,7 @@
     font-weight: 700;
     line-height: 1.5;
     margin-left: 25px;
+    color: #ffff;
 }
 .img-author .animation-img{
     animation: rotation 8s infinite linear;

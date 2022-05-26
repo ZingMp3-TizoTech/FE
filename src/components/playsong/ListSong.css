@@ -19,12 +19,12 @@
     width: 100%;
     position: relative;
 }
-.wrapper-list-song tr:hover{
-    background-color: #85A5A5;
-    border: 0px solid #85A5A5;
+.wrapper-list-song tbody tr:hover{
+    background-color: #475569;
+    border: 0px solid #475569;
 }
 .wrapper-list-song .active-row{
-    background-color: #85A5A5;
+    background-color: #475569;
 }
 .wrapper-list-song table, tr, td{
     border:none;
@@ -47,10 +47,6 @@
     border: none;
 }
 
-.wrapper-list-song tbody tr td a{
-    color: black !important;
-}
-
 .play-parent{    
   
     display: flex;
@@ -64,6 +60,25 @@
 .wrapper-song{
     display: flex;
 }
+.wrapper-list-song table th{
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .wrapper-list-song tbody tr{
     height: 100px;
+}
+
+.wrapper-list-song tbody tr td a{
+    color: black !important;
+} 
+
+.wrapper-list-song tbody{
+    background-color: #1e293b;
+}
+.wrapper-list-song tbody tr td{
+    font-weight:400;
+    color: #899997;
+}
+.wrapper-list-song tbody .color{
+    color: #5ce0ba;
 }
