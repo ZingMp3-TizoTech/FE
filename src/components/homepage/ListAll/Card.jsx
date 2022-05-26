@@ -10,19 +10,17 @@ import moment from 'moment';
 export default function CardItem({ artist, album, type = 'artist', loading }) {
     const { Meta } = Card;
     let navigate = useNavigate();
-    const handlePlayByArtist = (e) => {
-        navigate('/playsong/artist/' + `${e.target.id}`);
+    const handlePlayByArtist = (idArtist) => {
+        navigate('/playsong/artist/' + `${idArtist}`);
     }
-    const handlePlayByAlbum = (e) => {
-        navigate('/playsong/album/' + `${e.target.id}`);
+    const handlePlayByAlbum = (idAlbum) => {
+        navigate('/playsong/album/' + `${idAlbum}`);
     }
-    console.log(loading);
     return (
         <>
             {type == 'artist' && !loading ?
                 <Card
-                className='card'
-                   
+                className='card'                   
                     cover={
                         <img
                             alt="example"
@@ -36,9 +34,11 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                     }
                     actions={[
                         <HeartOutlined key="like" />,
-                        <div id={artist._id}
-                            onClick={handlePlayByArtist}>
-                            <PlayCircleOutlined key="play" />
+                        <div 
+                            >
+                            <PlayCircleOutlined key="play" 
+                             onClick={(e)=>handlePlayByArtist(artist?._id)}
+                             />
                         </div>
                     ]}
                 >
@@ -53,8 +53,7 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                 </Card>
                 : type == 'album' && !loading ?
                     <Card
-                        className='card'
-                       
+                        className='card'                       
                         cover={
                             <img
                                 alt="example"
@@ -69,10 +68,10 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                         actions={[
                             <HeartOutlined key="like" />,
                             <div
-                                id={album._id}
-                                onClick={handlePlayByAlbum}
+                            
+                                
                             >
-                                <PlayCircleOutlined key="play" />
+                                <PlayCircleOutlined key="play" onClick={(e)=>handlePlayByAlbum(album?._id)} />
                             </div>,
                         ]}
                     >

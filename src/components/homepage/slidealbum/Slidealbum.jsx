@@ -6,19 +6,22 @@ import "./Slidealbum.css"
 import ApiCaller from "../../../utils/callAPI";
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
-import { TextBlock, MediaBlock, TextRow, RectShape, RoundShape } from 'react-placeholder/lib/placeholders';
+import { RectShape } from 'react-placeholder/lib/placeholders';
 
 import { useNavigate } from 'react-router-dom';
 export default function Slidealbum() {
 
     const [loading, setLoading] = useState(false)
     let settings = {
-        dots: false,
-        infinite: true,
+        dots: false,   
         speed: 1000,
         slidesToShow: 3,
-        slidesToScroll: 1,
-        lazyLoad: true,
+        slidesToScroll: 2,
+        autoplay: true,
+        speed: 2000,
+        autoplaySpeed: 1300,
+        cssEase: "linear"
+        
     };
     const [songs, setSongs] = useState([])
     useEffect(() => {
@@ -49,8 +52,8 @@ export default function Slidealbum() {
                 <Slider {...settings}>
                     {topSongs.map((song, index) => (
                         <div className='img-item' key={index}>
-                            {loading ? <img src={song?.image[1]} alt="Image-song" /> : <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={awesomePlaceholder} ready={false} />}
-
+                            {loading ? <img src={song?.image[1]} alt="Image-song" /> : 
+                            <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={awesomePlaceholder} ready={false} />}
                         </div>
                     ))}
                 </Slider>

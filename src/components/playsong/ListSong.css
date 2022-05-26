@@ -60,12 +60,12 @@
 .wrapper-song{
     display: flex;
 }
-.wrapper-list-song table th{
+.wrapper-list-song table th, td{
     color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: Arial, Helvetica, sans-serif !important;
 }
 .wrapper-list-song tbody tr{
-    height: 100px;
+    height: 20px;
 }
 
 .wrapper-list-song tbody tr td a{

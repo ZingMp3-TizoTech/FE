@@ -2,11 +2,14 @@
     display: flex;
     position: fixed;
     height: 100%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     overflow-x: hidden;
 }
 .loading-album{
     max-width: 213px;
     border-radius: 10px; 
     margin-bottom: 15px;
+}
+.container p{
+    color: #ffff;
 }

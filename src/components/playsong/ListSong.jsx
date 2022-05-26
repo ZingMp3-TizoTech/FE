@@ -6,22 +6,21 @@ import Playing from './Playing'
 import DetailSong from './DetailSong'
 import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
-
 import { handleGetAlbumById } from '../../services/Album'
 import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
 import Extend from './Extend'
 
 export default function ListSongs({ type }) {
-    const  {id}  = useParams();
+    const id = useParams();
     const [songs, setSongs] = useState([])
     const [idNumber, setIdNumber] = useState(0);
     const [circular, setCircular] = useState(true);
     const [loading, setLoading] = useState(false)
     const [albums, setAlbums] = useState([])
-    const [playlist, setPlaylist] = useState([])
     const [action, setAction] = useState(type)
+    const [playlist, setPlaylist] = useState([])
     let a = songs.findIndex(i => i._id === id)
-   console.log(id);
+
     useEffect(() => {
         setLoading(true);
         ApiCaller('songs', 'GET')
@@ -30,6 +29,7 @@ export default function ListSongs({ type }) {
             })
             .finally(() => {
                 setLoading(false)
+
             }) 
     }, [])
     
@@ -44,44 +44,42 @@ export default function ListSongs({ type }) {
 
     useEffect(() => {
         setLoading(true);
-        ApiCaller(`album/${id}`, 'GET')
+        ApiCaller(`album/${id.id}`, 'GET')
             .then(res => {
                 setAlbums(res.data.data)
             })
             .finally(() => {
                 setLoading(false)
-            }) 
+            })
     }, [])
-
     const items =
-        id && type == "artists" ?
+        id?.id && type == "artists" ?
             songs?.filter((song) => {
                 return (
-                    song.artist?._id === id
+                    song.artist?._id === id.id
                 )
             })
-            : id && type == "genres" ?
+            : id?.id && type == "genres" ?
                 songs?.filter((song) => {
                     return (
-                        song.genre?._id === id
+                        song.genre?._id === id.id
                     )
                 })
-                : id && type == "albums" ?
+                : id?.id && type == "albums" ?
                     albums[0]?.songs
+                    :type == "playlists"?
+                    playlist?.song
                     : songs
 
 
 return (
     <div>
         <div className='wrapper-song'>
-
-
                 <DetailSong
                     idSong={idNumber} songs={items} circular={circular} 
                     type={type} albums={albums} loading={loading}
                     playlist={playlist}
                 />
-
 
             <div className='wrapper-list-song'>
                 <table>
@@ -148,7 +146,7 @@ return (
                                     style={{
                                         textAlign: 'center'
                                     }}>
-                                        <Extend/>
+                                        <Extend url={song?.url} id={song._id} type={type}/>
                                     </td>
                                  
                                     
@@ -182,5 +180,5 @@ return (
             </div>
         </div>
     </div>
-)
+    )
 }

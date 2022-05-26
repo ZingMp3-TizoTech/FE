@@ -2,28 +2,35 @@ import { Button, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import {AiOutlineFolderAdd} from 'react-icons/ai'
-import { height } from '@mui/system';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './ChoosePlaylist.css'
-import {FiCheckCircle} from 'react-icons/fi'
+import { FcCheckmark } from "react-icons/fc";
 import { handleAddSongToPlayList, handleGetPlaylistByUser } from '../../services/Playlist';
-import { PixOutlined } from '@mui/icons-material';
+
+import { stepButtonClasses } from '@mui/material';
+
+import Spinner from 'react-bootstrap/Spinner';
 const AddSong = ({id}) => {
-  
     const [playlist, setPlaylist] = useState([])
+    const [loading,setLoading]=useState(false)
     const [status,setStatus]=useState('')
+    const [active,setActive]=useState(true)
+    const [number,setNumber]=useState();
     const getPlaylist = async () => {
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
+        setLoading(true)
     }
     useEffect(() => {
         getPlaylist()
-    }, [])
+    }, [playlist])
     let idsong=[]
     const handleAddSong = async(idPl) =>{
         setStatus(idPl)
-        console.log(status);
        
     }
+   
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -33,17 +40,22 @@ const AddSong = ({id}) => {
 
   const handleOk =async () => {
     idsong=[id]
-    console.log(status);
-        ;
     const addSong = await handleAddSongToPlayList(status,idsong)
-    console.log(addSong);
     setIsModalVisible(false);
+    toast.success("Add playlist success!")
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+  const handleSetActive=(e)=>{
+    setActive(!active)     
+     setNumber(e.target.id)  
+     if(e.target.id!=number) 
+     setActive(active) 
+     if(e.target.id==number) 
+     setActive(true) 
+  }
   return (
     <>
       <AiOutlineFolderAdd  onClick={showModal}
@@ -57,17 +69,27 @@ const AddSong = ({id}) => {
       onOk={handleOk} 
       onCancel={handleCancel}
       width={320}
+      className={'modal-list'}
+      
       >
-        <div className='list-item'>
+        {loading? <div className='list-item'>
             {playlist.map((item, index)=>(
-                <div key={index} className='item'
-                onClick={(e)=>handleAddSong(item?._id)}
+                <div 
+                key={index} 
+                id={index}
+                className={index==number&&active?'item-active':'item'}
+                onClick={(e)=>{handleAddSong(item?._id);handleSetActive(e)}}
                 >
                     <p>{item.name}</p>
-                    <i><FiCheckCircle/></i>
+                    <i style={{color:"red"}}>{index==number&&active?<FcCheckmark />:null}</i>
                 </div>
+                
+                
             ))}
-        </div>
+            
+        </div>:<Spinner animation="border" />}
+       
+        
       </Modal>
     </>
   );

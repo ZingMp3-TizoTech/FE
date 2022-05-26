@@ -10,14 +10,12 @@ import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded';
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
+import { grey } from '@mui/material/colors'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { style } from '@mui/system';
-
+import '../components/sidebar.scss'
 const drawerWidth = 240;
 export default function Sidebar(props) {
   const { window } = props;
@@ -36,12 +34,13 @@ export default function Sidebar(props) {
   const drawer = (
     <div style={{
       overflowY: "clip",
-      minHeight:'100%'
+      minHeight: '100%',
+      backgroundColor: '#334155',
     }}>
 
       <Toolbar style={{
-        backgroundColor: '#48589c',
-       
+        backgroundColor: '#334155',
+
       }}>
         <div onClick={(e) => navigate('/')}
 
@@ -49,39 +48,40 @@ export default function Sidebar(props) {
             fontSize: '20px',
             display: 'flex',
             alignItems: 'center',
-          
+
           }}
         >
-          <GraphicEqRoundedIcon style={{ fontSize: "50px" }} />
-          <p
-            style={{
-              fontSize: '30px',
-              marginLeft: '15px',
-              textShadow: '2px 2px #d7d7d7',
-            
-            }}
 
-          >Suntify</p>
+          <div style={{ marginTop: '30px' }} onClick={() => navigate('/')}>
+
+            <h1 style={{
+              maxWidth: 'fit-content'
+            }}>
+              <span>Suntify</span>
+              <span>Suntify</span>
+            </h1>
+            <h2>Music and chill</h2></div>
         </div>
       </Toolbar>
 
       <List style={{
-        backgroundColor: '#48589c',
+        backgroundColor: '#334155',
         minHeight: '100%',
-        color:'black'
+        color: '#ffff',
+        marginTop:'30px'
       }}>
         {list.map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon onClick={(e) => navigate(`/${text}`)}>
               {
-                text === 'Personal' ? <ContactsRoundedIcon /> :
-                  text === 'Discover' ? <AlbumIcon /> :
-                    text === 'Library' ? <LibraryMusicRoundedIcon /> :
+                text === 'Personal' ? <ContactsRoundedIcon sx={{ color: grey[50] }}  /> :
+                  text === 'Discover' ? <AlbumIcon sx={{ color: grey[50] }} /> :
+                    text === 'Library' ? <LibraryMusicRoundedIcon sx={{ color: grey[50] }} /> :
                       <></>
               }
             </ListItemIcon>
 
-            <ListItemText primary={text} onClick={(e) => navigate(`/${text}`)} />
+            <ListItemText primary={text} onClick={(e) => navigate(`/${text.toLowerCase()}`)} />
           </ListItem>
 
         ))}
@@ -94,25 +94,15 @@ export default function Sidebar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-
-
-    // <Box sx={{ 
-    //   display: 'flex',
-    //   boxShadow:'-6px 1px 12px 6px #888888' }}
-    // >
-
     <Box
       style={{
-       
+
         marginLeft: "-110px"
       }}
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="mailbox folders"
     >
-
-
-
 
       <Drawer
 

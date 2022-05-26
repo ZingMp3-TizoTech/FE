@@ -1,0 +1,7 @@
+.playing{
+    background-color:#111827;
+       color: #ffff;
+}
+.rhap_time, .rhap_current-time {
+    color: white !important;
+}

@@ -4,22 +4,28 @@ import { Button, Dropdown, Menu, Space } from 'antd';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
 import { AiOutlineHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
 import AddSong from './ModalPlaylist';
-
-export default function Extend({ url, id }) {
+import { FaRegTrashAlt } from "react-icons/fa";
+const handleLike = ()=>{
+  console.log('liked');
+}
+export default function Extend({ url, id, type }) {
 
   const menu = (
     <Menu
     style={{
-      display:'flex'
+      display:'flex',
+      backgroundColor:'#a3b2c7'
     }}
     >
       <Menu.Item>
         <AiOutlineHeart
+        style={{color:'red'}}
+        onClick={handleLike}
           fontSize={'20px'}
         />
       </Menu.Item>
       <Menu.Item>
-        <AddSong id={id} />
+        {type != "playlists" ? <AddSong id={id} /> : <FaRegTrashAlt/>}
       </Menu.Item>
 
       <Menu.Item>

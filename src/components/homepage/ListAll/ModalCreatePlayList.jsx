@@ -11,14 +11,7 @@ const CreatePlayList = ({ onSuccess }) => {
   const [playlist, setPlaylist] = useState([])
   const [nameList, setName] = useState('')
   const [error, setError] = useState(false)
-  let i = Object.keys(playlist).length
-  // useEffect(() => {
-  //   getPlaylist()
-  // }, [])
-  // const getPlaylist = async () => {
-  //   const pl = await handleGetPlaylistByUser() 
-  //   setPlaylist(pl.data.data);
-  // }
+  
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -51,7 +44,8 @@ const CreatePlayList = ({ onSuccess }) => {
     <>
       <FolderAddFilled onClick={showModal}
         style={{
-          fontSize: '60px'
+          fontSize: '60px',
+          color:'#ffff'
         }}
       />
 

@@ -24,14 +24,11 @@ export default function Login() {
             setMessage("Email cannot be blank!")
         } else {
             setMessage("")
-            // if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.e.target.value){
-                // setMessage("Invalid email!")
-            // }
         } 
     }
     const handlePasswordInput = (e) => {
         setPassword(e.target.value)
-        if( e.target.value.length<=6){
+        if( e.target.value.length<6){
             setMessagePassWord("Password must be 6 characters!")
         }
         else{

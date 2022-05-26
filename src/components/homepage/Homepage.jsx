@@ -7,12 +7,7 @@ import Header from "./header/Header"
 import "./Homepage.css"
 import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
-
-import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import Extend from '../playsong/Extend'
-import AddSong from '../playsong/ModalPlaylist'
-
 export default function Homepage() {
   const [artists, setArtists] = useState([])
   const [albums, setAlbums] = useState([])
@@ -21,9 +16,8 @@ export default function Homepage() {
     ApiCaller('artists', 'GET')
       .then(res => {
         setArtists(res.data.data)
-        setLoading(false)
       })
-      .finally(()=>(
+      .finally(() => (
         setLoading(false)
       ))
   }, [])
@@ -31,51 +25,38 @@ export default function Homepage() {
     ApiCaller('albums', 'GET')
       .then(res => {
         setAlbums(res.data.data)
-        setLoading(true)
       })
-      .finally(()=>(
+      .finally(() => (
         setLoading(false)
       ))
-  }, [])
- ;
+  }, []);
 
+  // console.log(loading);
 
- function scrollFunction(e) {
-   console.log(e);
-  //  if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-  //   console.log(document.documentElement.scrollTop);
-  //  }
- }
   return (
-    <div className='container' onScroll={(e)=>scrollFunction(e)}  style={{backgroundColor:'#48589c',maxWidth:'100%',paddingLeft:"6%"}}>
-   
-       
-   <Sidebar />
-    
+    <div className='container' style={{ backgroundColor: '#1e293b', maxWidth: '100%', paddingLeft: "6%" }}>
+      <Sidebar />
       <div>
-        
         <div style={{
-          zIndex:"1",
-          marginTop:"20px",
-          paddingLeft:'30px',
-         
+          zIndex: "1",
+          marginTop: "20px",
+          paddingLeft: '30px',
+
         }}>
-          <Header/>
-          
-        
+          <Header />
         </div>
-          <Slidealbum />
+        <Slidealbum />
         <p className='title-album'>Featured Artists</p>
-        <Featured items={artists} type={'artists'} />
+        <Featured items={artists} type={'artists'} loading={loading}/>
         <p className='title-album'>Genres</p>
         <div style={{
-          zIndex:"1"
+          zIndex: "1"
         }}>
-        <Genre />
+          <Genre />
         </div>
         <p className='title-album'>Featured Albums</p>
-        <Featured  items={albums} type={'albums'}/>
-          
+        <Featured items={albums} type={'albums'} loading={loading}/>
+
       </div>
     </div>
   )
