@@ -11,6 +11,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import CreatePlayList from './ModalCreatePlayList';
 import './Card.css'
 import { FaPlay,FaRegTrashAlt } from "react-icons/fa";
+import Cookies from 'js-cookie'
 
 function AllPlaylists() {
     let navigate = useNavigate();
@@ -23,6 +24,7 @@ function AllPlaylists() {
     const { Meta } = Card;
     const [playlist, setPlaylist] = useState([])
     const getPlaylist = async () => {
+        if(Cookies.get('token')!=null){
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
         if (pl) {
@@ -32,7 +34,7 @@ function AllPlaylists() {
         }
         else {
             setLoading(false)
-        }
+        }}
     }   
     
     useEffect(()=>{

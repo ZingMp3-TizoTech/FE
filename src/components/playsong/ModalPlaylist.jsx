@@ -7,8 +7,9 @@ import './ChoosePlaylist.css'
 import { FcCheckmark } from "react-icons/fc";
 import { handleAddSongToPlayList, handleGetPlaylistByUser } from '../../services/Playlist';
 import { stepButtonClasses } from '@mui/material';
-
+import Cookies from 'js-cookie'
 import Spinner from 'react-bootstrap/Spinner';
+import { toast } from 'react-toastify';
 
 const AddSong = ({id}) => {
  
@@ -18,32 +19,35 @@ const AddSong = ({id}) => {
     const [active,setActive]=useState(true)
     const [number,setNumber]=useState();
     const getPlaylist = async () => {
+        if(Cookies.get('token')){
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
         setLoading(true)
+    }
     }
     useEffect(() => {
         getPlaylist()
     }, [playlist])
     let idsong=[]
     const handleAddSong = async(idPl) =>{
-        setStatus(idPl)
-       
+        setStatus(idPl)       
     }
    
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
-    setIsModalVisible(true);
+    if(Cookies.get('token'))
+    setIsModalVisible(true)
+    else toast.warning('Please Login to continue!')
   };
 
   const handleOk =async () => {
     idsong=[id]
-  
+    if(Cookies.get('token')){
     const addSong = await handleAddSongToPlayList(status,idsong)
    
-    setIsModalVisible(false);
+    setIsModalVisible(false);}
   };
 
   const handleCancel = () => {

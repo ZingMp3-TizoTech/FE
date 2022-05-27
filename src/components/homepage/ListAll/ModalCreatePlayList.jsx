@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import './ModalCreatePlaylist.css'
 import { FolderAddFilled } from '@ant-design/icons';
 import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../services/Playlist';
+import Cookies from 'js-cookie'
 const CreatePlayList = ({ onSuccess }) => {
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -20,7 +21,7 @@ const CreatePlayList = ({ onSuccess }) => {
   let date_create = ""
   let song = []
   const handleOk = async () => {
-    if (!error) {
+    if (!error&&Cookies.get('token')) {
       const created = await handleCreatePlaylist(name, date_create, song)
       setIsModalVisible(false)
 

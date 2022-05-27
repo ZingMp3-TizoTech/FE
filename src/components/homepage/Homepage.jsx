@@ -10,11 +10,14 @@ import Skeleton, {SkeletonTheme} from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Extend from '../playsong/Extend'
 import AddSong from '../playsong/ModalPlaylist'
-
+import 'animate.css';
 export default function Homepage() {
   const [artists, setArtists] = useState([])
   const [albums, setAlbums] = useState([])
   const [loading, setLoading] = useState(true)
+  const [scrollSidebar,setScrollSidebar]= useState('animate__fadeInLeft')
+  
+  
   useEffect(() => {
     ApiCaller('artists', 'GET')
       .then(res => {
@@ -37,28 +40,59 @@ export default function Homepage() {
   }, [])
  ;
 
+ function handleScroll() {
+   
+   const ob=document.getElementById("test");
+   ob.addEventListener("scroll", function () {
+    if(ob.scrollTop>=200)
+    setScrollSidebar('animate__fadeOutLeft')   
+    else
+      setScrollSidebar('animate__bounceInLeft')      
+  });
+}
+
+
+ 
 
   return (
-    <div className='container'   
-    style={{backgroundColor:'#1e293b',maxWidth:'100%',paddingLeft:"6%"}}
+    <div className='container' id='test' onScroll={handleScroll}
+    style={{backgroundColor:'#1e293b',paddingLeft:"6%"}}
     >
+    <div  className={`container-header animate__animated ${scrollSidebar}`} style={{marginLeft:'-7%', maxHeight: "100%"}}>    
+    <Sidebar />
+      </div>   
    
-       
-   <Sidebar />
     
       <div>
         
-        <div style={{
+        <div 
+       
+        style={{
           zIndex:"1",
           marginTop:"20px",
-          paddingLeft:'30px',
+          paddingLeft:'140px',
          
         }}>
           <Header/>
           
         
         </div>
+        <div style={{
+          zIndex:"1",
+        
+          paddingLeft:'140px',
+         
+        }} >
+
           <Slidealbum />
+        </div>
+        <div style={{
+          zIndex:"1",
+        
+          paddingLeft:'120px',
+         
+        }}>
+
         <p className='title-album' style={{color:"white"}}>Featured Artists</p>
         <Featured items={artists} type={'artists'} />
         <p className='title-album' style={{color:"white"}}>Genres</p>
@@ -69,6 +103,7 @@ export default function Homepage() {
         </div>
         <p className='title-album' style={{color:"white"}}>Featured Albums</p>
         <Featured  items={albums} type={'albums'}/>
+          </div>
           
       </div>
     </div>

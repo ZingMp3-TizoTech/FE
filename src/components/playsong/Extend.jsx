@@ -5,28 +5,28 @@ import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
 import { AiOutlineHeart, AiFillHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
 import AddSong from './ModalPlaylist';
 import { handelGetUser, handelLikeSong, handelUnLikeSong } from '../../services/User';
-
+import Cookies from 'js-cookie'
+import { toast } from 'react-toastify';
 
 
 export default function Extend({ liked, url, id }) {
 
 
   const handleLike = async (id) => {
-
-    if (liked == false) {
-      console.log('like');
-      const like = await handelLikeSong(id);
-      await handelGetUser()
-      console.log(like);
+    const token = Cookies.get('token')
+    if(token !=null){
+      if (liked == false) {
+        console.log('like');
+        const like = await handelLikeSong(id);
+        console.log(like);
+      }
+      if (liked == true) {
+        console.log('unlike');
+        const unlike = await handelUnLikeSong(id)  
+        console.log(unlike);
+      }
     }
-    if (liked == true) {
-      console.log('unlike');
-      const unlike = await handelUnLikeSong(id)
-      await handelGetUser()
-      console.log(unlike);
-    }
-
-
+    else toast.warning('Please Login to continue!')
   }
 
   const menu = (

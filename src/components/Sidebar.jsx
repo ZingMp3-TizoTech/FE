@@ -35,8 +35,11 @@ export default function Sidebar(props) {
   }
   const drawer = (
     <div style={{
-      overflowY: "clip",
-      minHeight: '100%'
+   
+      overflow: "hidden",
+      
+      minHeight: '100%',
+      maxHeight:'90%'
     }}>
 
       <Toolbar style={{

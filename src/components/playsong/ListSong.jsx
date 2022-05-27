@@ -9,9 +9,10 @@ import ReactLoading from 'react-loading';
 import { handleGetAlbumById } from '../../services/Album'
 import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
 import Extend from './Extend'
-
 import { AiOutlineHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
 import { handelGetUser } from '../../services/User'
+import Cookies from 'js-cookie'
+
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
@@ -38,8 +39,10 @@ export default function ListSongs({ type }) {
     }, [])
 
     const getPlaylist = async (id) => {
+        if(Cookies.get('token')!=null && type=='playlists'){
         const pl = await handleGetPlaylistById(id)
         setPlaylist(pl.data.data);
+    }
     }
 
     useEffect(() => {
@@ -75,16 +78,17 @@ export default function ListSongs({ type }) {
                         playlist?.song
                         : songs
     const liked = async (id) => {
-        console.log('hover');
-        const user = await handelGetUser();
-        setListLike(user.data.data[0].liked);
-        console.log(listLike.includes(`${id}`) );
-        if (listLike.includes(`${id}`) == true) {
-            setLiked(true)
-        }
-        else {
-            setLiked(false)
-        }
+        console.log('hover');    
+        if(Cookies.get('token')){
+            const user = await handelGetUser();
+            setListLike(user.data.data[0].liked);
+            console.log(listLike.includes(`${id}`) );
+            if (listLike.includes(`${id}`) == true) 
+                setLiked(true)       
+            else 
+                setLiked(false)            
+        }   
+        else console.log('phai dang nhap');
     }
     return (
         <div>
@@ -94,8 +98,6 @@ export default function ListSongs({ type }) {
                     type={type} albums={albums} loading={loading}
                     playlist={playlist}
                 />
-
-
                 <div className='wrapper-list-song'>
                     <table>
                         <thead
@@ -161,19 +163,14 @@ export default function ListSongs({ type }) {
                                                 textAlign: 'center',
                                             }}>{
                                                 song?.album ? <>{song?.album?.name}</> : <></>}</td>
-                                        {/* <td 
-                                    className={index === idNumber ? "color" : ""}
-                                    style={{
-                                        textAlign: 'center',
-                                    }}>{song?.album ? <div><AiOutlineHeart/><p>{song?.rates}</p></div> : <></>}</td> */}
+                                                                
                                         <td
                                             className={index === idNumber ? "color" : ""}
                                             style={{
                                                 textAlign: 'center'
                                             }}> <div 
                                             onMouseEnter ={(e) => liked(song._id)}
-                                                        //onMouseOverCapture={liked}
-                                            >
+                                                        >
 
                                                 <Extend  liked={islike} url={song?.url} id={song._id} />
                                             </div>
