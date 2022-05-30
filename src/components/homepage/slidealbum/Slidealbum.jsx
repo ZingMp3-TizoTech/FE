@@ -52,7 +52,7 @@ export default function Slidealbum() {
                 <Slider {...settings}>
                     {topSongs.map((song, index) => (
                         <div className='img-item' key={index}>
-                            {loading ? <img src={song?.image[1]} alt="Image-song" /> : 
+                            {loading ? <img src={song?.image[1]} alt="Image-song" onClick={handlePlaySong} id={song._id}/> : 
                             <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={awesomePlaceholder} ready={false} />}
                         </div>
                     ))}

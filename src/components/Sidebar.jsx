@@ -62,6 +62,7 @@ export default function Sidebar(props) {
             </h1>
             <h2>Music and chill</h2></div>
         </div>
+
       </Toolbar>
 
       <List style={{

@@ -1,11 +1,12 @@
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import 'antd/dist/antd.css';
-
 import { useNavigate } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
 import { handleDeletePlaylist } from '../../../services/Playlist';
 import { FaRegTrashAlt } from "react-icons/fa";
+import Cookies from 'js-cookie'
+
 const Delete = ({ value, id, onSuccess }) => {
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -15,9 +16,10 @@ const Delete = ({ value, id, onSuccess }) => {
   };
 
   const handleOk = async() => { 
+    if(Cookies.get('token')){
    const del= await handleDeletePlaylist(id)
     setIsModalVisible(false);
-    onSuccess && onSuccess()
+    onSuccess && onSuccess()}
   };
 
   const handleCancel = () => {

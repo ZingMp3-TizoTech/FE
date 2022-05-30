@@ -5,7 +5,8 @@ import './Playing.css';
 
 
 function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction, ...props }) {
-
+  console.log(action);
+  console.log(i);
   if (action == "songs") {
     setIdNumber(i)
   }

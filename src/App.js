@@ -8,18 +8,24 @@ import { ToastContainer, toast } from 'react-toastify';
 import Card from "./components/homepage/ListAll/Card";
 import ListAll from "./components/homepage/ListAll/ListAll";
 import AllPlaylists from "./components/homepage/ListAll/AllPlaylists";
-// import Demo from "./components/account/Register";
+import PrivateRoute from "./components/admin/Privatecomponent";
+import HomeAdmin from "./components/admin/HomeAdmin";
 
-function App() {
-  
+ function App() {
+  const NotFound = () => (
+    <div>
+      <h1 style={{
+        color:'red'
+      }}>404 - Not Found!</h1>
+      
+    </div>
+  );
   return (
     <>
-    <Routes>
-  
-    
-       <Route path="/" element={<Homepage />} />
+    <Routes>   
+       <Route path="*" element={<NotFound/>} />
+       <Route  path="/" element={<Homepage />} />
        <Route path="/playsong/artist/:id" element={<PlaySong type="artists" />} />
-       {/* /:type */}
        <Route path="/playsong/album/:id" element={<PlaySong type="albums" />} />
        <Route path="/playsong/genre/:id" element={<PlaySong type="genres" />} />
        <Route path="/playsong/playlist/:id" element={<PlaySong type="playlists" />} />
@@ -29,7 +35,8 @@ function App() {
        <Route path="/signup" element={<Register />} />
        <Route path="/artists" element={<ListAll type="artists" />} />
        <Route path="/albums" element={<ListAll type="albums" />} />
-       <Route path="/Library" element={<AllPlaylists/>}/>
+       <Route path="/library" element={<AllPlaylists/>}/>
+       <Route path="/admin" element={<PrivateRoute><HomeAdmin/></PrivateRoute>}/>
     </Routes>
     <ToastContainer />
     </>

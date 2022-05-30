@@ -4,14 +4,17 @@ import Featured from './featured/Featured'
 import Slidealbum from './slidealbum/Slidealbum'
 import "./Homepage.css"
 import Header from "./header/Header"
-import "./Homepage.css"
 import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
 import 'react-loading-skeleton/dist/skeleton.css'
+import 'animate.css';
 export default function Homepage() {
   const [artists, setArtists] = useState([])
   const [albums, setAlbums] = useState([])
   const [loading, setLoading] = useState(true)
+  const [scrollSidebar, setScrollSidebar] = useState('animate__fadeInLeft')
+
+
   useEffect(() => {
     ApiCaller('artists', 'GET')
       .then(res => {
@@ -31,32 +34,61 @@ export default function Homepage() {
       ))
   }, []);
 
-  // console.log(loading);
+  function handleScroll() {
+    const ob = document.getElementById("test");
+    ob.addEventListener("scroll", function () {
+      if (ob.scrollTop >= 200)
+        setScrollSidebar('animate__fadeOutLeft')
+      else
+        setScrollSidebar('animate__bounceInLeft')
+    });
+  }
+
+
+
 
   return (
-    <div className='container' style={{ backgroundColor: '#1e293b', maxWidth: '100%', paddingLeft: "6%" }}>
-      <Sidebar />
+    <div className='container'
+      style={{ backgroundColor: '#1e293b', paddingLeft: "6%" }}
+    >
       <div>
-        <div style={{
-          zIndex: "1",
-          marginTop: "20px",
-          paddingLeft: '30px',
+        <Sidebar />
+      </div>
 
-        }}>
+
+      <div>
+
+        <div
+
+          style={{
+            zIndex: "1",
+            marginTop: "20px",
+            paddingLeft: '40px',
+          }}>
           <Header />
         </div>
-        <Slidealbum />
-        <p className='title-album'>Featured Artists</p>
-        <Featured items={artists} type={'artists'} loading={loading}/>
-        <p className='title-album'>Genres</p>
         <div style={{
-          zIndex: "1"
-        }}>
-          <Genre />
+          zIndex: "1",
+          paddingLeft: '60px',
+        }} >
+          <Slidealbum />
         </div>
-        <p className='title-album'>Featured Albums</p>
-        <Featured items={albums} type={'albums'} loading={loading}/>
+        <div style={{
+          zIndex: "1",
+          paddingLeft: '20px',
+        }}>
 
+          <p className='title-album' style={{ color: "white" }}>Featured Artists</p>
+          <Featured items={artists} type={'artists'} />
+          <p className='title-album' style={{ color: "white" }}>Genres</p>
+          <div style={{
+            zIndex: "1"
+          }}>
+            <Genre />
+          </div>
+          <p className='title-album'>Featured Albums</p>
+          <Featured items={albums} type={'albums'} loading={loading} />
+        </div>
       </div>
     </div>
   )
