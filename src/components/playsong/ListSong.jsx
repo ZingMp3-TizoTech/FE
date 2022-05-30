@@ -12,7 +12,7 @@ import Extend from './Extend'
 import { AiOutlineHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
 import { handelGetUser } from '../../services/User'
 import Cookies from 'js-cookie'
-
+import beat from '../../beat.gif'
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
@@ -78,18 +78,28 @@ export default function ListSongs({ type }) {
                         playlist?.song
                         : songs
     const liked = async (id) => {
-        console.log('hover');    
+        
         if(Cookies.get('token')){
             const user = await handelGetUser();
             setListLike(user.data.data[0].liked);
-            console.log(listLike.includes(`${id}`) );
-            if (listLike.includes(`${id}`) == true) 
-                setLiked(true)       
-            else 
+         
+            if (listLike.includes(`${id}`) == true) {
+
+                setLiked(true)  
+                const user = await handelGetUser();
+                setListLike(user.data.data[0].liked);     
+            }
+            else {
                 setLiked(false)            
+                const user = await handelGetUser();
+                setListLike(user.data.data[0].liked);
+            }
         }   
         else console.log('phai dang nhap');
     }
+    // useEffect(()=>{liked()},[islike])
+
+
     return (
         <div>
             <div className='wrapper-song'>
@@ -99,7 +109,7 @@ export default function ListSongs({ type }) {
                     playlist={playlist}
                 />
                 <div className='wrapper-list-song'>
-                    <table>
+                    <table minHeight={'100%'}>
                         <thead
                             style={{
                                 background: '#334155',
@@ -149,7 +159,10 @@ export default function ListSongs({ type }) {
                                         <td scope="row"
                                             className={index === idNumber ? "color" : ""}
                                         >
-                                            {(song._id != null) ? index + 1 : <></>
+                                            {(song._id != null&&index === idNumber) ? 
+                                            <div >
+                                                <img style={{width:"40px",height:"40px"}} src={beat}/>
+                                                </div>  :index + 1
                                             }</td>
                                         <td
                                             className={index === idNumber ? "color" : ""}
@@ -170,9 +183,10 @@ export default function ListSongs({ type }) {
                                                 textAlign: 'center'
                                             }}> <div 
                                             onMouseEnter ={(e) => liked(song._id)}
+                                            onMouseLeave={(e) => liked(song._id)}
                                                         >
 
-                                                <Extend  liked={islike} url={song?.url} id={song._id} />
+                                                <Extend   liked={islike} url={song?.url} id={song._id} />
                                             </div>
                                         </td>
                                     </tr>

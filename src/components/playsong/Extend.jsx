@@ -11,24 +11,25 @@ import { toast } from 'react-toastify';
 
 export default function Extend({ liked, url, id }) {
 
-
   const handleLike = async (id) => {
     const token = Cookies.get('token')
     if(token !=null){
       if (liked == false) {
         console.log('like');
         const like = await handelLikeSong(id);
-        console.log(like);
+      
       }
       if (liked == true) {
         console.log('unlike');
-        const unlike = await handelUnLikeSong(id)  
-        console.log(unlike);
+        const unlike = await handelUnLikeSong(id)
+        
       }
     }
     else toast.warning('Please Login to continue!')
   }
 
+  
+ 
   const menu = (
     <Menu
 

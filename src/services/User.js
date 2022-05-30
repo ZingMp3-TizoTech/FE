@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as Config from '../constant/config'
+import Cookies from 'js-cookie'
 const handleLoginAPI = (email, password) => {
     try {
 
@@ -10,9 +11,9 @@ const handleLoginAPI = (email, password) => {
 }
 const handelGetUser = async () => {
     try {
-        let token = await localStorage.getItem('token');
-
-        return await axios.get(`${Config.API_URL}/user`, {
+        let token =Cookies.get('token');
+     
+        return await  axios.get(`${Config.API_URL}/user`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -34,7 +35,7 @@ const handleSignUpAPI = (email, password) => {
 }
 const handleGetUserIdAPI = async () => {
     try {
-        let token = await localStorage.getItem('token')
+        let token =Cookies.get('token');
         return axios.get(`${Config.API_URL}/user/profile`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -46,8 +47,8 @@ const handleGetUserIdAPI = async () => {
 }
 const handelChangePassWord = async (oldPassword, newPassword) => {
     try {
-        let token = await localStorage.getItem('token');
-        console.log(token);
+        let token =Cookies.get('token');
+       
         return await axios.put(`${Config.API_URL}/change-password`, { oldPassword, newPassword }, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -59,7 +60,7 @@ const handelChangePassWord = async (oldPassword, newPassword) => {
 }
 const handelLikeSong = async (liked) => {
     try {
-        let token = await localStorage.getItem('token');
+        let token =Cookies.get('token');
        
         return await axios.put(`${Config.API_URL}/user/like`, { liked }, {
             headers: {
@@ -72,8 +73,8 @@ const handelLikeSong = async (liked) => {
 }
 const handelUnLikeSong = async (liked) => {
     try {
-        let token = await localStorage.getItem('token');
-        console.log(token);
+        let token =Cookies.get('token');
+      
         return await axios.put(`${Config.API_URL}/user/unlike`, { liked }, {
             headers: {
                 'Authorization': `Bearer ${token}`
