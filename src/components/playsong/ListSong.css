@@ -5,19 +5,23 @@
     color: #a696d5;
     position: absolute;
     left: 500px;
-
 }
 .wrapper-list-song{
     display: flex;
-    overflow-y: scroll;
     width: 100%;
     background-color: #D7E9ED;
     max-height: 700px;
-    
 }
+::-webkit-scrollbar {
+    width: 10px;
+    color: red;
+  }
 .wrapper-list-song table{
     width: 100%;
     position: relative;
+}
+.wrapper-list-song tbody{
+    overflow-y: scroll;
 }
 .wrapper-list-song tbody tr:hover{
     background-color: #475569;

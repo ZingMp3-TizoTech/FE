@@ -10,7 +10,11 @@ export default function DetailSong({ idSong, songs, circular, type, albums, load
 
   return (
     <div className='wrapper-detail-song' style={{
+<<<<<<< HEAD
       backgroundColor: '#334155',   
+=======
+      backgroundColor: '#334155',
+>>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
     }}>
       <div
         onClick={() => {

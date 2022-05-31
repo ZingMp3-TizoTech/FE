@@ -15,11 +15,19 @@
     min-width: 100%;
     min-height: 100%;
     max-height: 100%;
-    overflow-y: hidden;
-    overflow-x: hidden;
 }
 .loading-album{
     max-width: 213px;
     border-radius: 10px; 
     margin-bottom: 15px;
+<<<<<<< HEAD
 }
+=======
+}
+.container p{
+    color: #ffff;
+}
+::-webkit-scrollbar {
+    width: 0px;
+  }
+>>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde

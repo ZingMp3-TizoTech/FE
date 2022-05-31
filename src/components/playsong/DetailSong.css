@@ -1,14 +1,22 @@
 body{   
+<<<<<<< HEAD
         background-color: #5ce0ba;       
      
+=======
+        background-color: #334155;       
+>>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
 }
 .wrapper-detail-song{
     width: 34%;
     position: relative;
+<<<<<<< HEAD
 
     height: 710px;
     background-color: #334155;
 
+=======
+    height: 700px;
+>>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
 }
 .wrapper-detail-song .suntify{
     display: flex;

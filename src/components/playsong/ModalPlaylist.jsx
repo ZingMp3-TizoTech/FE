@@ -2,11 +2,11 @@ import { Button, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import {AiOutlineFolderAdd} from 'react-icons/ai'
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ChoosePlaylist.css'
 import { FcCheckmark } from "react-icons/fc";
 import { handleAddSongToPlayList, handleGetPlaylistByUser } from '../../services/Playlist';
+<<<<<<< HEAD
 
 import { stepButtonClasses } from '@mui/material';
 import Cookies from 'js-cookie'
@@ -16,6 +16,13 @@ import Spinner from 'react-bootstrap/Spinner';
 
 
 const AddSong = ({id}) => {
+=======
+import { stepButtonClasses } from '@mui/material';
+import Cookies from 'js-cookie'
+import Spinner from 'react-bootstrap/Spinner';
+import { toast } from 'react-toastify';
+const AddSong = ({id, stopPropagation}) => {
+>>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
     const [playlist, setPlaylist] = useState([])
     const [loading,setLoading]=useState(false)
     const [status,setStatus]=useState('')
@@ -45,16 +52,28 @@ const AddSong = ({id}) => {
     else toast.warning('Please Login to continue!')
   };
 
-  const handleOk =async () => {
+  const handleOk =async (e) => {
     idsong=[id]
+<<<<<<< HEAD
 
     const addSong = await handleAddSongToPlayList(status,idsong)
     setIsModalVisible(false);
     toast.success("Add playlist success!")
+=======
+    stopPropagation(e)
+    const addSong = await handleAddSongToPlayList(status,idsong)
+    setIsModalVisible(false);
+    toast.success("Add playlist success!")
+    if(Cookies.get('token')){
+    const addSong = await handleAddSongToPlayList(status,idsong)
+   
+    setIsModalVisible(false);}
+>>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
   };
 
-  const handleCancel = () => {
+  const handleCancel = (e) => {
     setIsModalVisible(false);
+    stopPropagation(e);
   };
   const handleSetActive=(e)=>{
     setActive(!active)     
@@ -66,7 +85,7 @@ const AddSong = ({id}) => {
   }
   return (
     <>
-      <AiOutlineFolderAdd  onClick={showModal}
+      <AiOutlineFolderAdd  onClick={ (e)=>{stopPropagation(e); showModal(); }}
                             style={{
                                 fontSize:'20px',
                             }}
@@ -86,7 +105,7 @@ const AddSong = ({id}) => {
                 key={index} 
                 id={index}
                 className={index==number&&active?'item-active':'item'}
-                onClick={(e)=>{handleAddSong(item?._id);handleSetActive(e)}}
+                onClick={(e)=>{handleAddSong(item?._id);handleSetActive(e);stopPropagation(e)}}
                 >
                     <p>{item.name}</p>
                     <i style={{color:"red"}}>{index==number&&active?<FcCheckmark />:null}</i>
