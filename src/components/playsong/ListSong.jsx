@@ -11,7 +11,8 @@ import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/P
 import Extend from './Extend'
 import { handelGetUser } from '../../services/User'
 import Cookies from 'js-cookie'
-import beat from '../../beat.gif'
+import beat from '../../assets/gif/beat.gif'
+import beat_img from '../../assets/image/beat.png'
 import Duration from './Duration'
 export default function ListSongs({ type }) {
     const id = useParams();
@@ -169,7 +170,7 @@ return (
                                         >
                                             {(song._id != null&&index === idNumber) ? 
                                             <div >
-                                                <img style={{width:"40px",height:"40px"}} src={beat}/>
+                                                <img style={{width:"40px",height:"40px"}} src={circular ? beat : beat_img}/>
                                                 </div>  :index + 1
                                             }</td>
                                         <td
