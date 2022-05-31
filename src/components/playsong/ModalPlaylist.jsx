@@ -6,23 +6,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import './ChoosePlaylist.css'
 import { FcCheckmark } from "react-icons/fc";
 import { handleAddSongToPlayList, handleGetPlaylistByUser } from '../../services/Playlist';
-<<<<<<< HEAD
 
-import { stepButtonClasses } from '@mui/material';
-import Cookies from 'js-cookie'
-import Spinner from 'react-bootstrap/Spinner';
-
-
-
-
-const AddSong = ({id}) => {
-=======
 import { stepButtonClasses } from '@mui/material';
 import Cookies from 'js-cookie'
 import Spinner from 'react-bootstrap/Spinner';
 import { toast } from 'react-toastify';
 const AddSong = ({id, stopPropagation}) => {
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
     const [playlist, setPlaylist] = useState([])
     const [loading,setLoading]=useState(false)
     const [status,setStatus]=useState('')
@@ -54,21 +43,14 @@ const AddSong = ({id, stopPropagation}) => {
 
   const handleOk =async (e) => {
     idsong=[id]
-<<<<<<< HEAD
 
-    const addSong = await handleAddSongToPlayList(status,idsong)
-    setIsModalVisible(false);
-    toast.success("Add playlist success!")
-=======
     stopPropagation(e)
     const addSong = await handleAddSongToPlayList(status,idsong)
     setIsModalVisible(false);
     toast.success("Add playlist success!")
     if(Cookies.get('token')){
     const addSong = await handleAddSongToPlayList(status,idsong)
-   
     setIsModalVisible(false);}
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
   };
 
   const handleCancel = (e) => {

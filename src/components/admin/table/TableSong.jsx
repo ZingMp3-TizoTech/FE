@@ -24,11 +24,7 @@ function TableSong() {
         setSongs(res.data.data)
       })
   }, [])
-  const getSong= async(id)=>{
-    console.log(id);
-      const song= await handleGetSongById(id)
-     setNameSong(song?.data?.data?.name)
-  }
+
  
   return (
     <>
@@ -63,11 +59,8 @@ function TableSong() {
                 <td style={{ padding: '30px' }}><img style={{ width: '50px', height: '50px' }}
                   src={song?.image[0]} /></td>
                 <td style={{ color: 'black', padding: '30px' }}>{song?.genre?.zone}</td>
-                <td style={{ padding: '30px' }}>
-                  <div
-                  //  onClick={(e)=>getSong(song?._id)}
-                  >
-                  <EditSong asong={song?.id} /></div>
+                <td style={{ padding: '30px' }}>                
+                  <EditSong asong={song?._id} />
                   <FaRegTrashAlt style={{ marginLeft: '9px' }} color='red' size={'25px'} />
 
                 </td>

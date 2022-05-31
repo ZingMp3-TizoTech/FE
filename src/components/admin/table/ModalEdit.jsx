@@ -9,10 +9,11 @@ import Sidebar from '../../Sidebar';
 import SideBarAdmin from '../SideBarAdmin';
 import Cookies from 'js-cookie';
 import { ModalBody } from 'react-bootstrap';
+import { handleGetSongById } from '../../../services/Song';
 
 
 const EditSong = ({ asong }) => {
-    console.log(asong);
+    ////console.log(asong);
     //const navigate = useNavigate()
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [playlist, setPlaylist] = useState([])
@@ -44,14 +45,40 @@ const EditSong = ({ asong }) => {
         setIsModalVisible(false);
     };
 
-    const handleCreate = (e) => {
-        console.log(e.target.name);
+    const handleGetName = (e) => {
+        //console.log(e.target.value);
         //const names = (playlist?.map(pl => pl?.name))
         //setError(names.includes(e.target.value))
-        setNameSong(e.target.name)
-
+        setNameSong(e.target.value)
+        setURL(song?.data?.data?.url)
+        setImg1(e.target.files[0]);
     }
-
+    const handleGetURL = (e) => {
+        setURL(song?.data?.data?.url)
+       
+    }
+    const handleGetArtist = (e) => {
+        setArtist(e.target.value)
+        
+    }
+    const handleGetImage1 = (e) => {
+        console.log(e.target.files[0]);
+        setImg1(e.target.files[0]);
+    }
+    const getSong= async(asong)=>{
+        console.log(asong);
+          const song= await handleGetSongById(asong)
+          if(song){
+              setNameSong(song?.data?.data?.name)
+              setURL(song?.data?.data?.url)
+              setArtist(song?.data?.data?.artist?.name)
+              setImg1(song?.data?.data?.image[0])
+              setImg2(song?.data?.data?.image[1])}
+          return song
+      }
+      useEffect(() => {
+        getSong(asong) 
+    }, [asong])
     return (
         <>
             <div onClick={showModal} style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
@@ -73,11 +100,11 @@ const EditSong = ({ asong }) => {
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <input
                             value={nameSong}
-                            name={nameSong}
+                            //name={nameSong}
                             //defaultValue={nameSong}
                             type='text'
                             placeholder='Enter song name!'
-                            onChange={handleCreate}
+                            onChange={handleGetName}
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
@@ -85,44 +112,45 @@ const EditSong = ({ asong }) => {
                             }}
                         />
                         <input
-                            value={name}
+                            value={url}
                             type='text'
                             placeholder='Enter url'
-                            onChange={handleCreate}
+                            onChange={handleGetURL}
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
-                                borderRadius: '50px'
+                                borderRadius: '50px',
+                                wordBreak:'break-word'
                             }}
                         />
                         <input
-                            value={name}
+                            value={artist}
 
                             type='text'
                             placeholder='Enter artist'
-                            onChange={handleCreate}
+                            onChange={handleGetArtist}
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
                                 borderRadius: '50px'
                             }}
                         />
+                        {/* <p>Image 1</p>
+                        <img src='' /> */}
+                         <input
+                            //value={img1}
+                            type='file'
+                            onChange={handleGetImage1}
+
+                        /> 
                         <p>Image 1</p>
-                        <img src='' />
-                        <input
+                        <img src={img1} />
+                        {/* <input
                             value={name}
                             type='file'
                             onChange={handleCreate}
 
-                        />
-                        <p>Image 1</p>
-                        <img src='' />
-                        <input
-                            value={name}
-                            type='file'
-                            onChange={handleCreate}
-
-                        />
+                        /> */}
 
                     </div>
                 </ModalBody>

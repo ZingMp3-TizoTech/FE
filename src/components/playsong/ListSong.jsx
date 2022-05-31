@@ -12,11 +12,9 @@ import Extend from './Extend'
 import { handelGetUser } from '../../services/User'
 import Cookies from 'js-cookie'
 import beat from '../../beat.gif'
-<<<<<<< HEAD
 import { toast } from 'react-toastify'
-=======
 import Duration from './Duration'
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
+
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
@@ -28,12 +26,10 @@ export default function ListSongs({ type }) {
     const [playlist, setPlaylist] = useState([])
     const [islike, setLiked] = useState()
     const [listLike, setListLike] = useState([])
-<<<<<<< HEAD
+
 
     let a = songs.findIndex(i => i._id === id)
-=======
-    let a = songs.findIndex(i => i._id === id.id)
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
+
     
     useEffect(() => {
         setLoading(true);
@@ -108,28 +104,18 @@ export default function ListSongs({ type }) {
     }
     // useEffect(()=>{liked()},[islike])
 
-<<<<<<< HEAD
+
     return (
         <div>
             <div className='wrapper-song'>
-=======
 
-
-
-return (
-    <div>
-        <div className='wrapper-song'>
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
 
                 <DetailSong
                     idSong={idNumber} songs={items} circular={circular}
                     type={type} albums={albums} loading={loading}
                     playlist={playlist}
                 />
-<<<<<<< HEAD
 
-=======
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
                 <div className='wrapper-list-song'>
                     <table  style={{
                          maxHeight:'fit-content',
@@ -204,15 +190,9 @@ return (
                                             className={index === idNumber ? "color" : ""}
                                             style={{
                                                 textAlign: 'center',
-<<<<<<< HEAD
                                             }}>{ type=='albums'?
                                                  <>{albums[0]?.name}</> : <>{song?.album?.name}</>}</td>
-=======
-                                            }}>{
-                                                song?.album ? <>{song?.album?.name}</> : <></>}</td>
-                                        
-                                        <td style={{textAlign:'center'}}><Duration url={song?.url}/></td>
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
+
                                                                 
                                         <td
                                             className={index === idNumber ? "color" : ""}
@@ -222,12 +202,8 @@ return (
                                             onMouseEnter ={(e) => liked(song._id)}
                                             onMouseLeave={(e) => liked(song._id)}
                                                         >
-<<<<<<< HEAD
                                                 <Extend onDeleteSuccess={()=> getPlaylist(id.id)} idPlaylist={id.id} type={type}  liked={islike} url={song?.url} id={song._id} />
-=======
 
-                                                <Extend liked={islike} url={song?.url} id={song._id} type={type} />
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
                                             </div>
                                         </td>
                                     </tr>
@@ -241,8 +217,6 @@ return (
                             color='#a696d5' /></>}
 
                     </table>
-
-<<<<<<< HEAD
             </div>
         </div>
 
@@ -253,22 +227,5 @@ return (
         
     </div>
     )
-=======
-                    <div style={{
-                        marginTop: "100px"
-                    }}>
 
-                    </div>
-                </div>
-            </div>
-            <div >
-                <div className='play-child'>
-                    {<Playing i={a} action={action} setAction={setAction} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
-                </div>
-
-            </div>
-        </div>
-    )
-
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
 }

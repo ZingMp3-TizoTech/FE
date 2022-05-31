@@ -10,13 +10,10 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import CreatePlayList from './ModalCreatePlayList';
 import './Card.css'
-<<<<<<< HEAD
-import { FaPlay } from "react-icons/fa";
-=======
 
 import { FaPlay,FaRegTrashAlt } from "react-icons/fa";
 import Cookies from 'js-cookie'
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
+
 
 function AllPlaylists() {
     let navigate = useNavigate();
@@ -47,16 +44,10 @@ function AllPlaylists() {
     },[])
     return (
         <div style={{
-<<<<<<< HEAD
+
             backgroundColor:'rgb(30 41 59)',
             minHeight:'1500px'
-=======
 
-            backgroundColor:'#1e293b',
-            minHeight:'100%',
-            minWidth:'100%',
-            position:'absolute',
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
         }}>
             <Sidebar />
             
@@ -64,13 +55,9 @@ function AllPlaylists() {
                 <div
                     style={{
                         minWidth:'fit-content',
-<<<<<<< HEAD
                         backgroundColor:'rgb(30 41 59)',
                         // backgroundImage: 'linear-gradient(to right, rgb(30 41 59) , rgb(43 60 87))',
-=======
 
-                        backgroundColor: '#1e293b',
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
                         margin: '0 0 0 340px',
                         display: 'flex',
                         flexWrap: 'wrap',
@@ -94,10 +81,6 @@ function AllPlaylists() {
                        
                     >
                         <CreatePlayList onSuccess={()=>getPlaylist()} />
-<<<<<<< HEAD
-                      
-=======
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
                     </div>
                    
                     {playlist.map(item => (
@@ -137,14 +120,11 @@ function AllPlaylists() {
                                 ]}
                             >
                                 <Meta
-<<<<<<< HEAD
-                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]} />}
-                                    color={'#ffff'}
-=======
+
 
                                     avatar={<Avatar src={item?.song?.[0]?.image?.[0]?item?.song?.[0]?.image?.[0]
                                         :'https://lh3.googleusercontent.com/T7sdPCzUmJYQwX1aFl6__pbg6XJSt3HY7Nsfqy0QorxUgBilR_5ZixYlX0VM7yjowLHl=w512'} />}
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
+
                                     title={item?.name}
                                     description={<>
                                         <p>{item?.genre?.zone}</p>

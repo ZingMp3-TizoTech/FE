@@ -34,16 +34,12 @@ export default function   Sidebar(props) {
 
   const drawer = (
     <div style={{
-<<<<<<< HEAD
+
       overflow: "hidden",
       minHeight: '100%',
       maxHeight:'90%'
 
-=======
-      overflowY: "clip",
-      minHeight: '100%',
-      backgroundColor: '#334155',
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
+
     }}>
 
       <Toolbar style={{
@@ -69,25 +65,14 @@ export default function   Sidebar(props) {
               <span>Suntify</span>
             </h1>
             <h2>Music and chill</h2></div>
-<<<<<<< HEAD
-
-        </div>
-=======
         </div>
 
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
       </Toolbar>
 
       <List style={{
         backgroundColor: '#334155',
         minHeight: '100%',
-<<<<<<< HEAD
         color: 'black'
-
-=======
-        color: '#ffff',
-        marginTop:'30px'
->>>>>>> 0d1be6faaba6908c0afdf6cfcdca782b8fc05fde
       }}>
         {list.map((text, index) => (
           <ListItem button key={text}>
@@ -99,17 +84,13 @@ export default function   Sidebar(props) {
                       <></>
               }
             </ListItemIcon>
-
             <ListItemText primary={text} style={{ color: grey[50] }}  onClick={(e) => navigate(`/${text.toLowerCase()}`)} />
           </ListItem>
-
         ))}
-
       </List>
 
     </div>
   );
-
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
