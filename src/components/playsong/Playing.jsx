@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from "react-h5-audio-player";
-
+import './Playing.css';
 
 
 function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction, ...props }) {
@@ -31,11 +31,8 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction,
 
   return (
     <>
-     <AudioPlayer
-     style={{
-       backgroundColor:'#111827',
-       color:'#ffff'
-     }}
+     <AudioPlayer 
+     className='playing'
       src={props.songs?.[idSong]?.url}
       layout="stacked-reverse"
       showSkipControls={true}

@@ -1,0 +1,30 @@
+.css-1x0waax-MuiModal-root-MuiPopover-root-MuiMenu-root .MuiPaper-root {
+    background-color: #596e8b;
+    color: #fff !important;
+}
+.css-1x0waax-MuiModal-root-MuiPopover-root-MuiMenu-root .MuiPaper-root .MuiMenuItem-root .MuiSvgIcon-root{
+    color: #fff !important;
+}
+.css-1x0waax-MuiModal-root-MuiPopover-root-MuiMenu-root .MuiPaper-root .MuiMenuItem-root .MuiSvgIcon-root{
+    color: #fff !important;
+}
+.modal-content{
+    width: 76% !important;
+    margin-left: 20% !important;
+    margin-top: 20% !important;
+    background-color: rgb(41 65 98) !important;
+}
+.modal-title{
+    color: #fff;
+}
+.btn-close{
+    color: #fff !important;
+}
+.icon-hidden{
+    margin-left: -45px;
+    margin-bottom: 10px;
+}
+input::placeholder{
+    margin-left: -10px;
+    padding-left: 10px;
+}

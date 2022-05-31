@@ -8,7 +8,6 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import Cookies from 'js-cookie'
 import { handleSearchByKeyword } from '../../../services/Search';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-
 import {MdLibraryMusic } from "react-icons/md";
 import { GiMusicalNotes } from "react-icons/gi";
 
@@ -96,8 +95,10 @@ export default function Header() {
 
   
   return (
-    <div className='wrapper-navbar' style={{maxWidth:'100%',width:'82%'}}>
-      <div style={{ width: 400, marginRight: 300 }}>
+    <div className='wrapper-navbar'
+    
+    >
+      <div className='search' style={{ width: 400}}>
      
         <ReactSearchAutocomplete
           items={result}

@@ -27,7 +27,7 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                             src={artist?.image}
                             style={{
                                 maxWidth: 300,
-                                maxHeight: 300,
+                                maxHeight: 300,                              
                                 overflow: 'hidden',
                             }}
                         />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import {handleLoginAPI} from '../../services/User'
+import {handelGetUser, handleLoginAPI} from '../../services/User'
 import { useNavigate } from 'react-router-dom';
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { toast } from 'react-toastify';
@@ -24,14 +24,11 @@ export default function Login() {
             setMessage("Email cannot be blank!")
         } else {
             setMessage("")
-            // if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.e.target.value){
-                // setMessage("Invalid email!")
-            // }
         } 
     }
     const handlePasswordInput = (e) => {
         setPassword(e.target.value)
-        if( e.target.value.length<=6){
+        if( e.target.value.length<6){
             setMessagePassWord("Password must be 6 characters!")
         }
         else{
@@ -42,11 +39,13 @@ export default function Login() {
     const handleLogin = async()=>{
         try {
             // console.log(email, password);
-            const data = await handleLoginAPI(email, password);
+            const data = await handleLoginAPI(email, password);           
             console.log(data);
-            let token= Cookies.set("token",data.data.token)                                   
-            if(token){
-               
+            let token= Cookies.set("token",data.data.token)       
+            const user = await handelGetUser();
+            const role=user.data.data[0].role.name;
+            Cookies.set('role',role)
+            if(token){      
                 toast.success("Login success!")
                 navigate('/')
             } 

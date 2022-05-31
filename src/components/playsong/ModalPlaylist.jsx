@@ -2,17 +2,20 @@ import { Button, Modal } from 'antd';
 import { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import {AiOutlineFolderAdd} from 'react-icons/ai'
-import { height } from '@mui/system';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './ChoosePlaylist.css'
 import { FcCheckmark } from "react-icons/fc";
 import { handleAddSongToPlayList, handleGetPlaylistByUser } from '../../services/Playlist';
+
 import { stepButtonClasses } from '@mui/material';
 import Cookies from 'js-cookie'
 import Spinner from 'react-bootstrap/Spinner';
-import { toast } from 'react-toastify';
+
+
+
 
 const AddSong = ({id}) => {
- 
     const [playlist, setPlaylist] = useState([])
     const [loading,setLoading]=useState(false)
     const [status,setStatus]=useState('')
@@ -27,7 +30,7 @@ const AddSong = ({id}) => {
     }
     useEffect(() => {
         getPlaylist()
-    }, [playlist])
+    }, [])
     let idsong=[]
     const handleAddSong = async(idPl) =>{
         setStatus(idPl)       
@@ -44,10 +47,10 @@ const AddSong = ({id}) => {
 
   const handleOk =async () => {
     idsong=[id]
-    if(Cookies.get('token')){
+
     const addSong = await handleAddSongToPlayList(status,idsong)
-   
-    setIsModalVisible(false);}
+    setIsModalVisible(false);
+    toast.success("Add playlist success!")
   };
 
   const handleCancel = () => {
@@ -74,11 +77,15 @@ const AddSong = ({id}) => {
       onOk={handleOk} 
       onCancel={handleCancel}
       width={320}
+      className={'modal-list'}
+      
       >
         {loading? <div className='list-item'>
             {playlist.map((item, index)=>(
-                <div key={index} id={index}
-                className={'item'}
+                <div 
+                key={index} 
+                id={index}
+                className={index==number&&active?'item-active':'item'}
                 onClick={(e)=>{handleAddSong(item?._id);handleSetActive(e)}}
                 >
                     <p>{item.name}</p>

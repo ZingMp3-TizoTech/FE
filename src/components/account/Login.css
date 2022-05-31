@@ -61,7 +61,7 @@ img {
   position: relative;
   height: 100vh;
   width: 1194px;
-  background: url("https://images.unsplash.com/photo-1575285113814-f770cb8c796e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8&w=1000&q=80") no-repeat center center scroll;
+  background: url("https://images.unsplash.com/photo-1575285113814-f770cb8c796e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXVzaWMlMjBhcnRpc3R8ZW58MHx8MHx8&w=1000&q=80") no-repeat center center;
   background-size: cover;
   float: left;
   -webkit-animation: bgslide 2.3s forwards;
@@ -159,8 +159,8 @@ img {
   font-size: 32px;
   color: #636060;
   position: absolute;
-  right: 10px;
-  top: 498px;
+  right: 15px;
+  top: 435px;
 }
 .login .container .login-form .form button[type=submit] {
   background: -webkit-linear-gradient(110deg, #9495f7 0%, #fdd6bd 100%);

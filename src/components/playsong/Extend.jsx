@@ -7,10 +7,13 @@ import AddSong from './ModalPlaylist';
 import { handelGetUser, handelLikeSong, handelUnLikeSong } from '../../services/User';
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify';
+import { FaRegTrashAlt } from "react-icons/fa";
+import { handleDeleteSongToPlayList } from '../../services/Playlist';
+import DeleteSong from './ModalDeleteSong';
+import { useParams } from 'react-router-dom';
 
-
-export default function Extend({ liked, url, id }) {
-
+export default function Extend({ liked, url, id,idPlaylist,type,onDeleteSuccess }) {
+  const idPl = useParams();
   const handleLike = async (id) => {
     const token = Cookies.get('token')
     if(token !=null){
@@ -28,11 +31,9 @@ export default function Extend({ liked, url, id }) {
     else toast.warning('Please Login to continue!')
   }
 
-  
  
   const menu = (
     <Menu
-
       style={{
         display: 'flex'
       }}
@@ -56,7 +57,7 @@ export default function Extend({ liked, url, id }) {
 
       </Menu.Item>
       <Menu.Item>
-        <AddSong id={id} />
+      {type != "playlists" ? <AddSong id={id}/> : <DeleteSong onDeleteSuccess={(e)=>onDeleteSuccess(idPlaylist)} idPlaylist={idPlaylist} idSong={id}/>}
       </Menu.Item>
 
       <Menu.Item>

@@ -13,6 +13,7 @@ import { AiOutlineHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-ico
 import { handelGetUser } from '../../services/User'
 import Cookies from 'js-cookie'
 import beat from '../../beat.gif'
+import { toast } from 'react-toastify'
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
@@ -24,8 +25,9 @@ export default function ListSongs({ type }) {
     const [playlist, setPlaylist] = useState([])
     const [islike, setLiked] = useState()
     const [listLike, setListLike] = useState([])
-    let a = songs.findIndex(i => i._id === id)
 
+    let a = songs.findIndex(i => i._id === id)
+    
     useEffect(() => {
         setLoading(true);
         ApiCaller('songs', 'GET')
@@ -41,6 +43,7 @@ export default function ListSongs({ type }) {
     const getPlaylist = async (id) => {
         if(Cookies.get('token')!=null && type=='playlists'){
         const pl = await handleGetPlaylistById(id)
+        //console.log();
         setPlaylist(pl.data.data);
     }
     }
@@ -77,8 +80,7 @@ export default function ListSongs({ type }) {
                     : type == "playlists" ?
                         playlist?.song
                         : songs
-    const liked = async (id) => {
-        
+    const liked = async (id) => {       
         if(Cookies.get('token')){
             const user = await handelGetUser();
             setListLike(user.data.data[0].liked);
@@ -95,21 +97,27 @@ export default function ListSongs({ type }) {
                 setListLike(user.data.data[0].liked);
             }
         }   
-        else console.log('phai dang nhap');
+        else toast.warning('Please login to continue!');
     }
     // useEffect(()=>{liked()},[islike])
-
 
     return (
         <div>
             <div className='wrapper-song'>
+
                 <DetailSong
                     idSong={idNumber} songs={items} circular={circular}
                     type={type} albums={albums} loading={loading}
                     playlist={playlist}
                 />
+
                 <div className='wrapper-list-song'>
-                    <table minHeight={'100%'}>
+                    <table  style={{
+                         maxHeight:'fit-content',
+                         minHeight:'fit-content',
+                         overflow:'scroll',
+                        
+                    }} >
                         <thead
                             style={{
                                 background: '#334155',
@@ -132,15 +140,12 @@ export default function ListSongs({ type }) {
                                 <th style={{
                                     width: '20%',
                                     textAlign: 'center'
-                                }}>Author</th>
+                                }}>Album</th>
                                 <th style={{
                                     width: '10%',
                                     textAlign: 'center'
                                 }}>  </th>
-                                {/* <th style={{
-                                width: '10%',
-                                textAlign: 'center'
-                            }}>  </th> */}
+                                
 
                             </tr>
                         </thead>
@@ -169,13 +174,14 @@ export default function ListSongs({ type }) {
                                         >{song?.name}</td>
                                         <td
                                             className={index === idNumber ? "color" : ""}
-                                        >{song?.artist?.name}</td>
+                                        >{type=='albums'?
+                                        <>{albums[0]?.artist?.name}</> : <>{song?.artist?.name}</>}</td>
                                         <td
                                             className={index === idNumber ? "color" : ""}
                                             style={{
                                                 textAlign: 'center',
-                                            }}>{
-                                                song?.album ? <>{song?.album?.name}</> : <></>}</td>
+                                            }}>{ type=='albums'?
+                                                 <>{albums[0]?.name}</> : <>{song?.album?.name}</>}</td>
                                                                 
                                         <td
                                             className={index === idNumber ? "color" : ""}
@@ -185,8 +191,7 @@ export default function ListSongs({ type }) {
                                             onMouseEnter ={(e) => liked(song._id)}
                                             onMouseLeave={(e) => liked(song._id)}
                                                         >
-
-                                                <Extend   liked={islike} url={song?.url} id={song._id} />
+                                                <Extend onDeleteSuccess={()=> getPlaylist(id.id)} idPlaylist={id.id} type={type}  liked={islike} url={song?.url} id={song._id} />
                                             </div>
                                         </td>
                                     </tr>
@@ -201,19 +206,14 @@ export default function ListSongs({ type }) {
 
                     </table>
 
-                    <div style={{
-                        marginTop: "100px"
-                    }}>
-
-                    </div>
-                </div>
-            </div>
-            <div >
-                <div className='play-child'>
-                    {<Playing i={a} action={action} setAction={setAction} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
-                </div>
             </div>
         </div>
-    )
 
+            <div className='play-child'>
+                {<Playing action={action} setAction={setAction} i={a} type={type} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
+            </div>
+     
+        
+    </div>
+    )
 }

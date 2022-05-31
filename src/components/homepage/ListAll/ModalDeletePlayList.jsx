@@ -30,7 +30,8 @@ const Delete = ({ value, id, onSuccess }) => {
     <>
       <FaRegTrashAlt style={{
         width: '20px',
-        height: '20px'
+        height: '20px',
+        color:'#ffff'
 
       }} onClick={showModal} />
 

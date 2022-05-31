@@ -58,29 +58,27 @@ export default function Homepage() {
     <div className='container' id='test' onScroll={handleScroll}
     style={{backgroundColor:'#1e293b',paddingLeft:"6%"}}
     >
-    <div  className={`container-header animate__animated ${scrollSidebar}`} style={{marginLeft:'-7%', maxHeight: "100%"}}>    
-    <Sidebar />
+    <div  className={`container-header animate__animated ${scrollSidebar}`} 
+    style={{marginLeft:'-7%', maxHeight: "100%"}}>    
       </div>   
+    <Sidebar />
    
     
       <div>
         
-        <div 
-       
+        <div       
         style={{
-          zIndex:"1",
+          backgroundColor:"red",
+          zIndex:"1",        
           marginTop:"20px",
-          paddingLeft:'140px',
-         
-        }}>
+          marginLeft:'240px'}}
+          >
           <Header/>
-          
-        
-        </div>
+         </div>
         <div style={{
           zIndex:"1",
         
-          paddingLeft:'140px',
+          paddingLeft:'10px',
          
         }} >
 
@@ -89,7 +87,7 @@ export default function Homepage() {
         <div style={{
           zIndex:"1",
         
-          paddingLeft:'120px',
+          paddingLeft:'10px',
          
         }}>
 

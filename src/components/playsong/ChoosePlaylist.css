@@ -1,7 +1,27 @@
+.ant-modal-body{
+    background-color: rgb(51 65 85);
+}
+.ant-modal-header{
+    background-color: rgb(71, 84, 102);
+}
+.ant-modal-footer{
+    background-color: rgb(71, 84, 102);
+}
+.ant-btn{
+    color: #fff;
+    background-color: rgb(30 41 59) !important;
+}
+.ant-modal-close{
+    color: #fff;
+}
+.ant-modal-title{
+    color: #fff;
+}
 .list-item{
-    width: 265px;
+    width: 278px;
     height: 200px;
     overflow-y: scroll;
+    background-color: rgb(51 65 85);
 }
 .list-item::-webkit-scrollbar {
     width: 10px;
@@ -9,23 +29,34 @@
 .list-item .item{
     margin-bottom: 10px;
     position: relative;
-    background-color: rgb(176, 205, 239);
+    background-color: rgb(31, 41, 57);
     height: 50px;
     display: flex;
     justify-items: center;
+    color: #fff;
 }
 .list-item .item:hover{
-    box-shadow: 3px 3px rgb(186, 187, 188);
-   
+    box-shadow: 3px 3px rgb(89 214 182);
+    color: rgb(89 214 182);
 }
-.list-item .item p{
+.list-item .item-active{
+    margin-bottom: 10px;
+    position: relative;
+    background-color: rgb(31, 41, 57);
+    height: 50px;
+    display: flex;
+    justify-items: center;
+    color: #fff;
+    box-shadow: 3px 3px rgb(89 214 182);
+}
+.list-item p{
     position: absolute;
     font-weight: 600;
-    left: 10px;
-    top: 5px;
+    left: 20px;
+    top: 13px;
     
 }
-.list-item .item i{
+.list-item i{
     position: absolute;
     right: 20px;
     top: 7px;

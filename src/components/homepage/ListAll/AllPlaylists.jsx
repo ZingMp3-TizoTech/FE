@@ -10,8 +10,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import CreatePlayList from './ModalCreatePlayList';
 import './Card.css'
-import { FaPlay,FaRegTrashAlt } from "react-icons/fa";
-import Cookies from 'js-cookie'
+import { FaPlay } from "react-icons/fa";
 
 function AllPlaylists() {
     let navigate = useNavigate();
@@ -24,7 +23,6 @@ function AllPlaylists() {
     const { Meta } = Card;
     const [playlist, setPlaylist] = useState([])
     const getPlaylist = async () => {
-        if(Cookies.get('token')!=null){
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
         if (pl) {
@@ -34,7 +32,7 @@ function AllPlaylists() {
         }
         else {
             setLoading(false)
-        }}
+        }
     }   
     
     useEffect(()=>{
@@ -43,21 +41,17 @@ function AllPlaylists() {
     },[])
     return (
         <div style={{
-            backgroundColor:'#1e293b',
-            minHeight:'100%',
-            minWidth:'100%',
-            position:'absolute',
-         
-
+            backgroundColor:'rgb(30 41 59)',
+            minHeight:'1500px'
         }}>
             <Sidebar />
             
             {
                 <div
-                   
                     style={{
                         minWidth:'fit-content',
-                        backgroundColor: '#1e293b',
+                        backgroundColor:'rgb(30 41 59)',
+                        // backgroundImage: 'linear-gradient(to right, rgb(30 41 59) , rgb(43 60 87))',
                         margin: '0 0 0 340px',
                         display: 'flex',
                         flexWrap: 'wrap',
@@ -69,49 +63,30 @@ function AllPlaylists() {
                         style={{
                             height: '433px',
                             width: '300px',
-                            backgroundColor: '#48589c',
+                            backgroundColor: 'rgb(71 85 105)',
                             marginRight: '50px',
                             border: '1px #d9d9d9d9 solid',
                             display: 'flex',                         
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            marginTop:'40px'
+                            marginTop:'62px'
                         }}
                        
-                    >   
-                        <CreatePlayList  onSuccess={()=>getPlaylist()} />
-                       
+                    >
+                        <CreatePlayList onSuccess={()=>getPlaylist()} />
+                      
                     </div>
-                    {loading ? "" :
-                <div style={{  
                    
-                    margin: '0 100px 0 340px',
-                }}>
-                    <SkeletonTheme baseColor="#9c9c9c" highlightColor="#cac8c8" display='flex' >
-                        <div>
-                            <p style={{
-                                    width: '300px',
-                                    marginTop: '30px'
-                                }}
-                            >
-                                <Skeleton
-                                    height={350}
-                                />
-                                <Skeleton
-                                    count={3}
-                                    height={20}
-                                />
-                            </p>
-                            
-                        </div>
-                    </SkeletonTheme>
-                </div>}
                     {playlist.map(item => (
                         loading ?
                             <Card
                                 className='card'
-                                style={{ marginTop:'40px'}}
+                                style={{ 
+                                    marginTop:'60px',
+                                    backgroundColor:'rgb(71 85 105)',
+                                    border:'1px #ffff solid'
+                                    }}
                                 cover={
                                     <img
                                         alt="example"
@@ -129,7 +104,8 @@ function AllPlaylists() {
                                         <FaPlay 
                                         style={{
                                             width:'20px',
-                                            height:'20px'
+                                            height:'20px',
+                                            color:'#ffff'
                                             
                                         }}
                                          key="play" />
@@ -139,8 +115,8 @@ function AllPlaylists() {
                                 ]}
                             >
                                 <Meta
-                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]?item?.song?.[0]?.image?.[0]
-                                        :'https://lh3.googleusercontent.com/T7sdPCzUmJYQwX1aFl6__pbg6XJSt3HY7Nsfqy0QorxUgBilR_5ZixYlX0VM7yjowLHl=w512'} />}
+                                    avatar={<Avatar src={item?.song?.[0]?.image?.[0]} />}
+                                    color={'#ffff'}
                                     title={item?.name}
                                     description={<>
                                         <p>{item?.genre?.zone}</p>
@@ -148,11 +124,15 @@ function AllPlaylists() {
                                     </>}
                                 />
                             </Card> :
-                            <SkeletonTheme baseColor="#9c9c9c" highlightColor="#cac8c8" display='flex'>
+                            <SkeletonTheme baseColor="#e6e1e1" highlightColor="#cac8c8" display='flex'
+                                style={{ marginLeft:'-20px'}}
+                            >
                                 <div style={{
                                     display: 'flex',
                                     justifyContent: 'space-between',
-                                    marginRight: '30px'
+                                    marginRight: '35px',
+                                    marginTop:'39px',
+                                   
                                 }}>
 
                                     <p

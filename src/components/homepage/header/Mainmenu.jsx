@@ -14,6 +14,9 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { handelChangePassWord, handelGetUser } from '../../../services/User';
 import { toast, ToastContainer } from 'react-toastify';
 import { Cookie } from '@mui/icons-material';
+import { grey } from '@mui/material/colors'
+import './Mainmenu.css'
+
 const StyledMenu = styled((props) => (
 
   <Menu
@@ -130,29 +133,36 @@ else setError0('')
       <Modal
         show={show}
         onHide={handleClose}
-
         keyboard={false}
-        size="lg"
+        size="lm"
       >
         <Modal.Header closeButton>
           <Modal.Title>Change Password</Modal.Title>
-         
         </Modal.Header>
-      <a style={{marginLeft:'20px'}}>Hello {email} !</a>
+      {/* <a style={{marginLeft:'20px'}}>Hello {email} !</a> */}
         <Modal.Body>
           <div style={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
             justifyContent: "center",
+            width:"30%",
           }}>
             <ToastContainer />
             <div style={{ width: "400px" }}>
               <label style={{
-                fontSize: "25px"
+                fontSize: "25px",
+                color:"#fff",
+                marginBottom:"5px",
+                marginLeft:"10px",
+                fontWeight:"450"
               }}>Old password</label>
               <input onChange={(e) => handelGetOldPW(e)} style={{
                 height: "40px",
-                width: "300px"
+                width: "300px",
+                borderRadius:"50px",
+                padding:"0 15px",
+                marginBottom:"20px",
+                marginLeft:"10px",
               }} type={hidden ? 'text' : 'password'} placeholder='Enter old password' />
               <span className='icon-hidden' onClick={handleHidden}>
                 {hidden ? <AiOutlineEye style={{ width: "30px", height: "30px" }} /> : <AiOutlineEyeInvisible style={{ width: "30px", height: "30px" }} />}
@@ -163,11 +173,19 @@ else setError0('')
 
             <div style={{ width: "400px" }}>
               <label style={{
-                fontSize: "25px"
+                fontSize: "25px",
+                color:"#fff",
+                marginBottom:"5px",
+                marginLeft:"10px",
+                fontWeight:"450"
               }}>New password</label>
               <input onChange={(e) => handelGetNewPW(e)} style={{
                 height: "40px",
-                width: "300px"
+                width: "300px",
+                borderRadius:"50px",
+                padding:"0 15px",
+                marginBottom:"15px",
+                marginLeft:"10px",
               }} type={hidden ? 'text' : 'password'} placeholder='Enter new password' />
              
               <span className='icon-hidden' onClick={handleHidden}>
@@ -192,19 +210,19 @@ else setError0('')
           width: '90px',
           height: '50px',
           borderRadius: '10px',
-          border: 'none',
-          backgroundColor: '#FFFF',
+          border: '1px rgb(159 184 219) solid',
+          backgroundColor: 'rgb(111 136 171)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
         }}
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
+        endIcon={<KeyboardArrowDownIcon sx={{ color: grey[50] }} />}
       >
         <Stack direction="row" spacing={2}>
           <Avatar alt="Remy Sharp" src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/man5-512.png" />
         </Stack>
-        <span style={{ marginLeft: "6px", color: "rgb(89 85 85)" }}>
+        <span style={{ marginLeft: "6px", color: "#ffff" }}>
           <KeyboardArrowDownIcon />
         </span>
 
@@ -217,16 +235,18 @@ else setError0('')
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        style={{
+          color:'#6f88ab'
+        }}
       >
         <MenuItem onClick={handleClose} disableRipple>
           <div onClick={handleShow} >
-            <EditIcon />
+            <EditIcon sx={{ color: grey[50] }} />
             Change password
           </div>
-
         </MenuItem>
         <MenuItem onClick={() => { handleClose(); hadleLogout(); }} disableRipple>
-          <LogoutIcon />
+          <LogoutIcon color='#ffff'  />
           Logout
         </MenuItem >
 

@@ -15,9 +15,9 @@ import { grey } from '@mui/material/colors'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { style } from '@mui/system';
-import '../components/sidebar.scss'
+import '../../components/sidebar.scss'
 const drawerWidth = 240;
-export default function   Sidebar(props) {
+export default function   SideBarAdmin(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let navigate = useNavigate();
@@ -27,10 +27,8 @@ export default function   Sidebar(props) {
   const token = Cookies.get('token');
 
 
-  let list = ['Personal', 'Discover'];
-  if (token) {
-    list.push('Library')
-  }
+  let list = ['Songs', 'Albums'];
+ 
 
   const drawer = (
     <div style={{
@@ -84,7 +82,7 @@ export default function   Sidebar(props) {
               }
             </ListItemIcon>
 
-            <ListItemText primary={text} style={{ color: grey[50] }}  onClick={(e) => navigate(`/${text.toLowerCase()}`)} />
+            <ListItemText primary={text} style={{ color: grey[50] }}  onClick={(e) => navigate(`/admin/${text.toLowerCase()}`)} />
           </ListItem>
 
         ))}

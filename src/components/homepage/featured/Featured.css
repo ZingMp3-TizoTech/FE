@@ -1,15 +1,17 @@
 .featured{
     position: relative;
 }
+
 .more{
     text-decoration: none;
     position: absolute;
     right: 80px;
     bottom: 280px;
     color: black;
+    color: #fff;
 }
 .more:hover{
-    color: rgb(119, 118, 118);
+    color: rgb(220, 216, 216);
 }
 .title-album{
     margin-left: 45px;
@@ -42,6 +44,7 @@
     font-weight: 500;
     margin-left: 10px;
     margin-top: 15px;
+    color: #fff;
 }
 .album-item .after{
     position: absolute;

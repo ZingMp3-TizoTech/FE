@@ -1,26 +1,23 @@
-/* .wrapper-card{
-    height: 450px;
-    width: 300px;
-    margin: 200px;
-    border: 1px #000 solid;
-}
-.wrapper-card .image{
-    background-color: antiquewhite;
-    width: 300px;
-    height: 300px;
-    overflow: hidden;
-}
-.wrapper-card .image img{
-    max-width: 298px;
-} */
 .card {
     max-height: 500px;
     width:300px;
     margin-right: 50px;
     margin-bottom: 50px;
     transition: 0.12s;
+  
 }
 
 .card:hover { 
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+.ant-card-actions{
+    background-color: rgb(71 85 105) !important;
+}
+.ant-card-meta-title{
+    color: #ffff !important;
+}
+.ant-card-bordered .ant-card-cover {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
 }

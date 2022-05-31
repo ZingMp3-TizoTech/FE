@@ -58,6 +58,7 @@ const CreatePlayList = ({ onSuccess }) => {
           }}
         >Create playlist in here</p>
       </div>
+
       <Modal title="Create a new playlist"
         visible={isModalVisible}
         onOk={handleOk}
