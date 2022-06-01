@@ -27,7 +27,7 @@ export default function   SideBarAdmin(props) {
   const token = Cookies.get('token');
 
 
-  let list = ['Songs', 'Albums'];
+  let list = ['Songs', 'Albums','Artists','Genres'];
  
 
   const drawer = (

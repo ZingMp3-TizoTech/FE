@@ -37,4 +37,16 @@ const handleGetSongById = async (id)=>{
         console.log(error)
     }
 }
-export {handleGetSongBtArtistAPI, handleGetAllSongAPI,handleGetSongById}
+const handleUpdateSong = async (id,name,url,artist,image,album,genre,rates,listens)=>{
+    try {
+        let token =Cookies.get('token');
+        return axios.put(`${Config.API_URL}/song/${id}`,{name,url,artist,image,album,genre,rates,listens},{
+            headers: {
+                'Authorization': `Bearer ${token}` 
+              }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+export {handleGetSongBtArtistAPI, handleGetAllSongAPI,handleGetSongById,handleUpdateSong}
