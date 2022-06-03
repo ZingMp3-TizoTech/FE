@@ -49,6 +49,12 @@
     color: #fff;
     box-shadow: 3px 3px rgb(89 214 182);
 }
+.list-item input{
+    width: 268px;
+    margin: 3px 0 14px 0;
+    border-radius: 30px;
+    padding-left: 15px;
+}
 .list-item p{
     position: absolute;
     font-weight: 600;

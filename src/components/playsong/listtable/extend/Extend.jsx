@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
-import { Button, Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Menu, Space } from 'antd';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
 import { AiOutlineHeart, AiFillHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
-import AddSong from './ModalPlaylist';
-import { FaRegTrashAlt } from "react-icons/fa";
-import { handelGetUser, handelLikeSong, handelUnLikeSong } from '../../services/User';
+import AddSong from './playlist/ModalPlaylist';
+import { handelGetUser, handelLikeSong, handelUnLikeSong } from '../../../../services/User';
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify';
+import DeleteSong from './playlist/ModalDeleteSong';
+import { useParams } from 'react-router-dom';
 
 
-export default function Extend({ liked, url, id, type }) {
-
+export default function Extend({ liked, url, id, idPlaylist, type, onDeleteSuccess }) {
+  const idPl = useParams();
   const handleLike = async (id) => {
     const token = Cookies.get('token')
     if (token != null) {
@@ -26,7 +27,6 @@ export default function Extend({ liked, url, id, type }) {
     }
     else toast.warning('Please Login to continue!')
   }
-
 
 
   const menu = (
@@ -52,9 +52,8 @@ export default function Extend({ liked, url, id, type }) {
             }} />}
       </Menu.Item>
       <Menu.Item>
-        {/* {type != "playlists" ? <AddSong id={id} onClick={(e)=>{ e.stopPropagation()}} /> 
-        : <FaRegTrashAlt onClick={(e)=>{e.stopPropagation()}} />} */}
-        <AddSong id={id}  stopPropagation={(e)=>{ e.stopPropagation()}} /> 
+      {type != "playlists" ? <AddSong id={id}  stopPropagation={(e)=>{ e.stopPropagation()}}/> : <DeleteSong onDeleteSuccess={(e)=>onDeleteSuccess(idPlaylist)} idPlaylist={idPlaylist} idSong={id}/>}
+
       </Menu.Item>
 
       <Menu.Item>

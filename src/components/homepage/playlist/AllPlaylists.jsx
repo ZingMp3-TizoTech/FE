@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Sidebar from '../../Sidebar'
+import Sidebar from '../../sidebar/Sidebar'
 import 'antd/dist/antd.css';
 import { Card, Avatar } from 'antd';
 import { handleGetPlaylistByUser } from '../../../services/Playlist';
-import { FolderAddFilled, PlayCircleOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import Delete from './ModalDeletePlayList';
+import Delete from './modal/ModalDeletePlayList';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import CreatePlayList from './ModalCreatePlayList';
-import './Card.css'
+import CreatePlayList from './modal/ModalCreatePlayList';
+import '../ListAll/album&artist/card/Card.css'
+import music from '../../../assets/image/music.png'
+import { FaPlay } from "react-icons/fa";
 
-import { FaPlay,FaRegTrashAlt } from "react-icons/fa";
-import Cookies from 'js-cookie'
+
 
 function AllPlaylists() {
     let navigate = useNavigate();
@@ -25,7 +25,6 @@ function AllPlaylists() {
     const { Meta } = Card;
     const [playlist, setPlaylist] = useState([])
     const getPlaylist = async () => {
-        if(Cookies.get('token')!=null){
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data);
         if (pl) {
@@ -35,7 +34,7 @@ function AllPlaylists() {
         }
         else {
             setLoading(false)
-        }}
+        }
     }   
     
     useEffect(()=>{
@@ -45,10 +44,9 @@ function AllPlaylists() {
     return (
         <div style={{
 
-            backgroundColor:'#1e293b',
-            minHeight:'100%',
-            minWidth:'100%',
-            position:'absolute',
+            backgroundColor:'rgb(30 41 59)',
+            minHeight:'1500px'
+
         }}>
             <Sidebar />
             
@@ -56,8 +54,7 @@ function AllPlaylists() {
                 <div
                     style={{
                         minWidth:'fit-content',
-
-                        backgroundColor: '#1e293b',
+                        backgroundColor:'rgb(30 41 59)',
                         margin: '0 0 0 340px',
                         display: 'flex',
                         flexWrap: 'wrap',
@@ -67,7 +64,7 @@ function AllPlaylists() {
                     <div    
                         className='card'
                         style={{
-                            height: '433px',
+                            height: '458px',
                             width: '300px',
                             backgroundColor: 'rgb(71 85 105)',
                             marginRight: '50px',
@@ -80,7 +77,7 @@ function AllPlaylists() {
                         }}
                        
                     >
-                        <CreatePlayList onSuccess={()=>getPlaylist()} />
+                        <CreatePlayList onSuccess={()=>getPlaylist()} playlistUser = { playlist } />
                     </div>
                    
                     {playlist.map(item => (
@@ -95,7 +92,7 @@ function AllPlaylists() {
                                 cover={
                                     <img
                                         alt="example"
-                                        src={item?.song?.[0]?.image?.[0] ? item?.song?.[0]?.image?.[0] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCebaMsn7crR47zGdjApJzDoxM0t2-oCEyt07l6Ecvg0-3ZNOwv75SrgRcNKJr6g211a4&usqp=CAU'}
+                                        src={item?.song?.[0]?.image?.[0] ? item?.song?.[0]?.image?.[0] : music}
                                         style={{
                                             maxWidth: 300,
                                             maxHeight: 300,
@@ -121,8 +118,10 @@ function AllPlaylists() {
                             >
                                 <Meta
 
+
                                     avatar={<Avatar src={item?.song?.[0]?.image?.[0]?item?.song?.[0]?.image?.[0]
                                         :'https://lh3.googleusercontent.com/T7sdPCzUmJYQwX1aFl6__pbg6XJSt3HY7Nsfqy0QorxUgBilR_5ZixYlX0VM7yjowLHl=w512'} />}
+
                                     title={item?.name}
                                     description={<>
                                         <p>{item?.genre?.zone}</p>

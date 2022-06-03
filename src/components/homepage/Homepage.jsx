@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Sidebar from '../Sidebar'
+import Sidebar from '../sidebar/Sidebar'
 import Featured from './featured/Featured'
 import Slidealbum from './slidealbum/Slidealbum'
 import "./Homepage.css"
@@ -7,6 +7,7 @@ import Header from "./header/Header"
 import ApiCaller from "../../utils/callAPI"
 import Genre from './genre/Genre'
 import 'react-loading-skeleton/dist/skeleton.css'
+
 import 'animate.css';
 export default function Homepage() {
   const [artists, setArtists] = useState([])
@@ -19,6 +20,7 @@ export default function Homepage() {
     ApiCaller('artists', 'GET')
       .then(res => {
         setArtists(res.data.data)
+        setLoading(false)
       })
       .finally(() => (
         setLoading(false)
@@ -28,13 +30,17 @@ export default function Homepage() {
     ApiCaller('albums', 'GET')
       .then(res => {
         setAlbums(res.data.data)
+        setLoading(true)
       })
       .finally(() => (
         setLoading(false)
       ))
-  }, []);
+  }, [])
+    ;
+
 
   function handleScroll() {
+
     const ob = document.getElementById("test");
     ob.addEventListener("scroll", function () {
       if (ob.scrollTop >= 200)
@@ -48,23 +54,22 @@ export default function Homepage() {
 
 
   return (
-    <div className='container'
+    <div className='container' id='test' onScroll={handleScroll}
       style={{ backgroundColor: '#1e293b', paddingLeft: "6%" }}
     >
-      <div>
-        <Sidebar />
+      <div className={`container-header animate__animated ${scrollSidebar}`}
+        style={{ marginLeft: '-7%', maxHeight: "100%" }}>
       </div>
-
-
+      <Sidebar />
       <div>
-
         <div
-
           style={{
+            backgroundColor: "red",
             zIndex: "1",
             marginTop: "20px",
-            paddingLeft: '40px',
-          }}>
+            marginLeft: '240px'
+          }}
+        >
           <Header />
         </div>
         <div style={{
@@ -75,9 +80,8 @@ export default function Homepage() {
         </div>
         <div style={{
           zIndex: "1",
-          paddingLeft: '20px',
+          paddingLeft: '10px',
         }}>
-
           <p className='title-album' style={{ color: "white" }}>Featured Artists</p>
           <Featured items={artists} type={'artists'} />
           <p className='title-album' style={{ color: "white" }}>Genres</p>
@@ -86,8 +90,8 @@ export default function Homepage() {
           }}>
             <Genre />
           </div>
-          <p className='title-album'>Featured Albums</p>
-          <Featured items={albums} type={'albums'} loading={loading} />
+          <p className='title-album' style={{ color: "white" }}>Featured Albums</p>
+          <Featured items={albums} type={'albums'} />
         </div>
       </div>
     </div>

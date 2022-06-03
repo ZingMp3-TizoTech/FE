@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Login.css'
 import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import {handleLoginAPI} from '../../services/User'
+import {handelGetUser, handleLoginAPI} from '../../../services/User'
 import { useNavigate } from 'react-router-dom';
 import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai"
 import { toast } from 'react-toastify';
@@ -39,11 +39,12 @@ export default function Login() {
     const handleLogin = async()=>{
         try {
             // console.log(email, password);
-            const data = await handleLoginAPI(email, password);
-            console.log(data);
-            let token= Cookies.set("token",data.data.token)                                   
-            if(token){
-               
+            const data = await handleLoginAPI(email, password);          
+            let token= Cookies.set("token",data.data.token)       
+            const user = await handelGetUser();
+            const role=user.data.data[0].role.name;
+            Cookies.set('role',role)
+            if(token){      
                 toast.success("Login success!")
                 navigate('/')
             } 
@@ -86,7 +87,9 @@ export default function Login() {
                                 {/* {email==""?<p style={{marginLeft:'25px', color:'red'}}> *Please enter email </p>:<></>} */}
                             
 
-                            <input type={hidden ? 'password' : 'text'} placeholder="Password" onChange={handlePasswordInput} className="password"/>
+                            <input type={hidden ? 'password' : 'text'} 
+                            placeholder="Password" onChange={handlePasswordInput} 
+                            className="password"/>
                             <a style={{marginLeft:'25px', color:'red',height:'20px'}}>{messagePassWord}</a>
                             <span 
                             className='icon-hidden'

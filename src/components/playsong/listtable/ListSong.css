@@ -63,12 +63,17 @@
 
 .wrapper-song{
     display: flex;
+    position: absolute;
+    height: 90%;
+    width: 100%;
+    
 }
 .wrapper-list-song table th, td{
-    color: #fff;
+    color: #fff;    
     font-family: Arial, Helvetica, sans-serif !important;
 }
 .wrapper-list-song tbody tr{
+    min-height: 10%;
     height: 20px;
 }
 

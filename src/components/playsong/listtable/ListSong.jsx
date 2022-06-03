@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { FaDownload } from 'react-icons/fa'
 import './ListSong.css'
-import ApiCaller from '../../utils/callAPI'
-import Playing from './Playing'
-import DetailSong from './DetailSong'
+import ApiCaller from '../../../utils/callAPI'
+import Playing from '../play/Playing'
+import DetailSong from '../detail/DetailSong'
 import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
-import { handleGetAlbumById } from '../../services/Album'
-import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
-import Extend from './Extend'
-import { handelGetUser } from '../../services/User'
+import { handleGetPlaylistById } from '../../../services/Playlist'
+import Extend from './extend/Extend'
+import { handelGetUser } from '../../../services/User'
 import Cookies from 'js-cookie'
-import beat from '../../assets/gif/beat.gif'
-import beat_img from '../../assets/image/beat.png'
-import Duration from './Duration'
+import beat from '../../../assets/gif/beat.gif'
+import beat_img from '../../../assets/image/beat.png'
+import { toast } from 'react-toastify'
+import Duration from './extend/Duration'
+
 export default function ListSongs({ type }) {
     const id = useParams();
     const [songs, setSongs] = useState([])
@@ -25,7 +25,10 @@ export default function ListSongs({ type }) {
     const [playlist, setPlaylist] = useState([])
     const [islike, setLiked] = useState()
     const [listLike, setListLike] = useState([])
+
+
     let a = songs.findIndex(i => i._id === id.id)
+
     
     useEffect(() => {
         setLoading(true);
@@ -78,8 +81,8 @@ export default function ListSongs({ type }) {
                     : type == "playlists" ?
                         playlist?.song
                         : songs
-    const liked = async (id) => {
-        
+
+    const liked = async (id) => {       
         if(Cookies.get('token')){
             const user = await handelGetUser();
             setListLike(user.data.data[0].liked);
@@ -96,24 +99,30 @@ export default function ListSongs({ type }) {
                 setListLike(user.data.data[0].liked);
             }
         }   
-        else console.log('phai dang nhap');
+        else toast.warning('Please login to continue!');
     }
-    // useEffect(()=>{liked()},[islike])
 
+    console.log();
+    
 
+    return (
+        <div>
+            <div className='wrapper-song'>
 
-
-return (
-    <div>
-        <div className='wrapper-song'>
 
                 <DetailSong
                     idSong={idNumber} songs={items} circular={circular}
                     type={type} albums={albums} loading={loading}
                     playlist={playlist}
                 />
+
                 <div className='wrapper-list-song'>
-                    <table minHeight={'100%'}>
+                    <table  style={{
+                         maxHeight:'fit-content',
+                         minHeight:'fit-content',
+                         overflow:'scroll',
+                        
+                    }} >
                         <thead
                             style={{
                                 background: '#334155',
@@ -136,7 +145,7 @@ return (
                                 <th style={{
                                     width: '20%',
                                     textAlign: 'center'
-                                }}>Author</th>
+                                }}>Album</th>
                                 <th style={{
                                     width: '20%',
                                     textAlign: 'center'
@@ -145,10 +154,7 @@ return (
                                     width: '10%',
                                     textAlign: 'center'
                                 }}>  </th>
-                                {/* <th style={{
-                                width: '10%',
-                                textAlign: 'center'
-                            }}>  </th> */}
+                                
 
                             </tr>
                         </thead>
@@ -178,16 +184,16 @@ return (
                                         >{song?.name}</td>
                                         <td
                                             className={index === idNumber ? "color" : ""}
-                                        >{song?.artist?.name}</td>
+                                        >{type=='albums'?
+                                        <>{albums[0]?.artist?.name}</> : <>{song?.artist?.name}</>}</td>
                                         <td
                                             className={index === idNumber ? "color" : ""}
                                             style={{
                                                 textAlign: 'center',
-                                            }}>{
-                                                song?.album ? <>{song?.album?.name}</> : <></>}</td>
-                                        
-                                        <td style={{textAlign:'center'}}><Duration url={song?.url}/></td>
-                                                                
+                                            }}>{ type=='albums'?
+                                                 <>{albums[0]?.name}</> : <>{song?.album?.name}</>}</td>
+
+                                        <td style={{textAlign:'center'}}> <Duration url={song?.url} /> </td>                   
                                         <td
                                             className={index === idNumber ? "color" : ""}
                                             style={{
@@ -196,8 +202,8 @@ return (
                                             onMouseEnter ={(e) => liked(song._id)}
                                             onMouseLeave={(e) => liked(song._id)}
                                                         >
+                                                <Extend onDeleteSuccess={()=> getPlaylist(id.id)} idPlaylist={id.id} type={type}  liked={islike} url={song?.url} id={song._id} />
 
-                                                <Extend liked={islike} url={song?.url} id={song._id} type={type} />
                                             </div>
                                         </td>
                                     </tr>
@@ -211,21 +217,15 @@ return (
                             color='#a696d5' /></>}
 
                     </table>
-
-                    <div style={{
-                        marginTop: "100px"
-                    }}>
-
-                    </div>
-                </div>
-            </div>
-            <div >
-                <div className='play-child'>
-                    {<Playing i={a} action={action} setAction={setAction} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
-                </div>
-
             </div>
         </div>
+
+            <div className='play-child'>
+                {<Playing action={action} setAction={setAction} i={a} type={type} setCircular={setCircular} setIdNumber={setIdNumber} idSong={idNumber} songs={items} />}
+            </div>
+     
+        
+    </div>
     )
 
 }

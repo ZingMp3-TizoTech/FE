@@ -1,16 +1,16 @@
 import React from 'react'
 import './DetailSong.css'
-import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
 import { useNavigate } from 'react-router-dom';
 import Loading from 'react-loading';
-import '../sidebar.scss'
 export default function DetailSong({ idSong, songs, circular, type, albums, loading, playlist }) {
 
   let navigate = useNavigate();
 
   return (
     <div className='wrapper-detail-song' style={{
-      backgroundColor: '#334155',
+
+      backgroundColor: '#334155',   
+
     }}>
       <div
         onClick={() => {

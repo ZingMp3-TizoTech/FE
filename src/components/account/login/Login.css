@@ -128,6 +128,7 @@ img {
   margin: 0 auto;
   position: relative;
   flex-direction: column;
+  padding-left: 100px;
 }
 .login .container h1 {
   margin-top: 100px;
@@ -159,7 +160,7 @@ img {
   font-size: 32px;
   color: #636060;
   position: absolute;
-  right: 15px;
+  right: 150px;
   top: 435px;
 }
 .login .container .login-form .form button[type=submit] {
@@ -216,9 +217,7 @@ img {
   margin-left: 15px;
 }
 .login .container .forget-pass {
-  position: absolute;
-  right: 0;
-  margin-top: 202px;
+  margin-left: 390px;
 }
 .login .container .forget-pass a {
   font-size: 16px;

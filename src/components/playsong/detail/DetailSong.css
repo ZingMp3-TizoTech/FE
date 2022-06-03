@@ -1,10 +1,15 @@
 body{   
-        background-color: #334155;       
+
+        background-color: #5ce0ba;       
+     
+
 }
 .wrapper-detail-song{
     width: 34%;
     position: relative;
-    height: 700px;
+    height: 710px;
+    background-color: #334155;
+
 }
 .wrapper-detail-song .suntify{
     display: flex;

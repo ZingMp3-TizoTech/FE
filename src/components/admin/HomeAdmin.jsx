@@ -1,8 +1,13 @@
 import React from 'react'
+import SideBarAdmin from './SideBarAdmin'
+import TableSong from './table/TableSong'
 
-async function HomeAdmin() {
-  return await (
-    <div>Homepage Admin</div>
+ function HomeAdmin() {
+  return  (
+    <div>
+    <SideBarAdmin/>   
+    <TableSong/>
+    </div>
   )
 }
 

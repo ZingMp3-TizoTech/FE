@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import { Modal, Button } from 'react-bootstrap';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { handelChangePassWord, handelGetUser } from '../../../services/User';
+import { handelChangePassWord, handelGetUser } from '../../../../services/User';
 import { toast, ToastContainer } from 'react-toastify';
 import { Cookie } from '@mui/icons-material';
 import { grey } from '@mui/material/colors'
@@ -134,7 +134,7 @@ else setError0('')
         show={show}
         onHide={handleClose}
         keyboard={false}
-        size="lg"
+        size="lm"
       >
         <Modal.Header closeButton>
           <Modal.Title>Change Password</Modal.Title>
@@ -145,7 +145,7 @@ else setError0('')
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            width:"43%",
+            width:"30%",
           }}>
             <ToastContainer />
             <div style={{ width: "400px" }}>
@@ -161,7 +161,8 @@ else setError0('')
                 width: "300px",
                 borderRadius:"50px",
                 padding:"0 15px",
-                marginBottom:"20px"
+                marginBottom:"20px",
+                marginLeft:"10px",
               }} type={hidden ? 'text' : 'password'} placeholder='Enter old password' />
               <span className='icon-hidden' onClick={handleHidden}>
                 {hidden ? <AiOutlineEye style={{ width: "30px", height: "30px" }} /> : <AiOutlineEyeInvisible style={{ width: "30px", height: "30px" }} />}
@@ -183,7 +184,8 @@ else setError0('')
                 width: "300px",
                 borderRadius:"50px",
                 padding:"0 15px",
-                marginBottom:"15px"
+                marginBottom:"15px",
+                marginLeft:"10px",
               }} type={hidden ? 'text' : 'password'} placeholder='Enter new password' />
              
               <span className='icon-hidden' onClick={handleHidden}>

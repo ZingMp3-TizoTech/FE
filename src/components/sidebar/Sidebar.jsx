@@ -7,17 +7,14 @@ import ListItemText from '@mui/material/ListItemText';
 import AlbumIcon from '@mui/icons-material/Album';
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded';
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded';
-import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Drawer from '@mui/material/Drawer';
 import { grey } from '@mui/material/colors'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
-import { style } from '@mui/system';
-import '../components/sidebar.scss'
+import './sidebar.scss'
 const drawerWidth = 240;
-export default function Sidebar(props) {
+export default function   Sidebar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let navigate = useNavigate();
@@ -31,11 +28,15 @@ export default function Sidebar(props) {
   if (token) {
     list.push('Library')
   }
+
   const drawer = (
     <div style={{
-      overflowY: "clip",
+
+      overflow: "hidden",
       minHeight: '100%',
-      backgroundColor: '#334155',
+      maxHeight:'90%'
+
+
     }}>
 
       <Toolbar style={{
@@ -68,8 +69,7 @@ export default function Sidebar(props) {
       <List style={{
         backgroundColor: '#334155',
         minHeight: '100%',
-        color: '#ffff',
-        marginTop:'30px'
+        color: 'black'
       }}>
         {list.map((text, index) => (
           <ListItem button key={text}>
@@ -81,17 +81,13 @@ export default function Sidebar(props) {
                       <></>
               }
             </ListItemIcon>
-
-            <ListItemText primary={text} onClick={(e) => navigate(`/${text.toLowerCase()}`)} />
+            <ListItemText primary={text} style={{ color: grey[50] }}  onClick={(e) => navigate(`/${text.toLowerCase()}`)} />
           </ListItem>
-
         ))}
-
       </List>
 
     </div>
   );
-
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
