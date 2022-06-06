@@ -28,7 +28,7 @@ const handleGetAllSongAPI = async ()=>{
 const handleGetSongById = async (id)=>{
     try {
         let token =Cookies.get('token');
-        return axios.get(`${Config.API_URL}/song/${id}`,{
+        return await axios.get(`${Config.API_URL}/song/${id}`,{
             headers: {
                 'Authorization': `Bearer ${token}` 
               }
@@ -37,4 +37,15 @@ const handleGetSongById = async (id)=>{
         console.log(error)
     }
 }
-export {handleGetSongBtArtistAPI, handleGetAllSongAPI,handleGetSongById}
+
+const updateRateAndListen = async (id,rates, listens)=>{
+    try {
+        // console.log(rates);
+        // console.log(listens);
+        return await axios.put(`https://suntify.herokuapp.com/song/like/${id}`, {rates, listens})   
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export {handleGetSongBtArtistAPI, handleGetAllSongAPI,handleGetSongById, updateRateAndListen}

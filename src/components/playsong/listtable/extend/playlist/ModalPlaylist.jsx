@@ -61,10 +61,8 @@ const AddSong = ({ id, stopPropagation }) => {
       setName(" ")
       setOpen(false)
   } 
-  console.log(nameList);
 
   const checkExistence = (playlist.filter(item => item.name == nameList)).length
-  console.log(checkExistence);
 
   const handleOk = async (e) => {
     idsong = [id]

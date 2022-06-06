@@ -58,6 +58,20 @@ export default function Profile() {
             }))
     )
 
+
+    // console.log(songs);
+
+    songs.sort(function(song1, song2) {
+        let a = song1.listens;
+        let b = song2.listens;
+    
+        return b - a;
+    });
+    
+    // In ra kết quả
+    console.table(songs);
+
+
     const getPlaylist = async () => {
         const pl = await handleGetPlaylistByUser()
         setPlaylist(pl.data.data.slice(0, 5));
@@ -67,7 +81,7 @@ export default function Profile() {
         getPlaylist()
 
     }, [])
-    console.log(playlist);
+
     return (
         <div>
             <Sidebar />
@@ -156,9 +170,9 @@ export default function Profile() {
                                         className='row-img'
                                     >
                                         <div className='img-song'>
-                                            <img className={circular && idNumber === index ? 'image-song' : ''} src={song[0].image[0]} />
+                                            <img className={ idNumber === index ? 'image-song' : ''} src={song[0].image[0]} />
                                         </div>
-                                        {circular && idNumber === index ?
+                                        { idNumber === index ?
                                             <div>
                                                 <img className='img-ant' style={{ width: "30px", height: "30px" }} src={circular ? beat : beat_img} />
                                             </div> : <></>

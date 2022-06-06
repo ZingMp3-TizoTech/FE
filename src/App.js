@@ -10,6 +10,7 @@ import AllPlaylists from "./components/homepage/playlist/AllPlaylists";
 import PrivateRoute from "./components/admin/Privatecomponent";
 import HomeAdmin from "./components/admin/HomeAdmin";
 import Profile from "./components/homepage/profile/Profile";
+import Discover from "./components/homepage/Discover/Discover";
 
  function App() {
   const NotFound = () => (
@@ -37,6 +38,7 @@ import Profile from "./components/homepage/profile/Profile";
        <Route path="/albums" element={<ListAll type="albums" />} />
        <Route path="/Personal" element={<Profile/>}/>
        <Route path="/library" element={<AllPlaylists/>}/>
+       <Route path="/discover" element={<Discover/>}/>
        <Route path="/admin" element={<PrivateRoute><HomeAdmin/></PrivateRoute>}/>
     </Routes>
     <ToastContainer />

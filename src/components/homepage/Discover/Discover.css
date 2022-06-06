@@ -1,0 +1,115 @@
+#discover{
+    margin-left: 238px;
+    background-color: #1e293b;
+    min-height: 745px;
+    position: relative;
+}
+
+#discover .favorite-song table th, td {
+    color:#8a9baa;
+  }
+
+#discover .favorite-song{
+    position: absolute;
+    right: 0px;
+    bottom: 85px;
+    max-height: 550px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+#discover .title{
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    font-size: 25px;
+    font-weight: 600;
+    color: rgb(151, 147, 147);
+}
+#discover .favorite-song table thead {
+    position: fixed;
+    top: 100px;
+    background-color: #1e293b;
+    width: 1297px;
+    right: 0;
+}
+#discover .favorite-song table td{
+    border-top: 1px solid #284162;
+}
+#discover .favorite-song table tr{
+    height: 60px;
+}
+#discover .favorite-song table{
+    width: 1283px;
+}
+#discover .favorite-song table .number{
+    font-weight: 900;
+    width: 5px;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+    opacity: 1;
+}
+#discover .favorite-song table .number-1{
+    font-weight: 900;
+    width: 5px;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+    opacity: 1;
+    color: #1e293b;
+    text-shadow: -1px 0 #4a90e2, 0 1px #4a90e2, 1px 0 #4a90e2, 0 -1px #4a90e2
+}
+#discover .favorite-song table .number-2{
+    font-weight: 900;
+    width: 5px;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+    opacity: 1;
+    color: #1e293b;
+    text-shadow: -1px 0 #50e3c2, 0 1px #50e3c2, 1px 0 #50e3c2, 0 -1px #50e3c2
+}
+#discover .favorite-song table .number-3{
+    font-weight: 900;
+    width: 5px;
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 20px;
+    opacity: 1;
+    color: #1e293b;
+    text-shadow: -1px 0 #e35050, 0 1px #e35050, 1px 0 #e35050, 0 -1px #e35050
+}
+#discover .favorite-song table tbody a{
+    color: #8a9baa;
+}
+#discover .favorite-song table tbody tr:hover{
+    background-color: #475569;
+}
+#discover .favorite-song table .img-song img{
+    max-width: 50px;
+}
+#discover .play-song{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#discover .favorite-song .active-row{
+    background-color: #475569;
+}
+
+#discover .favorite-song tbody .color{
+    color: #5ce0ba;
+}
+#discover .favorite-song table tbody .image-song{
+    opacity: 0.3;
+}
+#discover .favorite-song table tbody .img-ant{
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
