@@ -80,7 +80,7 @@ function AllPlaylists() {
                         }}
                        
                     >
-                        <CreatePlayList onSuccess={()=>getPlaylist()} />
+                        <CreatePlayList onSuccess={()=>getPlaylist()} playlistbyUser={playlist} />
                     </div>
                    
                     {playlist.map(item => (

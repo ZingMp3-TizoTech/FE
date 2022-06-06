@@ -13,34 +13,32 @@ import { handleGetSongById, handleUpdateSong } from '../../../../services/Song';
 import { handleUpload } from '../../../../services/Upload';
 import { handleCreateGenre, handleGetAllGenre } from '../../../../services/Genres';
 import { Hidden } from '@mui/material';
-import { handleCreateArtist } from '../../../../services/Artist';
-import Select from 'react-select';
+import { handleCreateArtist, handleUpdateArtist } from '../../../../services/Artist';
+
 // import 'react-select/dist/css/react-select.css';
+import { Select } from 'antd';
+const { Option } = Select;
 
-
-const CreateArtist = ({ onCall }) => {
+const EditArtist = ({idArtist, onCall, name, old, sex, zone, image }) => {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [nameArtist, setNameArtist] = useState('')
-    const [age, setAge] = useState()
-    const [genre, setGenre] = useState('')
+    const [nameArtist, setNameArtist] = useState(name)
+    const [age, setAge] = useState(old)
+    const [genre, setGenre] = useState(zone)
     const [allGenre, setAllGenre] = useState([])
-    const [gender, setGender] = useState('')
+    const [gender, setGender] = useState(sex)
     const [artist, setArtist] = useState('')
-    const [img, setImg] = useState('')
+    const [img, setImg] = useState(image)
     const [loading, setLoading] = useState(false)
-    const [selectedOption, setSelectedOption] = useState(null);
+    //const [selectedOption, setSelectedOption] = useState(zone);
     const showModal = () => {
         setIsModalVisible(true);
         setLoading(true)
     };
-
     const handleOk = async () => {
         if (Cookies.get('token')) {
-            //const created = await handleCreatePlaylist(name, date_create, song)
-            console.log(nameArtist, gender, age, selectedOption?.value, img);
-            const create = await handleCreateArtist(nameArtist, gender, age, selectedOption?.value, img);
-            console.log(create);
+            //id,name,gender,image,age,genre
+            const create = await handleUpdateArtist(idArtist,nameArtist, gender,img, age, genre );
             setIsModalVisible(false)
             onCall && onCall()
 
@@ -72,11 +70,9 @@ const CreateArtist = ({ onCall }) => {
             setImg(upload.data.secure_url);
             setLoading(true)
         }
-
     }
     const getGenres = async () => {
         const all = await handleGetAllGenre();
-        console.log(all.data.data);
         setAllGenre(all.data.data)
     }
     useEffect(() => {
@@ -84,31 +80,18 @@ const CreateArtist = ({ onCall }) => {
     }, [])
 
 
-    let value = ''
-    let label = ''
-    let options = [{
-        value: 'value', label: '---'
-    }]
-    allGenre.forEach(i => {
-        value = i?._id;
-        label = i?.zone
-        return options.push({ value: value, label: label })
-
-    })
-
     return (
         <>
             <div onClick={showModal} style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <Button  >Create Artist</Button>
+                <FaRegEdit style={{ color: 'black', fontSize: '25px' }} />
             </div>
 
-            <Modal
-            style={{marginTop:'-90px'}}
+            <Modal style={{ marginTop: '-90px' }}
                 closeIcon
-                footer=''
+                footer={''}
                 visible={isModalVisible}>
                 <ModalHeader>
-                    <a style={{ color: "white", fontSize: '30px' }}>Create genre</a>
+                    <a style={{ color: "white", fontSize: '30px' }}>Update Artist</a>
                     <CloseButton onClick={(e) => setIsModalVisible(false)} />
                 </ModalHeader>
                 <ModalBody>
@@ -121,7 +104,8 @@ const CreateArtist = ({ onCall }) => {
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
-                                borderRadius: '50px'
+                                borderRadius: '50px',
+                                paddingLeft: "20px"
                             }}
                         />
                         <br />
@@ -133,11 +117,13 @@ const CreateArtist = ({ onCall }) => {
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
-                                borderRadius: '50px'
+                                borderRadius: '50px',
+                                paddingLeft: "20px"
                             }}
                         />
                         <br />
                         <input
+
                             value={age}
                             type='number'
                             placeholder='Enter age, if group age = 0!'
@@ -145,17 +131,32 @@ const CreateArtist = ({ onCall }) => {
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
-                                borderRadius: '50px'
+                                borderRadius: '50px',
+                                paddingLeft: "20px"
                             }}
                         />
                         <br />
                         <Select
-                            defaultValue={selectedOption}
-                            name="form-field-name"
-                            //value="one"
-                            options={options}
-                            onChange={setSelectedOption}
-                        />
+                            value={genre}
+                            showSearch
+                            style={{
+                                width: '100%',
+                            }}
+                            onChange={setGenre}
+                            placeholder="Search to Select..."
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.children.includes(input)}
+                            filterSort={(optionA, optionB) =>
+                                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                            }
+                        >
+                            {allGenre.map(item => (                              
+                                <Select.Option key={item?._id} value={item?.id}>
+                                    {item?.zone}
+                                </Select.Option>
+                            ))}
+                           
+                        </Select>
                         <br />
                         <input
                             //value={img1}
@@ -164,16 +165,16 @@ const CreateArtist = ({ onCall }) => {
 
                         />
                         <br />
-                        <div style={{width:'50px', height:'50px'}}>
-                        <img style={{width:'150px', height:'150px',border:'none'}} src={img} />
+                        <div style={{ width: '50px', height: '50px' }}>
+                            <img style={{ width: '150px', height: '150px' }} src={img} />
                         </div>
                     </div>
                 </ModalBody>
 
-                <ModalFooter style={{marginTop:'90px'}}>
+                <ModalFooter style={{ marginTop: '90px' }}>
                     <Button onClick={handleCancel}>Cancel</Button>
                     {loading ?
-                        <Button onClick={handleOk}>Create</Button>
+                        <Button onClick={handleOk}>Update</Button>
                         :
                         <Button variant="primary" disabled>
                             <Spinner
@@ -191,4 +192,4 @@ const CreateArtist = ({ onCall }) => {
         </>
     );
 }
-export default CreateArtist
+export default EditArtist

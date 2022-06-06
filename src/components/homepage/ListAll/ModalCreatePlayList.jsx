@@ -6,7 +6,7 @@ import './ModalCreatePlaylist.css'
 import { FolderAddFilled } from '@ant-design/icons';
 import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../services/Playlist';
 import Cookies from 'js-cookie'
-const CreatePlayList = ({ onSuccess }) => {
+const CreatePlayList = ({ onSuccess,playlistbyUser}) => {
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [playlist, setPlaylist] = useState([])
@@ -16,8 +16,15 @@ const CreatePlayList = ({ onSuccess }) => {
   const showModal = () => {
     setIsModalVisible(true);
   };
-
-  let name = nameList
+  function titleCase(str) {
+    var convertToArray = str.toLowerCase().split(' ');
+    var result = convertToArray.map(function(val) {
+      return val.replace(val.charAt(0), val.charAt(0).toUpperCase());
+    });
+    
+    return result.join(' ');
+  }
+  let name = titleCase(nameList)
   let date_create = ""
   let song = []
   const handleOk = async () => {
@@ -36,10 +43,13 @@ const CreatePlayList = ({ onSuccess }) => {
   };
 
   const handleCreate = (e) => {
-    const names = (playlist?.map(pl => pl?.name))
-    setError(names.includes(e.target.value))
+    const names = (playlistbyUser?.map(pl => pl?.name))
+    const nameValue =titleCase(e.target.value)
+    setError(names.includes(nameValue))
+    console.log(e.target.value);
     setName(e.target.value)
   }
+  console.log(playlistbyUser);
 
   return (
     <>

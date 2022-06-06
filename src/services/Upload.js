@@ -3,7 +3,7 @@ import * as Config from '../constant/config'
 import Cookies from 'js-cookie'
 const handleUpload = async (data) => {
     try {
-        return await axios.post('http://localhost:5000/upload',  data )
+        return await axios.post(`${Config.API_URL}/upload`,  data )
     } catch (error) {
         console.log(error);
     }

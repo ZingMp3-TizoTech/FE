@@ -5,15 +5,10 @@ import ApiCaller from '../../../../utils/callAPI'
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import Sidebar from '../../../Sidebar';
 import SideBarAdmin from '../../SideBarAdmin';
-import Cookies from 'js-cookie';
-import { Modal } from 'antd';
-import { ModalBody } from 'react-bootstrap';
-import { handleGetSongById } from '../../../../services/Song';
-import { FcEditImage } from 'react-icons/fc';
+
 import CreateArtist from './ModalCreateArtist';
-// import CreateGenre from './ModalCreateGenres';
-// import EditGenre from './ModalEditGenres';
-// import RemoveGenre from './RemoveGenre';
+import EditArtist from './EditArtist';
+import RemoveArtist from './RemoveArtist';
 function TableArtist() {
   const [artists, setArtist] = useState([])
   const [nameArtist,setNameArtist]=useState('')
@@ -80,11 +75,11 @@ const callAll=()=>{
                              flexDirection:'row',
                              justifyContent:'space-evenly'
                            }}>
-
-                  {/* <EditGenre  onCall={(e)=>callAll()} name={genre?.zone} image={genre?.image} id={genre?._id}></EditGenre> 
-                  <RemoveGenre  onCall={(e)=>callAll()}  name={genre?.zone} id={genre?._id}></RemoveGenre>  */}
+                          <EditArtist onCall={(e)=>callAll()} idArtist={artist?._id} name={artist?.name} sex={artist?.gender} old={artist?.age} zone={artist?.genre?._id} image={artist?.image[0]} />
+                  {/* <EditGenre  onCall={(e)=>callAll()} name={genre?.zone} image={genre?.image} id={genre?._id}></EditGenre>  */}
+                  <RemoveArtist onCall={(e)=>callAll()}  name={artist?.name} id={artist?._id}></RemoveArtist> 
                            </div>
-                 
+               
 
                 </td>
               </tr>

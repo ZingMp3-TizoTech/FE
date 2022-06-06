@@ -166,7 +166,7 @@ export default function ListSongs({ type }) {
                                         key={index}
                                         onClick={(e) => {
                                             setIdNumber(index);
-                                            e.stopPropagation();
+                                           
                                             setAction(" ");
                                         }
                                         }
@@ -194,7 +194,7 @@ export default function ListSongs({ type }) {
                                                  <>{albums[0]?.name}</> : <>{song?.album?.name}</>}</td>
 
                                                                 
-                                        <td
+                                        <td onClick={(e)=> e.stopPropagation()}
                                             className={index === idNumber ? "color" : ""}
                                             style={{
                                                 textAlign: 'center'

@@ -13,20 +13,20 @@ import { handleGetSongById, handleUpdateSong } from '../../../../services/Song';
 import { handleUpload } from '../../../../services/Upload';
 import { handleCreateGenre, handleGetAllGenre } from '../../../../services/Genres';
 import { Hidden } from '@mui/material';
-import { handleCreateArtist } from '../../../../services/Artist';
+import { handleCreateAlbum} from '../../../../services/Album';
 import Select from 'react-select';
+import ApiCaller from '../../../../utils/callAPI';
 // import 'react-select/dist/css/react-select.css';
 
 
-const CreateArtist = ({ onCall }) => {
-
+const CreateAlbum = ({ onCall }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [nameArtist, setNameArtist] = useState('')
     const [age, setAge] = useState()
     const [genre, setGenre] = useState('')
-    const [allGenre, setAllGenre] = useState([])
+    const [allArtist, setAllArtist] = useState([])
     const [gender, setGender] = useState('')
-    const [artist, setArtist] = useState('')
+    const [nameAlbum, setNameAlbum] = useState('')
     const [img, setImg] = useState('')
     const [loading, setLoading] = useState(false)
     const [selectedOption, setSelectedOption] = useState(null);
@@ -36,10 +36,14 @@ const CreateArtist = ({ onCall }) => {
     };
 
     const handleOk = async () => {
+        console.log('oke');
         if (Cookies.get('token')) {
             //const created = await handleCreatePlaylist(name, date_create, song)
-            console.log(nameArtist, gender, age, selectedOption?.value, img);
-            const create = await handleCreateArtist(nameArtist, gender, age, selectedOption?.value, img);
+           let created= ' ';
+           let songs=[];
+           console.log(nameAlbum,created,selectedOption?.value,songs);
+        //    name,created,artist,songs
+            const create = await handleCreateAlbum(nameAlbum,created,selectedOption?.value,songs);
             console.log(create);
             setIsModalVisible(false)
             onCall && onCall()
@@ -54,7 +58,7 @@ const CreateArtist = ({ onCall }) => {
     };
 
     const handleGetName = (e) => {
-        setNameArtist(e.target.value)
+        setNameAlbum(e.target.value)
     }
     const handleGetAge = (e) => {
         setAge(e.target.value)
@@ -62,26 +66,15 @@ const CreateArtist = ({ onCall }) => {
     const handleGetGender = (e) => {
         setGender(e.target.value)
     }
-
-    const handleGetImage1 = async (e) => {
-        setLoading(false)
-        const uploadData = new FormData();
-        uploadData.append("upload", e.target.files[0]);
-        const upload = await handleUpload(uploadData)
-        if (upload.data.secure_url) {
-            setImg(upload.data.secure_url);
-            setLoading(true)
-        }
-
-    }
-    const getGenres = async () => {
-        const all = await handleGetAllGenre();
-        console.log(all.data.data);
-        setAllGenre(all.data.data)
-    }
-    useEffect(() => {
-        getGenres()
-    }, [])
+    const callAll=()=>{
+        ApiCaller('artists', 'GET')
+        .then(res => {
+          setAllArtist(res.data.data)
+        })
+    }   
+      useEffect(() => {
+        callAll()
+      }, [])
 
 
     let value = ''
@@ -89,9 +82,9 @@ const CreateArtist = ({ onCall }) => {
     let options = [{
         value: 'value', label: '---'
     }]
-    allGenre.forEach(i => {
+    allArtist.forEach(i => {
         value = i?._id;
-        label = i?.zone
+        label = i?.name
         return options.push({ value: value, label: label })
 
     })
@@ -99,7 +92,7 @@ const CreateArtist = ({ onCall }) => {
     return (
         <>
             <div onClick={showModal} style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                <Button  >Create Artist</Button>
+                <Button  >Create Album</Button>
             </div>
 
             <Modal
@@ -108,15 +101,15 @@ const CreateArtist = ({ onCall }) => {
                 footer=''
                 visible={isModalVisible}>
                 <ModalHeader>
-                    <a style={{ color: "white", fontSize: '30px' }}>Create genre</a>
+                    <a style={{ color: "white", fontSize: '30px' }}>Create Album</a>
                     <CloseButton onClick={(e) => setIsModalVisible(false)} />
                 </ModalHeader>
                 <ModalBody>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <input
-                            value={nameArtist}
+                            value={nameAlbum}
                             type='text'
-                            placeholder='Enter Artist name!'
+                            placeholder='Enter Album name!'
                             onChange={handleGetName}
                             style={{
                                 height: '40px',
@@ -124,31 +117,9 @@ const CreateArtist = ({ onCall }) => {
                                 borderRadius: '50px'
                             }}
                         />
-                        <br />
-                        <input
-                            value={gender}
-                            type='text'
-                            placeholder='Enter gender!'
-                            onChange={handleGetGender}
-                            style={{
-                                height: '40px',
-                                border: '1px solid rgb(0 0 0 / 10%)',
-                                borderRadius: '50px'
-                            }}
-                        />
-                        <br />
-                        <input
-                            value={age}
-                            type='number'
-                            placeholder='Enter age, if group age = 0!'
-                            onChange={handleGetAge}
-                            style={{
-                                height: '40px',
-                                border: '1px solid rgb(0 0 0 / 10%)',
-                                borderRadius: '50px'
-                            }}
-                        />
-                        <br />
+                      
+                  
+                        <br />                    
                         <Select
                             defaultValue={selectedOption}
                             name="form-field-name"
@@ -157,16 +128,8 @@ const CreateArtist = ({ onCall }) => {
                             onChange={setSelectedOption}
                         />
                         <br />
-                        <input
-                            //value={img1}
-                            type='file'
-                            onChange={(e) => handleGetImage1(e)}
-
-                        />
-                        <br />
-                        <div style={{width:'50px', height:'50px'}}>
-                        <img style={{width:'150px', height:'150px',border:'none'}} src={img} />
-                        </div>
+                      
+                        
                     </div>
                 </ModalBody>
 
@@ -191,4 +154,4 @@ const CreateArtist = ({ onCall }) => {
         </>
     );
 }
-export default CreateArtist
+export default CreateAlbum

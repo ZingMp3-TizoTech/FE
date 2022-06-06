@@ -41,14 +41,18 @@ export default function Extend({ liked, url, id,idPlaylist,type,onDeleteSuccess 
     >
       <Menu.Item>
         {liked ?
-          <AiFillHeart onClick={(e) => { handleLike(id); e.stopPropagation() }}
+          <AiFillHeart onClick={(e) => { handleLike(id);
+             //e.stopPropagation()
+             }}
             style={{
               fontSize: "20px",
               color: "red"
             }}
           />
           :
-          <AiOutlineHeart onClick={(e) => { handleLike(id); e.stopPropagation() }}
+          <AiOutlineHeart onClick={(e) => { handleLike(id);
+            //  e.stopPropagation()
+             }}
             style={{
               fontSize: "20px"
             }} />}
@@ -75,9 +79,10 @@ export default function Extend({ liked, url, id,idPlaylist,type,onDeleteSuccess 
     <Space direction="vertical">
       <Space wrap>
         <Dropdown
-          // trigger='click' 
+           //trigger='hover' 
+          
           overlay={menu} placement="top">
-          <HiOutlineDotsCircleHorizontal
+          <HiOutlineDotsCircleHorizontal 
             fontSize={'30px'}
           />
         </Dropdown>
