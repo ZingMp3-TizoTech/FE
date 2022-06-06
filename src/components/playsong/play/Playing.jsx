@@ -5,8 +5,6 @@ import './Playing.css';
 
 
 function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction, ...props }) {
-  console.log(action);
-  console.log(i);
   if (action == "songs") {
     setIdNumber(i)
   }
@@ -34,7 +32,7 @@ function Playing({ i, type, idSong, setIdNumber, setCircular, action, setAction,
     <>
      <AudioPlayer 
      className='playing'
-      src={props.songs?.[idSong]?.url}
+      src={type == 'favorite-list' ? props.songs?.[idSong]?.[0]?.url : props.songs?.[idSong]?.url}
       layout="stacked-reverse"
       showSkipControls={true}
       showJumpControls={false}

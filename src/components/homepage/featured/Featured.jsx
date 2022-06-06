@@ -3,9 +3,9 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { useNavigate } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import music from '../../../assets/image/music.png'
 
 export default function Albums({ items, type = 'artists', loading }) {
-    console.log(loading);
     let list = items?.slice(0, 5);
     let navigate = useNavigate();
     const playByArtist = (e) => {
@@ -53,7 +53,7 @@ export default function Albums({ items, type = 'artists', loading }) {
                                             <div className='icon-play'>
                                                 <PlayCircleOutlineIcon sx={{ fontSize: 60 }} />
                                             </div>
-                                            <img src={artist?.image[0]} />
+                                            <img src={artist?.image[0] ? artist?.image[0] : music} />
                                             <div className="after" onClick={playByArtist}
                                                 id={artist?._id} ></div>
                                         </>
@@ -65,12 +65,11 @@ export default function Albums({ items, type = 'artists', loading }) {
                                     <div
                                         className='artist-name'
                                     > {artist?.name} </div>}
-
                             </div>
                         ))}
                     </div>
                 </div>
-                :
+                : 
                 <div className="featured">
                     <a className="more" onClick={() => { navigate('albums') }}  >See more...</a>
                     <div className='wrapper-album' >
@@ -116,7 +115,7 @@ export default function Albums({ items, type = 'artists', loading }) {
                                                 />
                                             </span>
                                             {album?.artist != null ?
-                                                <img src={album?.artist?.image[0]} />
+                                                <img src={album?.artist?.image[0] ? album?.artist?.image[0] : music} />
                                                 :
                                                 <img src="https://play-lh.googleusercontent.com/aA2rpO5sXUJmnkB-H9GlLz8BqhpIw27wG2xc1-9j5rg1h_LmcGxnAd6vOVXTZO8F-D0" />
                                             }

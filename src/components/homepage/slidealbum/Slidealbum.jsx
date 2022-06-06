@@ -7,6 +7,7 @@ import ApiCaller from "../../../utils/callAPI";
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 import { RectShape } from 'react-placeholder/lib/placeholders';
+import banner from '../../../assets/image/music_banner.jpg'
 
 import { useNavigate } from 'react-router-dom';
 export default function Slidealbum() {
@@ -52,7 +53,7 @@ export default function Slidealbum() {
                 <Slider {...settings}>
                     {topSongs.map((song, index) => (
                         <div className='img-item' key={index}>
-                            {loading ? <img src={song?.image[1]} alt="Image-song" onClick={handlePlaySong} id={song._id}/> : 
+                            {loading ? <img src={song?.image[1] ? song?.image[1] : banner} alt="Image-song" onClick={handlePlaySong} id={song._id}/> : 
                             <ReactPlaceholder showLoadingAnimation={true} customPlaceholder={awesomePlaceholder} ready={false} />}
                         </div>
                     ))}

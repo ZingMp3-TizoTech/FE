@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './Card.css'
+import music from '../../../../../assets/image/music.png'
 import moment from 'moment';
 export default function CardItem({ artist, album, type = 'artist', loading }) {
     const { Meta } = Card;
@@ -24,19 +25,31 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                     cover={
                         <img
                             alt="example"
-                            src={artist?.image}
+                            src={artist?.image ? artist?.image : music}
                             style={{
                                 maxWidth: 300,
-                                maxHeight: 300,                              
+                                height: 300,                              
                                 overflow: 'hidden',
                             }}
                         />
                     }
                     actions={[
-                        <HeartOutlined key="like" />,
+                        <HeartOutlined key="like" style={{
+                            width:'20px',
+                            height:'20px',
+                            color:'#ffff',
+                            fontSize:'23px'
+                            
+                        }}/>,
                         <div 
                             >
-                            <PlayCircleOutlined key="play" 
+                            <PlayCircleOutlined key="play" style={{
+                                            width:'20px',
+                                            height:'20px',
+                                            color:'#ffff',
+                                            fontSize:'23px'
+                                            
+                                        }}
                              onClick={(e)=>handlePlayByArtist(artist?._id)}
                              />
                         </div>
@@ -46,8 +59,8 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                         avatar={<Avatar src={artist?.image[0]} />}
                         title={artist?.name}
                         description={<>
-                            <p>{artist?.genre?.zone}</p>
-                            <div className='text-bold'>Age: {artist?.age}</div>
+                            <p style={{color:'#fff', fontWeight:'600'}}>{artist?.genre?.zone}</p>
+                            <div style={{color:'#ffff', fontWeight:'600'}}>Age: {artist?.age}</div>
                         </>}
                     />
                 </Card>
@@ -57,7 +70,7 @@ export default function CardItem({ artist, album, type = 'artist', loading }) {
                         cover={
                             <img
                                 alt="example"
-                                src={album?.artist != null ? album?.artist?.image[0] : "https://play-lh.googleusercontent.com/aA2rpO5sXUJmnkB-H9GlLz8BqhpIw27wG2xc1-9j5rg1h_LmcGxnAd6vOVXTZO8F-D0"}
+                                src={album?.artist != null ? album?.artist?.image[0] : music}
                                 style={{
                                     maxWidth: 300,
                                     maxHeight: 300,

@@ -2,7 +2,7 @@ import 'antd/dist/antd.css';
 import { useNavigate } from 'react-router-dom';
 import { FaRegTrashAlt } from "react-icons/fa";
 import Cookies from 'js-cookie'
-import { handleDeleteSongToPlayList } from '../../services/Playlist';
+import { handleDeleteSongToPlayList } from '../../../../../services/Playlist';
 import { toast } from 'react-toastify';
 
 const DeleteSong = ({ idSong,idPlaylist, onDeleteSuccess }) => {

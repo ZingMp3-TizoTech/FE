@@ -2,17 +2,18 @@ import React from "react";
 import Homepage from "./components/homepage/Homepage";
 import PlaySong from "./components/playsong/PlaySong";
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/account/Login";
-import Register from "./components/account/Register";
+import Login from "./components/account/login/Login";
+import Register from "./components/account/register/Register";
 import { ToastContainer, toast } from 'react-toastify';
-import Card from "./components/homepage/ListAll/Card";
-import ListAll from "./components/homepage/ListAll/ListAll";
-import AllPlaylists from "./components/homepage/ListAll/AllPlaylists";
+import ListAll from "./components/homepage/ListAll/album&artist/ListAll";
+import AllPlaylists from "./components/homepage/playlist/AllPlaylists";
 import PrivateRoute from "./components/admin/Privatecomponent";
 import HomeAdmin from "./components/admin/HomeAdmin";
 import TableGenre from "./components/admin/table/Genre/TableGenres";
 import TableArtist from "./components/admin/table/Artist/TableArtist";
 import TableAlbum from "./components/admin/table/Album/TableAlbum";
+
+import Profile from "./components/homepage/profile/Profile";
 
  function App() {
   const NotFound = () => (
@@ -38,6 +39,7 @@ import TableAlbum from "./components/admin/table/Album/TableAlbum";
        <Route path="/signup" element={<Register />} />
        <Route path="/artists" element={<ListAll type="artists" />} />
        <Route path="/albums" element={<ListAll type="albums" />} />
+       <Route path="/Personal" element={<Profile/>}/>
        <Route path="/library" element={<AllPlaylists/>}/>
        <Route path="/admin" element={<PrivateRoute><HomeAdmin/></PrivateRoute>}/>
        <Route path="/admin/genres" element={<PrivateRoute><TableGenre/></PrivateRoute>}/>

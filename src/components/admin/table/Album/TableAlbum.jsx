@@ -2,8 +2,6 @@
 import { Button } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import ApiCaller from '../../../../utils/callAPI'
-// import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import Sidebar from '../../../Sidebar';
 import SideBarAdmin from '../../SideBarAdmin';
 import CreateAlbum from './CreateAlbum';
 import RemoveAlbum from './RemoveAlbum';
@@ -64,7 +62,7 @@ const callAll=()=>{
                 <td style={{ color: 'black', padding: '30px' }}>{album?.name}</td>
                 <td style={{ color: 'black', padding: '30px' }}>{album?.artist?.name}</td>
                 <td style={{ color: 'black', padding: '30px' }}>{album?.date_create||album?.created}</td>   
-                <td style={{ color: 'black', padding: '30px' }}><ViewSong callAll={(e)=>callAll(e)}  songs={album?.songs} idAlbum={album?._id}/></td>   
+                <td style={{ color: 'black', padding: '30px' }}><ViewSong callAll={(e)=>callAll(e)} name={album?.name} idArtist={album?.artist?._id}  songs={album?.songs} idAlbum={album?._id}/></td>   
                 {/* <td style={{ color: 'black', padding: '30px' }}>{album?.age}</td>    */}
                
                 <td style={{ padding: '30px' }} >  

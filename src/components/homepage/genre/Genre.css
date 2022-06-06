@@ -37,3 +37,11 @@
     transform: scale(1.1);
     transition: 0.5s;
 }
+.genre-item:hover{
+    box-shadow: rgba(226, 219, 219, 0.07) 0px 3px 4px, 
+    rgba(255, 228, 228, 0.07) 0px 2px 4px, 
+    rgba(255, 255, 255, 0.07) 0px 4px 8px, 
+    rgba(0, 0, 0, 0.07) 0px 8px 16px, 
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, 
+    rgba(255, 255, 255, 0.07) 0px 15px 20px;
+}

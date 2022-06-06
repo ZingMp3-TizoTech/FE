@@ -5,7 +5,6 @@ import 'antd/dist/antd.css';
 import { FolderAddFilled } from '@ant-design/icons';
 import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../../services/Playlist';
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import Sidebar from '../../../Sidebar';
 import SideBarAdmin from '../../SideBarAdmin';
 import Cookies from 'js-cookie';
 import { ButtonGroup, CloseButton, ModalBody, ModalFooter, ModalHeader, Spinner } from 'react-bootstrap';
@@ -16,7 +15,6 @@ import { Hidden } from '@mui/material';
 import { handleCreateAlbum} from '../../../../services/Album';
 import Select from 'react-select';
 import ApiCaller from '../../../../utils/callAPI';
-// import 'react-select/dist/css/react-select.css';
 
 
 const CreateAlbum = ({ onCall }) => {

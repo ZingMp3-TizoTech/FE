@@ -1,5 +1,5 @@
 import React from 'react'
-import ListSongs from './ListSong'
+import ListSongs from './listtable/ListSong'
 
 export default function PlaySong({type}) {
   return (

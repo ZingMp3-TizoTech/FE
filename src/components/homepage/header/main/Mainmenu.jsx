@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import { Modal, Button } from 'react-bootstrap';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { handelChangePassWord, handelGetUser } from '../../../services/User';
+import { handelChangePassWord, handelGetUser } from '../../../../services/User';
 import { toast, ToastContainer } from 'react-toastify';
 import { Cookie } from '@mui/icons-material';
 import { grey } from '@mui/material/colors'

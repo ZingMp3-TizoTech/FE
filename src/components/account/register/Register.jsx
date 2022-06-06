@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Login.css'
+import '../login/Login.css'
 import './signup.css'
 import { Form, Input } from 'antd';
 import 'antd/dist/antd.css'
@@ -8,7 +8,7 @@ import { Button as Btn } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-import { handleSignUpAPI } from '../../services/User';
+import { handleSignUpAPI } from '../../../services/User';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

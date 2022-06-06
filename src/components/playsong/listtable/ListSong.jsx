@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { FaDownload } from 'react-icons/fa'
 import './ListSong.css'
-import ApiCaller from '../../utils/callAPI'
-import Playing from './Playing'
-import DetailSong from './DetailSong'
+import ApiCaller from '../../../utils/callAPI'
+import Playing from '../play/Playing'
+import DetailSong from '../detail/DetailSong'
 import { useParams } from 'react-router-dom'
 import ReactLoading from 'react-loading';
-import { handleGetAlbumById } from '../../services/Album'
-import { handleGetPlaylistById, handleGetPlaylistByUser } from '../../services/Playlist'
-import Extend from './Extend'
-import { handelGetUser } from '../../services/User'
+import { handleGetPlaylistById } from '../../../services/Playlist'
+import Extend from './extend/Extend'
+import { handelGetUser } from '../../../services/User'
 import Cookies from 'js-cookie'
-import beat from '../../beat.gif'
+import beat from '../../../assets/gif/beat.gif'
+import beat_img from '../../../assets/image/beat.png'
 import { toast } from 'react-toastify'
-import Duration from './Duration'
+import Duration from './extend/Duration'
 
 export default function ListSongs({ type }) {
     const id = useParams();
@@ -28,7 +27,7 @@ export default function ListSongs({ type }) {
     const [listLike, setListLike] = useState([])
 
 
-    let a = songs.findIndex(i => i._id === id)
+    let a = songs.findIndex(i => i._id === id.id)
 
     
     useEffect(() => {
@@ -46,7 +45,6 @@ export default function ListSongs({ type }) {
     const getPlaylist = async (id) => {
         if(Cookies.get('token')!=null && type=='playlists'){
         const pl = await handleGetPlaylistById(id)
-        //console.log();
         setPlaylist(pl.data.data);
     }
     }
@@ -83,6 +81,7 @@ export default function ListSongs({ type }) {
                     : type == "playlists" ?
                         playlist?.song
                         : songs
+
     const liked = async (id) => {       
         if(Cookies.get('token')){
             const user = await handelGetUser();
@@ -102,8 +101,9 @@ export default function ListSongs({ type }) {
         }   
         else toast.warning('Please login to continue!');
     }
-    // useEffect(()=>{liked()},[islike])
 
+    console.log();
+    
 
     return (
         <div>
@@ -176,7 +176,7 @@ export default function ListSongs({ type }) {
                                         >
                                             {(song._id != null&&index === idNumber) ? 
                                             <div >
-                                                <img style={{width:"40px",height:"40px"}} src={beat}/>
+                                                <img style={{width:"40px",height:"40px"}} src={circular ? beat : beat_img}/>
                                                 </div>  :index + 1
                                             }</td>
                                         <td
@@ -193,8 +193,9 @@ export default function ListSongs({ type }) {
                                             }}>{ type=='albums'?
                                                  <>{albums[0]?.name}</> : <>{song?.album?.name}</>}</td>
 
-                                                                
-                                        <td onClick={(e)=> e.stopPropagation()}
+
+                                        <td  onClick={(e)=> e.stopPropagation()} style={{textAlign:'center'}}> <Duration url={song?.url} /> </td>                   
+                                        <td
                                             className={index === idNumber ? "color" : ""}
                                             style={{
                                                 textAlign: 'center'

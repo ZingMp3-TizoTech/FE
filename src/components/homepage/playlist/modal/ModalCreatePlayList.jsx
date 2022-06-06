@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import 'antd/dist/antd.css';
 import './ModalCreatePlaylist.css'
 import { FolderAddFilled } from '@ant-design/icons';
-import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../services/Playlist';
+import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../../services/Playlist';
 import Cookies from 'js-cookie'
+
+import { toast } from 'react-toastify';
 const CreatePlayList = ({ onSuccess,playlistbyUser}) => {
+
   const navigate = useNavigate()
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [playlist, setPlaylist] = useState([])
@@ -30,12 +33,11 @@ const CreatePlayList = ({ onSuccess,playlistbyUser}) => {
   const handleOk = async () => {
     if (!error&&Cookies.get('token')) {
       const created = await handleCreatePlaylist(name, date_create, song)
+      toast.success("Create playlist success!") 
       setIsModalVisible(false)
-
       onSuccess && onSuccess()
     }
     else setIsModalVisible(true)
-
   };
 
   const handleCancel = () => {
@@ -47,6 +49,7 @@ const CreatePlayList = ({ onSuccess,playlistbyUser}) => {
     const nameValue =titleCase(e.target.value)
     setError(names.includes(nameValue))
     console.log(e.target.value);
+
     setName(e.target.value)
   }
   console.log(playlistbyUser);
@@ -85,7 +88,8 @@ const CreatePlayList = ({ onSuccess,playlistbyUser}) => {
           style={{
             height: '40px',
             border: '1px solid rgb(0 0 0 / 10%)',
-            borderRadius: '50px'
+            borderRadius: '50px',
+            paddingLeft:'10px'
           }}
         />
         <p

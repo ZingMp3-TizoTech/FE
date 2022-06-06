@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
-import { Button, Dropdown, Menu, Space } from 'antd';
+import { Dropdown, Menu, Space } from 'antd';
 import { HiOutlineDotsCircleHorizontal } from 'react-icons/hi'
 import { AiOutlineHeart, AiFillHeart, AiOutlineFolderAdd, AiOutlineDownload } from 'react-icons/ai'
-import AddSong from './ModalPlaylist';
-import { handelGetUser, handelLikeSong, handelUnLikeSong } from '../../services/User';
+import AddSong from './playlist/ModalPlaylist';
+import { handelGetUser, handelLikeSong, handelUnLikeSong } from '../../../../services/User';
 import Cookies from 'js-cookie'
 import { toast } from 'react-toastify';
-import { FaRegTrashAlt } from "react-icons/fa";
-import { handleDeleteSongToPlayList } from '../../services/Playlist';
-import DeleteSong from './ModalDeleteSong';
+import DeleteSong from './playlist/ModalDeleteSong';
 import { useParams } from 'react-router-dom';
 
 
-export default function Extend({ liked, url, id,idPlaylist,type,onDeleteSuccess }) {
+export default function Extend({ liked, url, id, idPlaylist, type, onDeleteSuccess }) {
   const idPl = useParams();
   const handleLike = async (id) => {
     const token = Cookies.get('token')

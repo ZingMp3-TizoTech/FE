@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import "../Homepage.css"
-import CardItem from './Card'
-import Sidebar from '../../Sidebar'
-import Header from '../header/Header'
+import "../../Homepage.css"
+import CardItem from './card/Card'
+import Sidebar from '../../../sidebar/Sidebar'
 import "./ListAll.css"
-import ApiCaller from '../../../utils/callAPI'
+import ApiCaller from '../../../../utils/callAPI'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { padding } from '@mui/system'
 
 
 export default function ListAll({ type = 'artists' }) {

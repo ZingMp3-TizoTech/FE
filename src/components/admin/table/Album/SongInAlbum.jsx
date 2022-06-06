@@ -5,13 +5,12 @@ import 'antd/dist/antd.css';
 import { FolderAddFilled } from '@ant-design/icons';
 import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../../services/Playlist';
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import Sidebar from '../../../Sidebar';
 import SideBarAdmin from '../../SideBarAdmin';
 import Cookies from 'js-cookie';
 import { ButtonGroup, CloseButton, ModalBody, ModalFooter, ModalHeader, Spinner } from 'react-bootstrap';
 import { handleUpload } from '../../../../services/Upload';
 import { handleCreateGenre, handleGetAllGenre } from '../../../../services/Genres';
-import { handleRemoveSongFromAlbum,handleAddSongToAlbum} from '../../../../services/Album';
+import { handleRemoveSongFromAlbum, handleAddSongToAlbum, handleUpdateAlbumAPI } from '../../../../services/Album';
 import { Hidden } from '@mui/material';
 import { handleCreateArtist, handleUpdateArtist } from '../../../../services/Artist';
 import { FaPlus } from "react-icons/fa";
@@ -21,33 +20,29 @@ import { Select } from 'antd';
 import ApiCaller from '../../../../utils/callAPI';
 const { Option } = Select;
 
-const ViewSong = ({ idArtist, onCall, name, old, sex, zone, image, songs,idAlbum,callAll}) => {
+const ViewSong = ({ name, songs, idAlbum, callAll,idArtist }) => {
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [allsongs, setAllSongs] = useState([])
-    const [nameArtist, setNameArtist] = useState(name)
-    const [age, setAge] = useState(old)
-    const [genre, setGenre] = useState(zone)
-    const [allGenre, setAllGenre] = useState([])
-    const [gender, setGender] = useState(sex)
-    const [artist, setArtist] = useState('')
-    const [img, setImg] = useState(image)
+    const [nameAlbum, setNameAlbum] = useState(name)
     const [loading, setLoading] = useState(false)
-    const [selectedOption, setSelectedOption] = useState(null);
-    
+    const [selectedOption, setSelectedOption] = useState(idArtist);
+    const [artist,setArtist]=useState(idArtist)
     const [allArtist, setAllArtist] = useState([])
     //const [selectedOption, setSelectedOption] = useState(zone);
     const showModal = () => {
-        setIsModalVisible(true);       
+        setIsModalVisible(true);
         setLoading(true)
-        callAll&&callAll()
+        callAll && callAll()
     };
     const handleOk = async () => {
         if (Cookies.get('token')) {
             //id,name,gender,image,age,genre
-            //const create = await handleUpdateArtist(idArtist,nameArtist, gender,img, age, genre );
+            //name,date_create,artist
+            const date_create=''
+            const updated = await handleUpdateAlbumAPI(idAlbum,nameAlbum, date_create,artist);
             setIsModalVisible(false)
-           
+            callAll && callAll()
 
         }
         else setIsModalVisible(true)
@@ -59,57 +54,37 @@ const ViewSong = ({ idArtist, onCall, name, old, sex, zone, image, songs,idAlbum
     };
 
     const handleGetName = (e) => {
-        setNameArtist(e.target.value)
-    }
-    const handleGetAge = (e) => {
-        setAge(e.target.value)
-    }
-    const handleGetGender = (e) => {
-        setGender(e.target.value)
+        setNameAlbum(e.target.value)
     }
 
-    const handleGetImage1 = async (e) => {
-        setLoading(false)
-        const uploadData = new FormData();
-        uploadData.append("upload", e.target.files[0]);
-        const upload = await handleUpload(uploadData)
-        if (upload.data.secure_url) {
-            setImg(upload.data.secure_url);
-            setLoading(true)
-        }
+    
+    const removeSong = async (idAlbum, song) => {
+        let id = idAlbum;
+        const remove = await handleRemoveSongFromAlbum(id, song)
+        console.log(remove);
+        callAll && callAll()
     }
-    const getGenres = async () => {
-        const all = await handleGetAllGenre();
-        ApiCaller('artists', 'GET')
-        .then(res => {
-          setAllArtist(res.data.data)
-        })
-        setAllGenre(all.data.data)
-    }
-    const removeSong = async(idAlbum,song)=>{ 
-        let id = idAlbum;    
-         const remove = await handleRemoveSongFromAlbum(id,song)
-         console.log(remove);
-         callAll&&callAll()
-    }
-    const addSong = async(idAlbum,song)=>{  
-        let id = idAlbum;   
-         const add = await handleAddSongToAlbum(id,song)
-         console.log(add);
-         callAll&&callAll()
+    const addSong = async (idAlbum, song) => {
+        let id = idAlbum;
+        const add = await handleAddSongToAlbum(id, song)
+        console.log(add);
+        callAll && callAll()
     }
     useEffect(() => {
-        getGenres()
-        callAll&&callAll()
+      
+        callAll && callAll()
     }, [])
-    // console.log(songs.map((song)=>console.log(song?.name)))
-  
+   
     useEffect(() => {
-       
+
         ApiCaller('songs', 'GET')
             .then(res => {
                 setAllSongs(res.data.data)
             })
+            ApiCaller('artists', 'GET')
+            .then(res => {
+                setAllArtist(res.data.data)
+            })                 
     }, [])
     let value = ''
     let label = ''
@@ -140,11 +115,11 @@ const ViewSong = ({ idArtist, onCall, name, old, sex, zone, image, songs,idAlbum
                 </ModalHeader>
                 <ModalBody>
                     <div>
-                    <input
-                            //value={nameArtist}
+                        <input
+                            value={nameAlbum}
                             type='text'
                             placeholder='Enter Album name!'
-                            //onChange={handleGetName}
+                            onChange={handleGetName}
                             style={{
                                 height: '40px',
                                 border: '1px solid rgb(0 0 0 / 10%)',
@@ -152,16 +127,27 @@ const ViewSong = ({ idArtist, onCall, name, old, sex, zone, image, songs,idAlbum
                                 paddingLeft: "20px"
                             }}
                         />
-                        <Select
-                        style={{width:'300px',marginLeft:'32%'}}
-                            defaultValue={selectedOption}
-                            name="form-field-name"
-                            //value="one"
-                            options={options}
-                            onChange={setSelectedOption}
-                        />
+                       <Select
+                            style={{marginLeft:'100px',width:'20%'}}
+                            value={artist}
+                            showSearch                          
+                            onChange={setArtist}
+                            placeholder="Search to Select..."
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.children.includes(input)}
+                            filterSort={(optionA, optionB) =>
+                                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+                            }
+                        >
+                            {allArtist.map(item => (                              
+                                <Select.Option key={item?._id} value={item?.id}>
+                                    {item?.name}
+                                </Select.Option>
+                            ))}
+                           
+                        </Select>
                     </div>
-               
+
                     <ListGroup variant="flush">
                         <table width='100%'>
                             <thead>
@@ -174,34 +160,33 @@ const ViewSong = ({ idArtist, onCall, name, old, sex, zone, image, songs,idAlbum
                             <tbody >
                                 <td >
 
-                                {songs.map(song =>
-                                (
-                                    <>
-                                        <td style={{ display: 'flex', flexDirection: 'row' }}>
-                                         
+                                    {songs.map(song =>
+                                    (
+                                        <>
+                                            <td style={{ display: 'flex', flexDirection: 'row' }}>
+
 
                                                 <ListGroup.Item style={{ backgroundColor: 'gray', width: '280px' }} >{song?.name}</ListGroup.Item>
                                                 <div style={{ marginLeft: '10px' }}>
-                                                    <FaRegTrashAlt onClick={(e)=>{removeSong(idAlbum,song?._id)}} />
+                                                    <FaRegTrashAlt onClick={(e) => { removeSong(idAlbum, song?._id) }} />
                                                 </div>
-                                           
-                                        </td>
-                                    </>
-                                )
-                                
-                                )}
+
+                                            </td>
+                                        </>
+                                    )
+                                    )}
                                 </td>
                                 <td>
-
                                     {allsongs.map(song =>
                                     (
                                         <>
-
                                             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                               
-                                                    <FaPlus onClick={(e)=>addSong(idAlbum,song?._id)} />
-                                             
-                                                <ListGroup.Item  style={{ backgroundColor: 'gray', width: '220px', marginLeft: '10px'  }} >{song?.name}</ListGroup.Item>
+
+                                                <Button>
+                                                    <FaPlus onClick={(e) => addSong(idAlbum, song?._id)} />
+                                                </Button>
+
+                                                <ListGroup.Item style={{ backgroundColor: 'gray', width: '220px', marginLeft: '10px' }} >{song?.name}</ListGroup.Item>
                                             </div>
                                         </>
                                     ))}
@@ -210,17 +195,7 @@ const ViewSong = ({ idArtist, onCall, name, old, sex, zone, image, songs,idAlbum
 
 
                         </table>
-                        {/* <td>
-
-                                    {allsongs.map(allsong => {
-                                        <a>{allsong?.name}</a>
-                                            // console.log(allsong?.name);
-                                    })}
-                                </td> */}
-
-
-
-
+                      
                     </ListGroup>
                 </ModalBody>
 

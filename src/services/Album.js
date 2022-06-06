@@ -26,10 +26,10 @@ const handleCreateAlbum = async (name,created,artist,songs)=> {
         console.log(error)
     }
 }
-const handleUpdateAlbumAPI = async (id,data)=>{
+const handleUpdateAlbumAPI = async (id,name,date_create,artist)=>{
     try {
         const token = Cookies.get('token')
-        return await axios.put(`${Config.API_URL}/album/${id}`, data,{
+        return await axios.put(`${Config.API_URL}/album/${id}`, {name,date_create,artist},{
             headers: {
                 'Authorization': `Bearer ${token}` 
               }

@@ -15,7 +15,7 @@ import { grey } from '@mui/material/colors'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
 import { style } from '@mui/system';
-import '../../components/sidebar.scss'
+import '../sidebar/sidebar.scss'
 const drawerWidth = 240;
 export default function   SideBarAdmin(props) {
   const { window } = props;

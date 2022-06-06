@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import Sidebar from '../../Sidebar'
+import Sidebar from '../../sidebar/Sidebar'
 import 'antd/dist/antd.css';
 import { Card, Avatar } from 'antd';
 import { handleGetPlaylistByUser } from '../../../services/Playlist';
-import { FolderAddFilled, PlayCircleOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
-import Delete from './ModalDeletePlayList';
+import Delete from './modal/ModalDeletePlayList';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import CreatePlayList from './ModalCreatePlayList';
-import './Card.css'
+import CreatePlayList from './modal/ModalCreatePlayList';
+import '../ListAll/album&artist/card/Card.css'
+import music from '../../../assets/image/music.png'
+import { FaPlay } from "react-icons/fa";
 
-import { FaPlay,FaRegTrashAlt } from "react-icons/fa";
-import Cookies from 'js-cookie'
 
 
 function AllPlaylists() {
@@ -56,8 +55,6 @@ function AllPlaylists() {
                     style={{
                         minWidth:'fit-content',
                         backgroundColor:'rgb(30 41 59)',
-                        // backgroundImage: 'linear-gradient(to right, rgb(30 41 59) , rgb(43 60 87))',
-
                         margin: '0 0 0 340px',
                         display: 'flex',
                         flexWrap: 'wrap',
@@ -67,7 +64,7 @@ function AllPlaylists() {
                     <div    
                         className='card'
                         style={{
-                            height: '433px',
+                            height: '458px',
                             width: '300px',
                             backgroundColor: 'rgb(71 85 105)',
                             marginRight: '50px',
@@ -81,6 +78,7 @@ function AllPlaylists() {
                        
                     >
                         <CreatePlayList onSuccess={()=>getPlaylist()} playlistbyUser={playlist} />
+
                     </div>
                    
                     {playlist.map(item => (
@@ -95,7 +93,7 @@ function AllPlaylists() {
                                 cover={
                                     <img
                                         alt="example"
-                                        src={item?.song?.[0]?.image?.[0] ? item?.song?.[0]?.image?.[0] : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCebaMsn7crR47zGdjApJzDoxM0t2-oCEyt07l6Ecvg0-3ZNOwv75SrgRcNKJr6g211a4&usqp=CAU'}
+                                        src={item?.song?.[0]?.image?.[0] ? item?.song?.[0]?.image?.[0] : music}
                                         style={{
                                             maxWidth: 300,
                                             maxHeight: 300,

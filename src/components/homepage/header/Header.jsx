@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useNavigate } from "react-router-dom";
 import './Header.css'
-import MainMenu from "./Mainmenu"
+import MainMenu from "./main/Mainmenu"
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import Cookies from 'js-cookie'
 import { handleSearchByKeyword } from '../../../services/Search';
@@ -62,7 +62,6 @@ export default function Header() {
     handleSearch = handleSearch.data.data;
     let _result = [];
     Object.keys(handleSearch).forEach(key => {
-      console.log(key);
       _result = _result?.concat((handleSearch[key] || []).map(item => {
         return {
           id: item?._id,
@@ -74,7 +73,6 @@ export default function Header() {
         }
       }))
     })
-    console.log(handleSearch);
     results = _result;
     setResult(results);
   }

@@ -5,7 +5,6 @@ import 'antd/dist/antd.css';
 import { FolderAddFilled } from '@ant-design/icons';
 import { handleCreatePlaylist, handleGetPlaylistByUser } from '../../../../services/Playlist';
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
-import Sidebar from '../../../Sidebar';
 import SideBarAdmin from '../../SideBarAdmin';
 import Cookies from 'js-cookie';
 import { ButtonGroup, CloseButton, ModalBody, ModalFooter, ModalHeader, Spinner } from 'react-bootstrap';

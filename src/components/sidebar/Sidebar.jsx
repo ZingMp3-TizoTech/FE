@@ -7,15 +7,12 @@ import ListItemText from '@mui/material/ListItemText';
 import AlbumIcon from '@mui/icons-material/Album';
 import ContactsRoundedIcon from '@mui/icons-material/ContactsRounded';
 import LibraryMusicRoundedIcon from '@mui/icons-material/LibraryMusicRounded';
-import GraphicEqRoundedIcon from '@mui/icons-material/GraphicEqRounded';
-import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Drawer from '@mui/material/Drawer';
 import { grey } from '@mui/material/colors'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom';
-import { style } from '@mui/system';
-import '../components/sidebar.scss'
+import './sidebar.scss'
 const drawerWidth = 240;
 export default function   Sidebar(props) {
   const { window } = props;

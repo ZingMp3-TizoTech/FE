@@ -1,0 +1,103 @@
+#profile{
+    margin-left: 238px;
+    background-color: #1e293b;
+    min-height: 745px;
+    position: relative;
+}
+#profile .title-playlist{
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+}
+#profile .title-song{
+    position: absolute;
+    top: 350px;
+    left: 40px;
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+}
+#profile .see-more{
+    position: absolute;
+    right: 74px;
+    top: 34px;
+    font-size: 17px;
+    color: #ffff;
+}
+#profile .playlist{
+    position: absolute;
+    top: 20px;
+}
+#profile .favorite-song table th, td {
+    color:#8a9baa;
+  }
+
+#profile .favorite-song{
+    position: absolute;
+    right: 0px;
+    bottom: 85px;
+    max-height: 190px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+#profile .favorite-song table thead {
+    position: fixed;
+    top: 410px;
+    background-color: #1e293b;
+    width: 1297px;
+    right: 0;
+}
+#profile .favorite-song table td{
+    border-top: 1px solid #284162;
+}
+#profile .favorite-song table tr{
+    height: 60px;
+}
+#profile .favorite-song table{
+    width: 1283px;
+}
+#profile .favorite-song table .img-song{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 1px 1px #8a9baa;
+}
+#profile .favorite-song table tbody .row-img{
+    padding-left: 20px;
+    width: 110px;
+    position: relative;
+}
+#profile .favorite-song table tbody a{
+    color: #8a9baa;
+}
+#profile .favorite-song table tbody tr:hover{
+    background-color: #475569;
+}
+#profile .favorite-song table .img-song img{
+    max-width: 50px;
+}
+#profile .play-song{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#profile .favorite-song .active-row{
+    background-color: #475569;
+}
+
+#profile .favorite-song tbody .color{
+    color: #5ce0ba;
+}
+#profile .favorite-song table tbody .image-song{
+    opacity: 0.3;
+}
+#profile .favorite-song table tbody .img-ant{
+    position: absolute;
+    top: 15px;
+    left: 30px;
+}
